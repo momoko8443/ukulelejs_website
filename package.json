@@ -1,0 +1,23 @@
+{
+  "name": "ukulelejs",
+  "version": "1.0.0",
+  "description": "this is a light mvvc framework likes angularjs",
+  "scripts": {
+    "postinstall": "bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.oschina.net/momoko8443/ukulelejs.git"
+  },
+  "keywords": [
+    "mvvc",
+    "javascript",
+    "framework",
+    "angularjs"
+  ],
+  "author": "Huibin Zheng",
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.4.1"
+  }
+}
