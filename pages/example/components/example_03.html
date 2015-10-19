@@ -21,6 +21,7 @@
 		<button class="btn btn-success" uku-onclick="ex03Ctrl.sayHelloWithArgument(ex03Ctrl.myName)">
 			Click Me with argument
 		</button>
+        <button uku-disabled="ex03Ctrl.disabled">disabled</button>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html3" style="margin: 20px">
 		<pre>
@@ -34,6 +35,7 @@
 &lt;button uku-onclick="ex03Ctrl.sayHelloWithArgument(ex03Ctrl.myName)"&gt;
 	Click Me with argument
 &lt;/button&gt;
+&lt;button uku-disabled="ex03Ctrl.disabled"&gt;disabled&lt;/button&gt;
 			</code>		    		
 		</pre>
 	</div>
@@ -42,6 +44,7 @@
 			<code class="javascript">
 function Example03Ctrl() {
 	this.myName = "ukulelejs";
+    this.disabled = true;
 	this.sayHello = function() {
 		alert(this.myName);
 	};
