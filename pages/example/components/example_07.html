@@ -1,4 +1,4 @@
-<h3>{{res.getResource('LABEL_EXAMPLE_07')}}</h3>
+<h3 uku-text="res.getResource('LABEL_EXAMPLE_07')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
 		<a href="#demo7" aria-controls="demo7" role="tab" data-toggle="tab">Demo</a>
@@ -20,6 +20,7 @@
         <div class="uku-include" src="pages/example/components/subview.html" replace="true" uku-onload="ex07Ctrl.onInclueElementLoaded()"></div>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html7" style="margin: 20px">
+        <div class="alert alert-info" role="alert" uku-text="res.getResource('TOOL_TIPS_UKU_INCLUDE')"></div>
 		<pre>
 			<code class="html">
 &lt;div class="uku-include" replace-controller="ex07Ctrl|otherCtrl" src="pages/example/components/subview.html"&gt;&lt;/div&gt;

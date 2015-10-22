@@ -1,4 +1,4 @@
-<h3>{{res.getResource('LABEL_EXAMPLE_09')}}</h3>
+<h3 uku-text="res.getResource('LABEL_EXAMPLE_09')"></h3>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
         <a href="#demo9" aria-controls="demo9" role="tab" data-toggle="tab">Demo</a>
@@ -29,6 +29,7 @@
     </div>
 
     <div role="tabpanel" class="tab-pane" id="js9" style="margin: 20px">
+        <div class="alert alert-info" role="alert" uku-text="res.getResource('TOOL_TIPS_UKU_REFRESH')"></div>
         <pre>
 			<code class="javascript">
 function Example09Ctrl() {

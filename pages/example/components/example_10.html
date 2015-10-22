@@ -1,4 +1,4 @@
-<h3>{{res.getResource('LABEL_EXAMPLE_10')}}</h3>
+<h3 uku-text="res.getResource('LABEL_EXAMPLE_10')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
 		<a href="#demo10" aria-controls="demo10" role="tab" data-toggle="tab">Demo</a>
@@ -25,6 +25,7 @@
 		<label>{{ex10Ctrl.selectedOption.name}}</label>  <label>{{ex10Ctrl.selectedChildOption.name}}</label>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html10" style="margin: 20px">
+        <div class="alert alert-info" role="alert" uku-text="res.getResource('TOOL_TIPS_UKU_SELECTED')"></div>
 		<pre>
 			<code class="html">
 &lt;select uku-selected="ex10Ctrl.selectedOption|value" uku-onchange="ex10Ctrl.selectedOptionChanged()"&gt;

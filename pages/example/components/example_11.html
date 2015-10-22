@@ -1,4 +1,4 @@
-<h3>{{res.getResource('LABEL_EXAMPLE_11')}}</h3>
+<h3 uku-text="res.getResource('LABEL_EXAMPLE_11')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
 		<a href="#demo11" aria-controls="demo11" role="tab" data-toggle="tab">Demo</a>
@@ -25,6 +25,7 @@
         <em>{{ex11Ctrl.sex}}</em>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html11" style="margin: 20px">
+        <div class="alert alert-info" role="alert" uku-text="res.getResource('TOOL_TIPS_UKU_SELECTED_2')"></div>
 		<pre>
 			<code class="html">
 &lt;input type="checkbox" uku-value="ex11Ctrl.isCheckboxSelected"&gt;
