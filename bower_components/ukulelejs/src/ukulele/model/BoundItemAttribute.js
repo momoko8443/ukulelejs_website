@@ -16,6 +16,8 @@ BoundItemAttribute.prototype.render = function (controller) {
         key = tempArr[1];
     }
     var finalValue = UkuleleUtil.getFinalValue(this.uku,controller,attr);
+    
+    
     if(this.ukuTag.search('data-item') !== -1){
     	finalValue = JSON.stringify(finalValue);
         this.element.setAttribute('data-item',finalValue);
@@ -39,13 +41,20 @@ BoundItemAttribute.prototype.render = function (controller) {
         }
     }
     else if(this.element.nodeName === "IMG" && this.ukuTag === "src"){
-        if(!finalValue){
+        if(finalValue){
+            this.element.setAttribute(this.ukuTag,finalValue);
+        }
+        /*if(!finalValue){
             this.element.setAttribute(this.ukuTag,UkuleleUtil.blankImg);
         }else{
             this.element.setAttribute(this.ukuTag,finalValue);
-        }
+        }*/
     }
     else{
-        this.element.setAttribute(this.ukuTag, finalValue);
+        if(this.ukuTag === "disabled"){
+            this.element.disabled = finalValue;
+        }else{
+            this.element.setAttribute(this.ukuTag, finalValue);
+        }    
     }    
 };

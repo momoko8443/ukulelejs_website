@@ -1,7 +1,7 @@
 # Install UkuleleJS
 ```
 $npm install -g bower
-bower install ukulelejs
+bower install ukulelejs#pure
 ```
 # Getting Start
 ## Native Way
@@ -99,4 +99,4 @@ define("MyController",function(){
 
 ***
  
-### Find more examples and API document at [http://ukulelejs.tiger.mopaas.com/](http://ukulelejs.tiger.mopaas.com/)
+### Find more examples and API document at [http://ukujs.tiger.mopaasapp.com/](http://ukujs.tiger.mopaasapp.com/)
