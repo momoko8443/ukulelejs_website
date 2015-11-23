@@ -4,9 +4,9 @@ define("Example12Ctrl", function () {
         this.hideStyle = "display:block";
         this.showHideFunction = function () {
             if (!this.isShown) {
-                this.hideStyle = "display:none";
+                this.hideStyle = {display:'none'};
             } else {
-                this.hideStyle = "display:block";
+                this.hideStyle = {display:'block'};
             }
         };
 
