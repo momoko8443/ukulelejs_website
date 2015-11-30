@@ -39,7 +39,8 @@ var locale = {
         "LABEL_EXAMPLE_12":"example 12:How to deal with CSS",
         "LABEL_EXAMPLE_13":"example 13:How to draw a table",
         "LABEL_EXAMPLE_14":"example 14:How to work with third-party plugins",
-        "LABEL_EXAMPLE_14_DESCRIPTION":"Generally, 3rd-party plugin will create and operate dom with container's id or class, but the container hasn't been append to document tree when we used uku-include function. We should use 'uku-onload' to call back a handler to initialize the plugin when container is ready. The second point is...I don't recommend you to use 'uku-' on 3rd party plugins, they maybe not work at some suitation, a good way is using dom method to operate them and sync the view with uku.refresh()."
+        "LABEL_EXAMPLE_14_DESCRIPTION":"Generally, 3rd-party plugin will create and operate dom with container's id or class, but the container hasn't been append to document tree when we used uku-include function. We should use 'uku-onload' to call back a handler to initialize the plugin when container is ready. The second point is...I don't recommend you to use 'uku-' on 3rd party plugins, they maybe not work at some suitation, a good way is using dom method to operate them and sync the view with uku.refresh().",
+		"LABEL_EXAMPLE_15":"example 15:Newest featrue! Usage of web component (beta)"
     },
     "zh_CN":{
         "TAB_HOME":"主页",
@@ -81,7 +82,8 @@ var locale = {
         "LABEL_EXAMPLE_12":"例12:如何处理CSS",
         "LABEL_EXAMPLE_13":"例13:如何绘制表格",
         "LABEL_EXAMPLE_14":"例14:如何与第三方插件协同工作",
-        "LABEL_EXAMPLE_14_DESCRIPTION":"一般情况下，第三方插件库都会通过调用插件容器id或者class来创建并操作dom，但是当你使用uku-include功能的时候，插件容器还并没有添加到document tree上（我们是获取不到这些id的），所以我们需要设一个回调函数，当代码片段加载成功已经ready的时候执行uku-onload回调方法，在这个回调方法中去初始化第三方插件。另外，在插件上使用uku-标签可能会失效，建议此处使用dom操作来管理插件，然后使用uku.refresh()来同步model和视图"
+        "LABEL_EXAMPLE_14_DESCRIPTION":"一般情况下，第三方插件库都会通过调用插件容器id或者class来创建并操作dom，但是当你使用uku-include功能的时候，插件容器还并没有添加到document tree上（我们是获取不到这些id的），所以我们需要设一个回调函数，当代码片段加载成功已经ready的时候执行uku-onload回调方法，在这个回调方法中去初始化第三方插件。另外，在插件上使用uku-标签可能会失效，建议此处使用dom操作来管理插件，然后使用uku.refresh()来同步model和视图",
+		"LABEL_EXAMPLE_15":"例15:新功能！web component的支持(测试完善阶段，暂不稳定)"
     }
 };
 

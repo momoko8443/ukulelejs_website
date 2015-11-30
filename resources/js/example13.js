@@ -27,9 +27,9 @@ define("Example13Ctrl", function () {
                         break;
                     }
                 }
-                return "";
+                return {};
             } else {
-                return "display:none";
+                return {display:'none'};
             }
         };
 

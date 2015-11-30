@@ -34,7 +34,7 @@
                     <td>{{city.total}}</td>
                 </tr>
             </tbody>
-        </table>     
+        </table>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html13" style="margin: 20px">
 		<pre>
@@ -42,7 +42,7 @@
 &lt;table class="table table-bordered"&gt;
     &lt;thead&gt;
         &lt;tr&gt;
-            &lt;th&gt;Area&lt;/td&gt; 
+            &lt;th&gt;Area&lt;/td&gt;
             &lt;th&gt;Country&lt;/td&gt;
             &lt;th&gt;City&lt;/td&gt;
             &lt;th&gt;Total&lt;/td&gt;
@@ -65,15 +65,15 @@
 			<code class="javascript">
 function Example13Ctrl() {
     var citiesSpanPool = {};
-    this.setRowSpan = function(rowItem,field){         
-        if(!citiesSpanPool[rowItem[field]]){  
+    this.setRowSpan = function(rowItem,field){
+        if(!citiesSpanPool[rowItem[field]]){
             var rowCount = 0;
             for(var i=0;i&lt;this.cities.length;i++){
                 var item = this.cities[i];
                 if(rowItem[field] === item[field]){
                     rowCount++;
                 }
-            } 
+            }
             citiesSpanPool[rowItem[field]] = rowCount;
             return citiesSpanPool[rowItem[field]];
         }
@@ -84,18 +84,18 @@ function Example13Ctrl() {
     };
     var citiesStylePool = {};
     this.setRowStyle = function(rowItem,field){
-        if(!citiesStylePool[rowItem[field]]){  
+        if(!citiesStylePool[rowItem[field]]){
             for(var i=0;i&lt;this.cities.length;i++){
                 var item = this.cities[i];
                 if(rowItem[field] === item[field]){
                     citiesStylePool[rowItem[field]] = true;
                     break;
                 }
-            }       
-            return "";
+            }
+            return {};
         }
         else{
-            return "display:none";
+            return {display:'none'};
         }
     };
 
@@ -121,7 +121,7 @@ function Example13Ctrl() {
         'total': 400
     }];
 }
-			</code>		    		
+			</code>
 		</pre>
 	</div>
 </div>
