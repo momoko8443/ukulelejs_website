@@ -1,0 +1,44 @@
+<uku-component>
+    <template>
+        <div>
+            <h2>Ukujs Web Component</h2>
+            <lable>Repeat Count:</lable>
+            <input type="text" uku-value="cc.rowNum">
+            <button uku-onclick="cc.generateTesingData()">Render</button>
+            <button uku-onclick="cc.reset()">Reset</button>
+            <br/>
+            <lable>Total Binding Objects:</lable>
+            <em>{{cc.total}}</em>
+            <br/>
+            <label>Time:</label><em id="timer">0</em> ms
+        </div>
+    </template>
+    <script>
+        function(uku){
+            this.rowNum = 0;
+            this.total = 0;
+            this.items = [];
+            this.generateTesingData = function(){
+                this.items = [];
+                var rowLen = this.rowNum;
+                var columnLen = 10;
+                for (var i = 0; i < rowLen; i++) {
+                    var item = {};
+                    for (var j = 0; j < columnLen; j++) {
+                        item["field" + j] = "testing " + (i * 10 + j);
+                    }
+                    this.items.push(item);
+                }
+                this.total = rowLen * columnLen * 2;
+                this.fire('settingchanged', {items: this.items});
+            };
+
+            this.reset = function(){
+                this.items = [];
+                this.rowNum = 0;
+                this.total = 0;
+                this.fire('settingchanged', {items: this.items});
+            };
+        }
+    </script>
+</uku-component>

@@ -1,0 +1,40 @@
+<uku-component>
+    <template>
+        <li>
+            <div>
+                <label>{{cc.myItem.field0}}</label>
+                <input type="text" uku-value="cc.myItem.field0" style="width:80px">
+                <label>{{cc.myItem.field1}}</label>
+                <input type="text" uku-value="cc.myItem.field1" style="width:80px">
+                <label>{{cc.myItem.field2}}</label>
+                <input type="text" uku-value="cc.myItem.field2" style="width:80px">
+                <label>{{cc.myItem.field3}}</label>
+                <input type="text" uku-value="cc.myItem.field3" style="width:80px">
+                <label>{{cc.myItem.field4}}</label>
+                <input type="text" uku-value="cc.myItem.field4" style="width:80px">
+                <label>{{cc.myItem.field5}}</label>
+                <input type="text" uku-value="cc.myItem.field5" style="width:80px">
+                <label>{{cc.myItem.field6}}</label>
+                <input type="text" uku-value="cc.myItem.field6" style="width:80px">
+                <label>{{cc.myItem.field7}}</label>
+                <input type="text" uku-value="cc.myItem.field7" style="width:80px">
+                <label>{{cc.myItem.field8}}</label>
+                <input type="text" uku-value="cc.myItem.field8" style="width:80px">
+                <label>{{cc.myItem.field9}}</label>
+                <input type="text" uku-value="cc.myItem.field9" style="width:80px">
+            </div>
+       </li>
+    </template>
+    <script>
+        function(uku){
+            this.myItem = {};
+            Object.defineProperty(this, "item", {
+                set: function (value) {
+                    this.myItem = value;
+                    console.log(this.myItem);
+                    uku.refresh();
+                }
+            });
+        }
+    </script>
+</uku-component>

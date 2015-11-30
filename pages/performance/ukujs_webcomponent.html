@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../../bower_components/ukulelejs/dist/ukulele.js"></script>
+</head>
+
+<body uku-application>
+    <my-setting id="performanceSetting"></my-setting>
+    <my-list id="performanceList" uku-items="myCtrl.items"></my-list>
+</body>
+<script>
+    var uku;
+    window.onload = function(){
+        uku = new Ukulele();
+        uku.registerComponent('my-setting','ukujs-components/setting.html');
+        uku.registerComponent('my-list','ukujs-components/list.html');
+        uku.registerComponent('my-item','ukujs-components/item.html');
+        var myCtrl = new MyController(uku);
+        uku.registerController('myCtrl',myCtrl);
+        uku.initHandler = function(){
+            myCtrl.init();
+        };
+        uku.init();
+
+        function MyController(uku){
+            var self = this;
+            this.items = [];
+            this.init = function(){
+                var setting = document.getElementById("performanceSetting");
+                list_comp = document.getElementById("performanceList");
+                setting.addEventListener("onsettingchanged", function (e) {
+                    timer_em = document.getElementById("timer");
+                    var items = e.data.items;
+                    if (items.length > 0) {
+                        calulateTime(items.length);
+                    } else {
+                        timer_em.innerHTML = 0;
+                    }
+
+                    self.items = items;
+                    uku.refresh();
+                });
+            }
+        }
+
+
+
+
+        var interval = 50;
+        var timer;
+        var timer_em;
+        var list_comp;
+        function calulateTime(rowLen) {
+            var startTime = new Date().getTime();
+            timer = setInterval(function () {
+                if (checkIsRenderOver(rowLen)) {
+                    var endTime = new Date().getTime();
+                    var runTime = endTime - startTime;
+                    timer_em.innerHTML = runTime;
+                    clearInterval(timer);
+                }
+            }, interval);
+        }
+
+        function checkIsRenderOver(rowLen) {
+            if (list_comp && list_comp.children.length > rowLen) {
+                return true;
+            }
+            return false;
+        }
+    };
+</script>
+
+</html>

@@ -12,7 +12,7 @@
         window['Ukulele'] = Ukulele;
     }
     
-    /*! ukulelejs - v1.0.0 - 2015-11-30 */function elementChangedBinder(element, tagName, controllerModel, handler) {
+    /*! ukulelejs - v1.0.0 - 2015-12-01 */function elementChangedBinder(element, tagName, controllerModel, handler) {
     var elementStrategies = [inputTextCase, textareaCase, selectCase, checkboxCase, radioCase];
     for (var i = 0; i < elementStrategies.length; i++) {
         var func = elementStrategies[i];
@@ -178,6 +178,13 @@ function Ukulele() {
 	 */
 	this.parentUku = null;
 
+	this.getComponentsDefinition = function(){
+        return componentsDefinition;
+    };
+    this.setComponentsDefinition = function(value){
+        componentsDefinition = value;
+    };
+
 	this.init = function () {
 		if(ajaxCounter > 0){
 			setTimeout(this.init,200);
@@ -331,7 +338,7 @@ function Ukulele() {
 	function analyizeElement(element) {
 		var onloadHandlerQueue = [];
 		searchIncludeTag(element, function () {
-			searchComponent(element);
+			element = searchComponent(element);
 			var subElements = [];
 			//scan element which has uku-* tag
 			var isSelfHasUkuTag = Selector.fuzzyFind(element, 'uku-');
@@ -408,23 +415,45 @@ function Ukulele() {
 			}
 		});
 
-		function searchComponent(element) {
+		function isComponent(element){
 			for(var key in componentsDefinition){
-				var tags = element.querySelectorAll(key);
-				for(var i=0;i<tags.length;i++){
-					var comp = tags[i];
-					var attrs = comp.attributes;
-					var compDef = componentsDefinition[key];
-					dealWithComponent(comp,compDef.template,compDef.controllerClazz,attrs);
+				if(element.localName === key){
+					return key;
 				}
 			}
-			self.refresh();
+			return null;
+		}
+
+		function searchComponent(element) {
+			var key = isComponent(element);
+			if(key){
+				if (!UkuleleUtil.isRepeat(element) && !UkuleleUtil.isInRepeat(element)) {
+					var attrs = element.attributes;
+                    var compDef = componentsDefinition[key];
+                    element = dealWithComponent(element,compDef.template,compDef.controllerClazz,attrs);
+			    }
+			}else{
+				for (var i = 0; i < element.children.length; i++) {
+					var child = element.children[i];
+					searchComponent(child);
+				}
+			}
+			return element;
+
+
 			function dealWithComponent(tag,template,Clazz,attrs) {
 				var randomAlias = 'cc_'+Math.floor(10000 * Math.random()).toString();
 				template = template.replace(new RegExp('cc.','gm'),randomAlias+'.');
 				tag.insertAdjacentHTML('beforeBegin', template);
 				var htmlDom = tag.previousElementSibling;
 				var cc = new Clazz(self);
+				cc._dom = htmlDom;
+                cc.fire = function(eventType,data){
+                    var event = document.createEvent('HTMLEvents');
+                    event.initEvent("on"+eventType.toLowerCase(), true, true);
+                    event.data = data;
+                    cc._dom.dispatchEvent(event);
+                };
 				self.registerController(randomAlias,cc);
 				for(var i=0;i<attrs.length;i++){
 					var attr = attrs[i];
@@ -441,7 +470,11 @@ function Ukulele() {
 					}
 				}
 				tag.parentNode.removeChild(tag);
-				searchComponent(htmlDom);
+				for (var j = 0; j < htmlDom.children.length; j++) {
+					var child = htmlDom.children[j];
+					searchComponent(child);
+				}
+				return htmlDom;
 			}
 		}
 
@@ -887,7 +920,7 @@ BoundItemRepeat.prototype.render = function (controller) {
         }
         return (NodeFilter.FILTER_SKIP);
     }
-    
+
     function generateTempContainer(){
         var index = UkuleleUtil.searchHtmlTag(self.renderTemplate,"tr");
         if(index === -1){
@@ -919,15 +952,18 @@ BoundItemRepeat.prototype.render = function (controller) {
                     blankDiv = null;
                 }
             }
-            
+
             var child = commentNode.nextSibling;
             for (var j = 0; j < finalValue.length; j++) {
                 child.removeAttribute("uku-repeat");
                 var ukulele = new Ukulele();
                 ukulele.parentUku = this.uku;
+                var compDef = ukulele.parentUku.getComponentsDefinition();
+                ukulele.setComponentsDefinition(compDef);
                 ukulele.registerController(this.expression, finalValue[j]);
+                var sibling = child.nextSibling;
                 ukulele.dealWithElement(child);
-                child = child.nextSibling;
+                child = sibling;
             }
         }
     }
@@ -945,6 +981,7 @@ BoundItemRepeat.prototype.render = function (controller) {
         }
     }
 };
+
 function ComponentModel(tagName,template,clazz){
     "use strict";
     this.tagName = tagName;
@@ -1121,7 +1158,7 @@ ObjectUtil.deepClone = function (obj) {
     } else {
         o = {};
         for (i in obj) {
-            if (typeof (obj[i]) === "object" && obj[i] !== null) {
+            if (typeof (obj[i]) === "object" && obj[i] !== null && i !== "_dom") {
                 o[i] = arguments.callee(obj[i]);
             } else {
                 o[i] = obj[i];
@@ -1131,6 +1168,7 @@ ObjectUtil.deepClone = function (obj) {
 
     return o;
 };
+
 function UkuleleUtil() {
     'use strict';
 }

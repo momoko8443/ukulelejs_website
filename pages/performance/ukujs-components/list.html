@@ -1,0 +1,23 @@
+<uku-component>
+    <template>
+        <ol>
+            <h3>previous dom</h3>
+                <!--<my-item uku-repeat="item in cc.myItems" uku-item="item"></my-item>-->
+                <div uku-repeat="item in cc.myItems">
+                    <my-item  uku-item="item"></my-item>
+                </div>
+
+            <h3>next dom</h3>
+        </ol>
+    </template>
+    <script>
+        function(uku){
+            this.myItems = [];
+            Object.defineProperty(this, "items", {
+                set: function (value) {
+                    this.myItems = value;
+                }
+            });
+        }
+    </script>
+</uku-component>
