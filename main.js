@@ -2,7 +2,7 @@ require.config({
     paths: {
         "jquery": 'bower_components/jquery/dist/jquery.min',
         "jquery.bootstrap": 'bower_components/bootstrap/dist/js/bootstrap.min',
-        "Ukulele": 'bower_components/ukulelejs/dist/ukulele',
+        "Ukulele": 'bower_components/ukulelejs/dist/ukulele.min',
         "highlight": 'bower_components/highlightjs/highlight.pack',
         "locale": 'resources/locale/example_properties',
         "routejs": 'bower_components/uku-routejs/build/js/uku-route',
@@ -92,7 +92,7 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
 				.addAnchor("repeat")
 				.work();
         uku.init();
-		
+
         uku.initHandler = function (element) {
             var elementId = element.getAttribute("id");
             if (!initRoutePool[elementId]) {
@@ -102,8 +102,8 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
                 }
                 initRoutePool[elementId] = true;
             }
-			
-			
+
+
 			route.onRouteChange = function (page) {
 				if (page && page.page && !page.cache) {
 					document.getElementById("mainView").classList.add('blur');
@@ -121,10 +121,10 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
 				}
 
 			};
-			
+
         };
     });
-	
+
     function ResourceManager() {
         this.changeLocale = function (language) {
             this.selectedLanguage = language;
