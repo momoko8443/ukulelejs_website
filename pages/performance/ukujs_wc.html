@@ -29,7 +29,7 @@
             this.init = function(){
                 var setting = document.getElementById("performanceSetting");
                 list_comp = document.getElementById("performanceList");
-                setting.addEventListener("onsettingchanged", function (e) {
+                setting.addEventListener("settingchanged", function (e) {
                     timer_em = document.getElementById("timer");
                     var items = e.data.items;
                     if (items.length > 0) {

@@ -45,7 +45,7 @@ BoundItemRepeat.prototype.render = function (controller) {
         }
         return (NodeFilter.FILTER_SKIP);
     }
-    
+
     function generateTempContainer(){
         var index = UkuleleUtil.searchHtmlTag(self.renderTemplate,"tr");
         if(index === -1){
@@ -67,7 +67,6 @@ BoundItemRepeat.prototype.render = function (controller) {
             var blankDiv = generateTempContainer();
             commentNode.parentNode.insertBefore(blankDiv, commentNode.nextSibling);
             for (var i = 0; i < finalValue.length; i++) {
-
                 tempDiv.insertAdjacentHTML('beforeEnd', this.renderTemplate);
                 if (i === finalValue.length - 1) {
                     var childrenHTML = tempDiv.innerHTML;
@@ -77,15 +76,18 @@ BoundItemRepeat.prototype.render = function (controller) {
                     blankDiv = null;
                 }
             }
-            
+
             var child = commentNode.nextSibling;
             for (var j = 0; j < finalValue.length; j++) {
                 child.removeAttribute("uku-repeat");
                 var ukulele = new Ukulele();
                 ukulele.parentUku = this.uku;
+                var compDef = ukulele.parentUku.getComponentsDefinition();
+                ukulele.setComponentsDefinition(compDef);
                 ukulele.registerController(this.expression, finalValue[j]);
+                var sibling = child.nextSibling;
                 ukulele.dealWithElement(child);
-                child = child.nextSibling;
+                child = sibling;
             }
         }
     }
