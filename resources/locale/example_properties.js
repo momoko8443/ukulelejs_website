@@ -9,6 +9,11 @@ var locale = {
         "TAB_AMD":"Using AMD",
         "TAB_CMD":"Using CMD",
         "TITLE_UKULELEJS":"The two way data binding tool",
+        "TITLE_REASON":"Why we choose Ukujs",
+        "PROS_1":"Small size gizp≈5k，min≈15k，dev≈45k",
+        "PROS_2":"work well with AMD(requirejs)/CMD(seajs)",
+        "PROS_3":"Performance is good",
+        "PROS_4":"Easy to learn",
         "TOOL_TIPS_UKU_TEXT":"uku-text is a special attribute of ukujs, it can replace with {{xxx}} function to bind text with dom, using uku-text can avoid the flash problem when initialization.",
         "TOOL_TIPS_UKU_REPEAT":"uku-text is a special attribute of ukujs, it can render a collection, if you want to invoke parent controller from repeat item, please use parent.ctrlAlias.xxx",
         "TOOL_TIPS_UKU_REFRESH":"You can use uku.refresh() function to synchronize view and model by force. refresh('ctrlAlias') to sync single controller, refresh(['ctrlAliasA','ctrlAliasB'] to sync multiple controllers, refresh() to sync all controllers)",
@@ -52,6 +57,11 @@ var locale = {
         "TAB_AMD":"AMD方式",
         "TAB_CMD":"CMD方式",
         "TITLE_UKULELEJS":"一个双向数据绑定JS工具",
+        "TITLE_REASON":"选择Ukujs的理由",
+        "PROS_1":"体积小 gizp≈5k，min≈15k，dev≈45k",
+        "PROS_2":"完美兼容AMD/CMD",
+        "PROS_3":"性能突出",
+        "PROS_4":"学习成本低",
         "TOOL_TIPS_UKU_TEXT":"uku-text是ukujs中特有的属性，它用来代替{{xxx}}的写法，引入uku-text功能是为了方式初始化时花括号的闪现带来的不佳用户体验体验",
         "TOOL_TIPS_UKU_REPEAT":"uku-repeat是ukujs中特有的属性，它用来遍历渲染一组集合数据，如果在子dom中想调用外围controller的资源，请使用parent.ctrlAlias.xxx的方式",
         "TOOL_TIPS_UKU_REFRESH":"你可以使用 uku.refresh()，方法来强制同步视图和与之绑定的模型，refresh('ctrlAlias')同步指定的controller， refresh(['ctrlAliasA','ctrlAliasB'])同步多个controller，refresh()同步所有controller",
@@ -86,4 +96,3 @@ var locale = {
 		"LABEL_EXAMPLE_15":"例15:新功能！web component的支持(测试完善阶段，暂不稳定)"
     }
 };
-

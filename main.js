@@ -2,7 +2,7 @@ require.config({
     paths: {
         "jquery": 'bower_components/jquery/dist/jquery.min',
         "jquery.bootstrap": 'bower_components/bootstrap/dist/js/bootstrap.min',
-        "Ukulele": 'bower_components/ukulelejs/dist/ukulele.min',
+        "Ukulele": 'bower_components/ukulelejs/dist/ukulele',
         "highlight": 'bower_components/highlightjs/highlight.pack',
         "locale": 'resources/locale/example_properties',
         "routejs": 'bower_components/uku-routejs/build/js/uku-route',
@@ -26,7 +26,6 @@ require.config({
         "Example14Ctrl": 'resources/js/example14',
         "Example15Ctrl": 'resources/js/example15',
         "PerformanceCtrl": 'resources/js/performance'
-
     },
     shim: {
         "routejs": {
@@ -89,14 +88,12 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
 				.when("#api", "pages/api.html")
 				.when("#about", "pages/about.html")
 				.otherwise("pages/home.html")
-				.addAnchor("repeat")
-				.work();
-        uku.init();
-
+				.addAnchor("repeat");
         uku.initHandler = function (element) {
+            route.work();
             var elementId = element.getAttribute("id");
             if (!initRoutePool[elementId]) {
-                var codeDoms = document.querySelectorAll('pre code');
+                var codeDoms = element.querySelectorAll('pre code');
                 for (var i = 0; i < codeDoms.length; i++) {
                     hljs.highlightBlock(codeDoms[i]);
                 }
@@ -121,8 +118,8 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
 				}
 
 			};
-
         };
+        uku.init();
     });
 
     function ResourceManager() {
