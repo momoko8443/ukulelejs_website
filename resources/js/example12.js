@@ -1,7 +1,7 @@
 define("Example12Ctrl", function () {
     return function (uku) {
         this.isShown = true;
-        this.hideStyle = "display:block";
+        this.hideStyle = {display:'block'};
         this.showHideFunction = function () {
             if (!this.isShown) {
                 this.hideStyle = {display:'none'};
