@@ -1,6 +1,7 @@
 var locale = {
     "en_US" :{
         "TAB_HOME":"HOME",
+        "TAB_GUIDE":"GUIDE",
         "TAB_EXAMPLE":"Example",
         "TAB_PERFORMANCE":"Performance",
         "TAB_API":"API(EN)",
@@ -49,6 +50,7 @@ var locale = {
     },
     "zh_CN":{
         "TAB_HOME":"主页",
+        "TAB_GUIDE":"教学",
         "TAB_EXAMPLE":"示例",
         "TAB_PERFORMANCE":"性能",
         "TAB_API":"API(英文)",

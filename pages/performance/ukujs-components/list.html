@@ -7,13 +7,16 @@
         </ol>
     </template>
     <script>
-        function(uku){
-            this.myItems = [];
-            Object.defineProperty(this, "items", {
-                set: function (value) {
-                    this.myItems = value;
-                }
-            });
-        }
+        (function(){
+            return function(uku){
+                this.myItems = [];
+                Object.defineProperty(this, "items", {
+                    set: function (value) {
+                        this.myItems = value;
+                    }
+                });
+            };
+        })();
+
     </script>
 </uku-component>

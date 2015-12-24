@@ -26,18 +26,21 @@
        </li>
     </template>
     <script>
-        function(uku){
-            this.myItem = {};
-            Object.defineProperty(this, "item", {
-                set: function (value) {
-                    this.myItem = value;
-                    console.log(this.myItem);
-                    uku.refresh();
+        (function(){
+            return function(uku){
+                this.myItem = {};
+                Object.defineProperty(this, "item", {
+                    set: function (value) {
+                        this.myItem = value;
+                        console.log(this.myItem);
+                        uku.refresh();
+                    }
+                });
+                this._initialized = function(){
+                    console.log(this._dom,'load completed');
                 }
-            });
-            this._initialized = function(){
-                console.log(this._dom,'load completed');
-            }
-        }
+            };
+        })();
+
     </script>
 </uku-component>

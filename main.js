@@ -83,6 +83,7 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
         uku.registerController("res", new ResourceManager());
 		route = new RouteController("viewContainer");
 		route.default("#home", "pages/home.html")
+        .when("#guide", "pages/guide.html")
 				.when("#example", "pages/example.html")
 				.when("#performance", "pages/performance.html")
 				.when("#api", "pages/api.html")
@@ -106,7 +107,7 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
 					document.getElementById("mainView").classList.add('blur');
 					document.getElementById("loadingBar").style.display = "block";
 					uku.dealWithElement(page.page);
-					if (page.key === "#performance" || page.key === "#about" || page.key === "#api") {
+					if (page.key === "#performance" || page.key === "#about" || page.key === "#api" || page.key === "#guide") {
 						setTimeout(function () {
 							document.getElementById("mainView").classList.remove('blur');
 							document.getElementById("loadingBar").style.display = "none";

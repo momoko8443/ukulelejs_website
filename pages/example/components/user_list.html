@@ -1,43 +1,48 @@
 <uku-component>
-    <template>
-        <div>
-            <ul>
-                <li uku-repeat="user in cc.users">
-                    <div>
-                        <input type="checkbox" uku-value="user.selected" uku-onchange="parent.cc.cbChangedHandler()">
-                        <label>{{user.name}}</label>
-                    </div>
-                </li>
-            </ul>
-			<h3 uku-text="cc.selectedUsers"></h3>
-        </div>
-    </template>
-    <script>
-        function(uku){
-            this.users = [];
-			this.selectedUsers = "";
-			this.cbChangedHandler = function(){
-				var tempArr = [];
-				for(var i=0;i<this.users.length;i++){
-					var user = this.users[i];
-					if(user.selected === true){
-						tempArr.push(user.name);
-					}
-				}
-				this.selectedUsers = tempArr.join(', ');
-			};
-			
-            var usersFromOutside;
-            Object.defineProperty(this, "usersFromOutside", {
-                set: function (value) {
-                    usersFromOutside = value;
-                    for(var i=0;i<usersFromOutside.length;i++){
-                        var user = {'name':usersFromOutside[i],'selected':false};
-                        this.users.push(user);
-                    }
-                    console.log(this.users);
-                }
-            });
-        }
-    </script>
+  <template>
+    <div>
+      <ul>
+        <li uku-repeat="user in cc.users">
+          <div>
+            <input type="checkbox" uku-value="user.selected" uku-onchange="parent.cc.cbChangedHandler()">
+            <label>{{user.name}}</label>
+          </div>
+        </li>
+      </ul>
+      <h3 uku-text="cc.selectedUsers"></h3>
+    </div>
+  </template>
+  <script>
+    (function() {
+      return function(uku) {
+        this.users = [];
+        this.selectedUsers = "";
+        this.cbChangedHandler = function() {
+          var tempArr = [];
+          for (var i = 0; i < this.users.length; i++) {
+            var user = this.users[i];
+            if (user.selected === true) {
+              tempArr.push(user.name);
+            }
+          }
+          this.selectedUsers = tempArr.join(', ');
+        };
+
+        var usersFromOutside;
+        Object.defineProperty(this, "usersFromOutside", {
+          set: function(value) {
+            usersFromOutside = value;
+            for (var i = 0; i < usersFromOutside.length; i++) {
+              var user = {
+                'name': usersFromOutside[i],
+                'selected': false
+              };
+              this.users.push(user);
+            }
+            console.log(this.users);
+          }
+        });
+      }
+    })();
+  </script>
 </uku-component>
