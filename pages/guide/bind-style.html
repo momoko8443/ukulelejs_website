@@ -1,0 +1,107 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>绑定样式</h3>
+            <p>
+                绑定样式其实也是对绑定属性的一种实现，我们使用 uku-style和 uku-class来实现这个功能
+            </p>
+            <h4>uku-style的实现</h4>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#demo" aria-controls="demo" role="tab" data-toggle="tab">Demo</a>
+                </li>
+                <li role="presentation">
+                    <a href="#html" aria-controls="html" role="tab" data-toggle="tab">Html</a>
+                </li>
+                <li role="presentation">
+                    <a href="#js" aria-controls="js" role="tab" data-toggle="tab">JavaScript</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
+                    <h4 uku-style="cc.customStyle">uku-style test</h4>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;h4 uku-style="myCtrl.customStyle"&gt;uku-style test&lt;/h4&gt;
+                        </code>
+                    </pre>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="js" style="margin: 20px">
+                    <pre>
+                        <code class="javascript">
+function MyCtrl(uku) {
+    this.customStyle = {color:'red',fontStyle:'italic'};//font-style需要写成fontStyle
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p>
+                注意这里我们使用json格式来定义style对象, 在css中的某些带-的写法需要改成驼峰式的写法，如上例中的font-style需要写成
+                fontStyle
+            </p>
+            <h4>uku-class的实现</h4>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#demo2" aria-controls="demo2" role="tab" data-toggle="tab">Demo</a>
+                </li>
+                <li role="presentation">
+                    <a href="#html2" aria-controls="html2" role="tab" data-toggle="tab">Html</a>
+                </li>
+                <li role="presentation">
+                    <a href="#js2" aria-controls="js2" role="tab" data-toggle="tab">JavaScript</a>
+                </li>
+                <li role="presentation">
+                    <a href="#css2" aria-controls="css2" role="tab" data-toggle="tab">CSS</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="demo2" style="margin: 20px">
+                    <h4 uku-class="cc.customClass">uku-class test</h4>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="html2" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;h4 uku-class="myCtrl.customClass"&gt;uku-class test&lt;/h4&gt;
+                        </code>
+                    </pre>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="js2" style="margin: 20px">
+                    <pre>
+                        <code class="javascript">
+function MyCtrl(uku) {
+    this.customClass = 'myClass1 myClass2';
+}
+                        </code>
+                    </pre>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="css2" style="margin: 20px">
+                    <pre>
+                        <code class="css">
+.myClass1{
+    color:red;
+}
+.myClass2{
+    font-style: italic;
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p>
+                uku-class的使用方式和原生的class无异，你只要绑定一个以空格分割的callNames的字符串即可。uku-style和uku-class可以方便的帮助我们在
+                程序中控制view的样式，包括dom的show/hide等效果。（Ukujs中为了api的简洁，没有实现诸如Angular中ng-show这样的指令，请使用uku-style来实现）
+            </p>
+        </div>
+    </template>
+    <script>
+        (function () {
+            return function(uku){
+                this.customStyle = {color:'red',fontStyle:'italic'};
+                this.customClass = 'myClass1 myClass2';
+            };
+        })();
+    </script>
+</uku-component>

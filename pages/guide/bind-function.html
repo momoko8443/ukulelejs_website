@@ -1,0 +1,69 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>函数绑定</h3>
+            <p>
+                上面小节中的绝大多数例子都是 “模型的属性” 与 “标签的属性”进行绑定，Ukujs中也提供了“模型的函数” 与 “标签的属性”进行绑定的功能,
+                如 uku-src = "myCtrl.func()"表示，img的src属性是由模型中的函数func的返回值来决定具体的图片路径。
+                又如 {{myCtrl.func()}}则表示用文本显示函数func的返回值。
+            </p>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#demo" aria-controls="demo" role="tab" data-toggle="tab">Demo</a>
+                </li>
+                <li role="presentation">
+                    <a href="#html" aria-controls="html" role="tab" data-toggle="tab">Html</a>
+                </li>
+                <li role="presentation">
+                    <a href="#js" aria-controls="js" role="tab" data-toggle="tab">JavaScript</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
+                    <h4>{{cc.func()}}</h4>
+                    <h4>{{cc.func('with argument')}}</h4>
+                    <input type="text" uku-value="cc.func(cc.arg)">
+                </div>
+                <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;h4&gt;{{myCtrl.func()}}&lt;/h4&gt;
+&lt;h4&gt;{{myCtrl.func('with argument')}}&lt;/h4&gt;
+&lt;input type="text" uku-value="myCtrl.func(myCtrl.arg)"&gt;
+                        </code>
+                    </pre>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="js" style="margin: 20px">
+                    <pre>
+                        <code class="javascript">
+function MyCtrl(uku) {
+    this.arg = 'arg from model';
+    this.func = function(){
+        var returnString = "run func ";
+        var arr = Array.prototype.slice.call(arguments);
+        return "run func " + arr.join(",");
+    };
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p>
+                我们可以给函数设置参数，参数目前只支持String类型，如果你想传递其它类型的参数，请将其定义在模型中，使用 ctrlAlias.attr的方式传递
+                如上例中的 uku-value="myCtrl.func(myCtrl.arg)，当然这也就意味着你可以传递变量了。（咳咳，将会在后续版本中改进参数这方面的体验）
+            </p>
+        </div>
+    </template>
+    <script>
+        (function () {
+            return function(uku){
+                this.arg = "with arg from model";
+                this.func = function(){
+                    var returnString = "run func ";
+                    var arr = Array.prototype.slice.call(arguments);
+                    return "run func " + arr.join(",");
+                };
+            };
+        })();
+    </script>
+</uku-component>

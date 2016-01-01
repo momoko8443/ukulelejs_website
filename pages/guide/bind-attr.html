@@ -1,0 +1,54 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>绑定属性</h3>
+            <p>
+                绑定属性可以说是ukujs最重要的功能之一，你只要记住一条规则 “uku-”这个前缀加上任意的html标签上的属性即可生成属性的绑定。
+                例如 uku-src="myCtrl.imageUrl" 即可将img标签的src属性与模型上的 imageUrl变量进行绑定。
+            </p>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#demo" aria-controls="demo" role="tab" data-toggle="tab">Demo</a>
+                </li>
+                <li role="presentation">
+                    <a href="#html" aria-controls="html" role="tab" data-toggle="tab">Html</a>
+                </li>
+                <li role="presentation">
+                    <a href="#js" aria-controls="js" role="tab" data-toggle="tab">JavaScript</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
+                    <img uku-src="cc.imageUrl">
+                </div>
+                <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;img uku-src="myCtrl.imageUrl"&gt;&lt;/img&gt;
+                        </code>
+                    </pre>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="js" style="margin: 20px">
+                    <pre>
+                        <code class="javascript">
+function MyCtrl() {
+    this.imageUrl = "pages/images/hf1.jpg";
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p>
+                你还可以尝试uku-value , uku-style, uku-class... <span style="color:red">uku-+任何原生的属性，uku-+任何原生的属性，uku-+任何原生的属性</span>（重说三）。
+                在接下去的几个关于双向绑定的小节其实都是围绕这条规则展开的。
+            </p>
+        </div>
+    </template>
+    <script>
+        (function () {
+            return function(uku){
+                this.imageUrl = "pages/example/images/hf1.jpg";
+            };
+        })();
+    </script>
+</uku-component>

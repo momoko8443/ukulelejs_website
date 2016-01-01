@@ -46,11 +46,11 @@ require.config({
     }
 });
 
-require(["domReady", "routejs", "Ukulele", "RootCtrl", "OtherCtrl",
+require(["domReady", "routejs", "Ukulele", "RootCtrl", "GuideCtrl","OtherCtrl",
 "Example01Ctrl", "Example02Ctrl", "Example03Ctrl", "Example04Ctrl", "Example05Ctrl", "Example06Ctrl", "Example07Ctrl",
 "Example08Ctrl", "Example09Ctrl", "Example10Ctrl", "Example11Ctrl", "Example12Ctrl", "Example13Ctrl", "Example14Ctrl", "Example15Ctrl",
 "PerformanceCtrl", "Chart", "jquery", "jquery.bootstrap", "highlight", "locale", "datetimepicker"],
-function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
+function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
             Example01Ctrl, Example02Ctrl, Example03Ctrl, Example04Ctrl, Example05Ctrl, Example06Ctrl, Example07Ctrl,
             Example08Ctrl, Example09Ctrl, Example10Ctrl, Example11Ctrl, Example12Ctrl, Example13Ctrl, Example14Ctrl, Example15Ctrl, PerformanceCtrl) {
 
@@ -61,6 +61,7 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
     domReady(function () {
         uku = new Ukulele();
         uku.registerController("root", new RootCtrl(uku));
+        uku.registerController("guideCtrl", new GuideCtrl(uku));
         uku.registerController("otherCtrl", new OtherCtrl());
         uku.registerController("ex01Ctrl", new Example01Ctrl());
         uku.registerController("ex02Ctrl", new Example02Ctrl());
@@ -77,7 +78,21 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
         uku.registerController("ex13Ctrl", new Example13Ctrl());
         uku.registerController("ex14Ctrl", new Example14Ctrl(uku));
         uku.registerController("ex15Ctrl", new Example15Ctrl(uku));
+
         uku.registerComponent("user-list", "pages/example/components/user_list.html");
+        uku.registerComponent("guide-install", "pages/guide/install.html");
+        uku.registerComponent("guide-config", "pages/guide/config.html");
+        uku.registerComponent("guide-native", "pages/guide/native.html");
+        uku.registerComponent("guide-amd", "pages/guide/amd.html");
+        uku.registerComponent("guide-cmd", "pages/guide/cmd.html");
+        uku.registerComponent("guide-webpack", "pages/guide/webpack.html");
+        uku.registerComponent("guide-bind-text", "pages/guide/bind-text.html");
+        uku.registerComponent("guide-bind-attr", "pages/guide/bind-attr.html");
+        uku.registerComponent("guide-bind-input", "pages/guide/bind-input.html");
+        uku.registerComponent("guide-bind-event", "pages/guide/bind-event.html");
+        uku.registerComponent("guide-bind-style", "pages/guide/bind-style.html");
+        uku.registerComponent("guide-bind-function", "pages/guide/bind-function.html");
+        uku.registerComponent("guide-building", "pages/guide/building.html");
         perforCtrl = new PerformanceCtrl();
         uku.registerController("perforCtrl", perforCtrl);
         uku.registerController("res", new ResourceManager());
@@ -90,6 +105,14 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
 				.when("#about", "pages/about.html")
 				.otherwise("pages/home.html")
 				.addAnchor("repeat");
+        uku.refreshHandler = function(element){
+            if(element){
+                var codeDoms = element.querySelectorAll('pre code');
+                for (var i = 0; i < codeDoms.length; i++) {
+                    hljs.highlightBlock(codeDoms[i]);
+                }
+            }
+        };
         uku.initHandler = function (element) {
             route.work();
             var elementId = element.getAttribute("id");
@@ -130,10 +153,11 @@ function (domReady, Route, Ukulele, RootCtrl, OtherCtrl,
         this.languages = [{
             "name": "中文",
             "value": "zh_CN"
-        }, {
-            "name": "English",
-            "value": "en_US"
         }];
+        // , {
+        //     "name": "English",
+        //     "value": "en_US"
+        // }
         this.selectedLanguage = this.languages[0];
         this.getResource = function (key) {
             var currentLocale = this.selectedLanguage.value;
@@ -151,6 +175,32 @@ define("RootCtrl", function () {
         }
     };
 
+});
+
+define("GuideCtrl", function(){
+    return function(uku){
+        var currentMenuItem;
+        this.guideMenuItemClickHandler = function(e){
+            if(e.target.nodeName === "BUTTON"){
+                var menuItem = e.target.dataset.menuItem;
+                if(currentMenuItem !== menuItem){
+                    var componentTag = "guide-"+menuItem;
+                    var comp = uku.getComponentsDefinition()[componentTag];
+                    var guideItem;
+                    if(comp){
+                        guideItem = document.createElement(componentTag);
+                    }else{
+                        guideItem = document.createElement("guide-building");
+                    }
+                    var guideContentPanel = document.getElementById("guideContentPanel");
+                    guideContentPanel.removeChild(guideContentPanel.children[0]);
+                    guideContentPanel.appendChild(guideItem);
+                    uku.dealWithElement(guideItem);
+                    currentMenuItem = menuItem;
+                }
+            }
+        };
+    };
 });
 
 define("OtherCtrl", function () {

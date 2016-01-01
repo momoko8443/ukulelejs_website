@@ -11,7 +11,7 @@
     } else {
         window['Ukulele'] = Ukulele;
     }
-    
+
     /*! ukulelejs - v1.0.1 - 2015-12-24 */function Analyzer(uku){
     var self = this;
     //解析html中各个uku的tag
@@ -74,7 +74,7 @@
                 handler.func.apply(this, handler.args);
             }
             if (uku.refreshHandler) {
-                uku.refreshHandler.call(uku);
+                uku.refreshHandler.call(uku, element);
             }
             if (uku.initHandler) {
                 uku.initHandler.call(uku, element);
@@ -128,35 +128,39 @@
         }
         tag.insertAdjacentHTML('beforeBegin', template);
         var htmlDom = tag.previousElementSibling;
-        var cc = new Clazz(uku);
-        cc._dom = htmlDom;
-        cc.fire = function(eventType,data){
-            var event = document.createEvent('HTMLEvents');
-            event.initEvent(eventType.toLowerCase(), true, true);
-            event.data = data;
-            cc._dom.dispatchEvent(event);
-        };
-        uku.registerController(randomAlias,cc);
-        for(var i=0;i<attrs.length;i++){
-            var attr = attrs[i];
-            if(UkuleleUtil.searchUkuAttrTag(attr.nodeName) !== 0 || attr.nodeName.search("uku-on") !== -1){
-                htmlDom.setAttribute(attr.nodeName,attr.nodeValue);
-            }else{
-                var tagName = UkuleleUtil.getAttrFromUkuTag(attr.nodeName,true);
-                var controllerModel = uku.getControllerModelByName(attr.nodeValue);
-                if (controllerModel) {
-                    var boundItem = new BoundItemComponentAttribute(attr.nodeValue, tagName, cc, uku);
-                    controllerModel.addBoundItem(boundItem);
-                    boundItem.render(controllerModel.controllerInstance);
+        var cc;
+        if(Clazz){
+            cc = new Clazz(uku);
+            cc._dom = htmlDom;
+            cc.fire = function(eventType,data){
+                var event = document.createEvent('HTMLEvents');
+                event.initEvent(eventType.toLowerCase(), true, true);
+                event.data = data;
+                cc._dom.dispatchEvent(event);
+            };
+            uku.registerController(randomAlias,cc);
+            for(var i=0;i<attrs.length;i++){
+                var attr = attrs[i];
+                if(UkuleleUtil.searchUkuAttrTag(attr.nodeName) !== 0 || attr.nodeName.search("uku-on") !== -1){
+                    htmlDom.setAttribute(attr.nodeName,attr.nodeValue);
+                }else{
+                    var tagName = UkuleleUtil.getAttrFromUkuTag(attr.nodeName,true);
+                    var controllerModel = uku.getControllerModelByName(attr.nodeValue);
+                    if (controllerModel) {
+                        var boundItem = new BoundItemComponentAttribute(attr.nodeValue, tagName, cc, uku);
+                        controllerModel.addBoundItem(boundItem);
+                        boundItem.render(controllerModel.controllerInstance);
+                    }
                 }
             }
         }
+
         tag.parentNode.removeChild(tag);
         for (var j = 0; j < htmlDom.children.length; j++) {
             var child = htmlDom.children[j];
             self.searchComponent(child);
         }
-        if(cc._initialized && typeof(cc._initialized) === 'function'){
+        if(cc && cc._initialized && typeof(cc._initialized) === 'function'){
             cc._initialized();
         }
         return htmlDom;
@@ -785,7 +789,7 @@ Ajax.prototype.get = function(url,success,error){
 };
 
 function Selector(){
-    
+
 }
 Selector.fuzzyFind = function (element,text) {
     if (element && element.attributes) {
@@ -843,8 +847,8 @@ BoundItemAttribute.prototype.render = function (controller) {
         key = tempArr[1];
     }
     var finalValue = UkuleleUtil.getFinalValue(this.uku,controller,attr);
-    
-    
+
+
     if(this.ukuTag.search('data-item') !== -1){
     	finalValue = JSON.stringify(finalValue);
         this.element.setAttribute('data-item',finalValue);
@@ -854,7 +858,7 @@ BoundItemAttribute.prototype.render = function (controller) {
     		value = finalValue[key];
     	}else{
     		value = finalValue;
-    	}     
+    	}
         this.element.value = value;
     }else if(this.element.getAttribute("type") === "checkbox"){
 		this.element.checked = finalValue;
@@ -887,8 +891,8 @@ BoundItemAttribute.prototype.render = function (controller) {
             this.element.disabled = finalValue;
         }else{
             this.element.setAttribute(this.ukuTag, finalValue);
-        }    
-    }    
+        }
+    }
 };
 function BoundItemBase(attrName, element, uku) {
     "use strict";
@@ -1215,7 +1219,7 @@ function AsyncCaller(){
 }
 
 function ObjectUtil() {
-    
+
 }
 
 ObjectUtil.isArray = function (obj) {

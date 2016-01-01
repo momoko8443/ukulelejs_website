@@ -1,0 +1,49 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>绑定文本</h3>
+            <p>
+                一种是使用“{{ }}”双层花括号将需要显示的模型属性括起来，比如{{myCtrl.user.username}}
+            </p>
+            <ul class="nav nav-tabs" role="tablist">
+            	<li role="presentation" class="active">
+            		<a href="#demo" aria-controls="demo" role="tab" data-toggle="tab">Demo</a>
+            	</li>
+            	<li role="presentation">
+            		<a href="#html" aria-controls="html" role="tab" data-toggle="tab">Html</a>
+            	</li>
+            	<li role="presentation">
+            		<a href="#js" aria-controls="js" role="tab" data-toggle="tab">JavaScript</a>
+            	</li>
+            </ul>
+            <div class="tab-content">
+            	<div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
+                    <h4>{{cc.user.username}}</h4>
+            	</div>
+            	<div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
+            		<pre>
+        				<code class="html">
+&lt;h4&gt;{{myCtrl.user.username}}&lt;/h4&gt;
+        				</code>
+        		    </pre>
+            	</div>
+            	<div role="tabpanel" class="tab-pane" id="js" style="margin: 20px">
+            		<pre>
+    			        <code class="javascript">
+function MyCtrl() {
+	this.user = {username:'hello world',password:'123456'};
+}
+            			</code>
+                    </pre>
+            	</div>
+            </div>
+        </div>
+    </template>
+    <script>
+        (function () {
+            return function(uku){
+                this.user = {username:'hello ukujs',password:'123456'};
+            };
+        })();
+    </script>
+</uku-component>

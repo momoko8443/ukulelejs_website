@@ -1,33 +1,43 @@
-<div class="row content">
-    <div class="col-md-3">
-        <ul class="list-group">
+<div class="left_column">
+    <div style="overflow:auto;position:absolute;top:60px;left:0;bottom:0;width:300px">
+        <div class="list-group" style="margin:10px" uku-onclick="guideCtrl.guideMenuItemClickHandler()">
             <li class="list-group-item active">准备工作</li>
-            <li class="list-group-item">安装Ukujs</li>
-            <li class="list-group-item">引入工程</li>
-            <li class="list-group-item">------Native方式</li>
-            <li class="list-group-item">------AMD方式</li>
-            <li class="list-group-item">------CMD方式</li>
-            <li class="list-group-item">------Webpack方式</li>
+            <button type="button" class="list-group-item" data-menu-item="install">安装Ukujs</button>
+            <button type="button" class="list-group-item" data-menu-item="config">配置</button>
+            <button type="button" class="list-group-item" data-menu-item="native">&nbsp;&nbsp;&nbsp;&nbsp;Native方式</button>
+            <button type="button" class="list-group-item" data-menu-item="amd">&nbsp;&nbsp;&nbsp;&nbsp;AMD方式</button>
+            <button type="button" class="list-group-item" data-menu-item="cmd">&nbsp;&nbsp;&nbsp;&nbsp;CMD方式</button>
+            <button type="button" class="list-group-item" data-menu-item="webpack">&nbsp;&nbsp;&nbsp;&nbsp;Webpack方式</button>
             <li class="list-group-item active">新手村（初级-双向绑定）</li>
-            <li class="list-group-item">绑定文本</li>
-            <li class="list-group-item">绑定属性</li>
-            <li class="list-group-item">绑定输入控件</li>
-            <li class="list-group-item">绑定事件</li>
-            <li class="list-group-item">绑定样式</li>
-            <li class="list-group-item active">村下位（进阶-特殊指令）</li>
-            <li class="list-group-item">uku-repeat</li>
-            <li class="list-group-item">uku-include</li>
-            <li class="list-group-item">uku-selected</li>
-            <li class="list-group-item">uku-data-item</li>
-            <li class="list-group-item">uku.refresh()</li>
-            <li class="list-group-item active">村上位（高级-组件化）</li>
-            <li class="list-group-item">自定义组件</li>
-            <li class="list-group-item">组件的嵌套</li>
-            <li class="list-group-item">组件之间通讯</li>
-            <li class="list-group-item">组件中使用第三方库</li>
-        </ul>
+            <button type="button" class="list-group-item" data-menu-item="bind-text">绑定文本</button>
+            <button type="button" class="list-group-item" data-menu-item="bind-attr">绑定属性</button>
+            <button type="button" class="list-group-item" data-menu-item="bind-input">绑定输入控件</button>
+            <button type="button" class="list-group-item" data-menu-item="bind-event">绑定事件</button>
+            <button type="button" class="list-group-item" data-menu-item="bind-style">绑定样式</button>
+            <button type="button" class="list-group-item" data-menu-item="bind-function">函数绑定</button>
+            <li class="list-group-item active">村下位（进阶1-特殊属性）</li>
+            <button type="button" class="list-group-item" data-menu-item="uku-routext">uku-text</button>
+            <button type="button" class="list-group-item" data-menu-item="uku-repeat">uku-repeat</button>
+            <button type="button" class="list-group-item" data-menu-item="uku-include">uku-include</button>
+            <button type="button" class="list-group-item" data-menu-item="uku-selected">uku-selected</button>
+            <button type="button" class="list-group-item" data-menu-item="uku-data-item">uku-data-item</button>
+            <li class="list-group-item active">村上位（进阶2-常用API）</li>
+            <button type="button" class="list-group-item" data-menu-item="api-register-controller">uku.registerController()</button>
+            <button type="button" class="list-group-item" data-menu-item="api-register-component">uku.registerComponent()</button>
+            <button type="button" class="list-group-item" data-menu-item="api-refresh">uku.init()</button>
+            <button type="button" class="list-group-item" data-menu-item="api-init-handler">uku.initHandler</button>
+            <button type="button" class="list-group-item" data-menu-item="api-refresh">uku.refresh()</button>
+            <button type="button" class="list-group-item" data-menu-item="api-refresh-handler">uku.refreshHandler</button>
+            <button type="button" class="list-group-item" data-menu-item="api-dealwith-element">uku.dealWithElement()</button>
+            <li class="list-group-item active">集会下位（高级-组件化）</li>
+            <button type="button" class="list-group-item">自定义组件</button>
+            <button type="button" class="list-group-item">组件的嵌套</button>
+            <button type="button" class="list-group-item">组件之间通讯</button>
+            <button type="button" class="list-group-item">组件中使用第三方库</button>
+            <button type="button" class="list-group-item">动态加载组件</button>
+        </div>
     </div>
-    <div class="col-md-9">
-        <h2>建设中...coming soon</h2>
-    </div>
+</div>
+<div id="guideContentPanel" class="right_content" style="overflow:auto;position:absolute;top:60px;left:300px;right:0;bottom:0;margin:10px">
+    <guide-install></guide-install>
 </div>

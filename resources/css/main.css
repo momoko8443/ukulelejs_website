@@ -162,3 +162,10 @@ ul.ukuNav li a:hover {
     position: relative;
     bottom: -80px;
 }
+
+.myClass1{
+    color:red;
+}
+.myClass2{
+    font-style: italic;
+}
