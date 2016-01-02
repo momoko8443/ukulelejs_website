@@ -1,0 +1,61 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>特殊属性（指令） —— uku-repeat</h3>
+            <p>
+                使用过Angular的朋友因该对ng-repeat不会陌生，不错uku-repeat就是借（chao）鉴（xi）了ng-repeat的用法，
+                uku-repeat的作用将模型中一个集合类型属性进行循环渲染。无需躲言，光看示例就知道怎么用了。
+            </p>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#demo" aria-controls="demo" role="tab" data-toggle="tab">Demo</a>
+                </li>
+                <li role="presentation">
+                    <a href="#html" aria-controls="html" role="tab" data-toggle="tab">Html</a>
+                </li>
+                <li role="presentation">
+                    <a href="#js" aria-controls="js" role="tab" data-toggle="tab">JavaScript</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
+                    <ul>
+                        <li uku-repeat="item in cc.users">
+                            {{item.username}}
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;ul&gt;
+    &lt;li uku-repeat="item in myCtrl.users"&gt;
+        {{item.username}}
+    &lt;/li&gt;
+&lt;/ul&gt;
+                        </code>
+                    </pre>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="js" style="margin: 20px">
+                    <pre>
+                        <code class="javascript">
+function MyCtrl(uku) {
+    this.users = [{username:'ukujs'},{username:'angular'},{username:'react'},{username:'vue'}];
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p>
+                uku-repeat支持树形结构的多层嵌套，更多用法请参考“示例”。
+            </p>
+        </div>
+    </template>
+    <script>
+        (function () {
+            return function(uku){
+                this.users = [{username:'ukujs'},{username:'angular'},{username:'react'},{username:'vue'}];
+            };
+        })();
+    </script>
+</uku-component>

@@ -1,0 +1,55 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>特殊属性（指令） —— uku-text</h3>
+            <p>
+                uku-text是妥协的产物，它的出现是为了解决{{xxx}}在html加载时还没有获得模型数值时闪现的问题，为了提高用户体验作者不得不作出了妥协，
+                增加了这个特殊的指令。（作者为了降低学习曲线希望把特殊属性的数量控制在最低）
+            </p>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#demo" aria-controls="demo" role="tab" data-toggle="tab">Demo</a>
+                </li>
+                <li role="presentation">
+                    <a href="#html" aria-controls="html" role="tab" data-toggle="tab">Html</a>
+                </li>
+                <li role="presentation">
+                    <a href="#js" aria-controls="js" role="tab" data-toggle="tab">JavaScript</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
+                    <h4>{{cc.message}}</h4>
+                    <h4 uku-text="cc.message"></h4>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;h4&gt;{{myCtrl.message}}&lt;/h4&gt;
+&lt;h4 uku-text="myCtrl.message"&gt;&lt;/h4&gt;
+                        </code>
+                    </pre>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="js" style="margin: 20px">
+                    <pre>
+                        <code class="javascript">
+function MyCtrl(uku) {
+    this.message = "hello uku-text";
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p>
+                uku-text可以取代{{}}的功能。
+            </p>
+        </div>
+    </template>
+    <script>
+        (function () {
+            return function(uku){
+                this.message = "hello uku-text";
+            };
+        })();
+    </script>
+</uku-component>
