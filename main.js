@@ -96,6 +96,8 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
         uku.registerComponent("guide-uku-text", "pages/guide/uku-text.html");
         uku.registerComponent("guide-uku-repeat", "pages/guide/uku-repeat.html");
         uku.registerComponent("guide-uku-include", "pages/guide/uku-include.html");
+        uku.registerComponent("guide-uku-selected", "pages/guide/uku-selected.html");
+        uku.registerComponent("guide-uku-selected2", "pages/guide/uku-selected2.html");
         perforCtrl = new PerformanceCtrl();
         uku.registerController("perforCtrl", perforCtrl);
         uku.registerController("res", new ResourceManager());
