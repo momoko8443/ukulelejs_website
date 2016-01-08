@@ -1,0 +1,67 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>方法:</h3>
+            <b>registerController(aliasName, controller)</b>
+            <h3>参数:</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                aliasName
+                            </td>
+                            <td>
+                                String
+                            </td>
+                            <td>
+                                Controller的别名
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                controller
+                            </td>
+                            <td>
+                                Object
+                            </td>
+                            <td>
+                                Controller的实例
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                registerController方法用来注册“视图模型”（视图模型——在ukujs中为了使ng粉丝们可以路转粉，故沿用了Controller这个名词）
+            </p>
+            <pre>
+                <code class="js">
+var uku = new Ukulele();
+uku.registerController("myCtrl",new MyController(uku));
+uku.init();
+
+function MyController(uku){
+    this.message = "hello world";
+}
+                </code>
+            </pre>
+            <p>
+                我们将MyController的实例new MyController()以及它的别名myCtrl注册成一个Controller（"视图模型"），这样你就可以在html中使用
+                myCtrl.message来引用模型上的变量，从而与视图进行绑定了(如下例)
+            </p>
+            <pre>
+                <code class="html">
+&lt;h3&gt;{{myCtrl.message}}&lt;/h3&gt;
+                </code>
+            </pre>
+        </div>
+    </template>
+</uku-component>

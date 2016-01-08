@@ -1,0 +1,67 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>方法:</h3>
+            <b>registerComponent(componentTagName, filePath)</b>
+            <h3>参数:</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                componentTagName
+                            </td>
+                            <td>
+                                String
+                            </td>
+                            <td>
+                                Component的TagName，例如 <mydiv></mydiv>中的mydiv即为componentTagName
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                filePath
+                            </td>
+                            <td>
+                                String
+                            </td>
+                            <td>
+                                定义Component的html文件，该路进相对于index.html文件。
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                registerComponent方法用来注册“Web Component”，这样你就可以在任意地方使用标签引入你的自定义组件了。
+            </p>
+            <pre>
+                <code class="js">
+var uku = new Ukulele();
+uku.registerComponent("mydiv","view/components/mydiv.html");
+uku.init();
+                </code>
+            </pre>
+            <p>
+                此处注册mydiv为组件的tagName，那么在下例的html中就可以使用<mydiv></mydiv>来引入组件了。
+            </p>
+            <pre>
+                <code class="html">
+&lt;div&gt;
+    &lt;mydiv&gt;&lt;/mydiv&gt;
+&lt;/div&gt;
+                </code>
+            </pre>
+            <p>
+                Web Component的定义会在组件化章节中做具体的介绍
+            </p>
+        </div>
+    </template>
+</uku-component>
