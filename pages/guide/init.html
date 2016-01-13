@@ -1,0 +1,28 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>方法:</h3>
+            <b>init()</b>
+            <h3>参数:无</h3>
+            <p>
+                init()方法用来初始化Ukujs，使整个库开始运作。建议在dom载入完毕后执行该方法，如<script></script>标签写于<body></body>之后，
+                或者使用requirejs的domReady的回调中执行init()方法。
+            </p>
+            <pre>
+                <code class="js">
+var uku = new Ukulele();
+...
+uku.registerController("myCtrl",new MyController(uku));
+uku.registerController("myCtrl2",new MyController2(uku));
+uku.registerComponent("myComp","component.html");
+uku.registerComponent("myComp2","component2.html");
+...
+uku.init();
+                </code>
+            </pre>
+            <p>
+                注意,请务必让init()方法在最后被执行，以确保controller和component都已被register过。
+            </p>
+        </div>
+    </template>
+</uku-component>

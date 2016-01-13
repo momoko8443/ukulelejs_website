@@ -1,0 +1,33 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>属性:</h3>
+            <b>refreshHandler</b>
+            <p>
+                refreshHandler需要被赋予一个function，当Ukujs执行refresh(脏检查)后，refreshHandler指向的function将被调用。
+            </p>
+            <pre>
+                <code class="js">
+var uku = new Ukulele();
+...
+uku.registerController("myCtrl",new MyController(uku));
+uku.registerController("myCtrl2",new MyController2(uku));
+uku.registerComponent("myComp","component.html");
+uku.registerComponent("myComp2","component2.html");
+...
+uku.refreshHandler = function(){
+    alert("ukujs has been refreshed")
+};
+uku.init();
+                </code>
+            </pre>
+            <p>
+                使用场景：refreshHandler为了解决一些第三方控件加载时机和ukujs不匹配从而导致失灵的问题。
+            </p>
+            <p>
+                注意,由于在整个程序执行期间脏检查会被执行很多次，所以refreshHandler尽量不要轻易去使用它，即使使用也请用flag来判断，
+                以免重复执行同一段逻辑造成性能损耗。
+            </p>
+        </div>
+    </template>
+</uku-component>
