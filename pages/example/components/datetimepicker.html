@@ -1,9 +1,37 @@
-<div class="container">
-    <div class="input-group date form_date col-md-5" uku-data-date="ex14Ctrl.initialDate" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-        <input class="form-control" size="16" type="text" uku-value="ex14Ctrl.initialDate" readonly>
-        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-    </div>
-    <h4>You choose: </h4>
-    <h4>{{ex14Ctrl.initialDate}}</h4>
-</div>
+<uku-component>
+    <template>
+        <div class="container">
+            <div class="input-group date form_date col-md-5" uku-data-date="cc.initialDate" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input class="form-control" size="16" type="text" uku-value="cc.initialDate" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <h4>You choose: </h4>
+            <h4>{{cc.initialDate}}</h4>
+        </div>
+    </template>
+    <script src="resources/plugin/bootstrap_datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script>
+        (function(mo) {
+            return function(uku) {
+                var self = this;
+                var $picker = $('.form_date').datetimepicker({
+                    language: 'zh-CN',
+                    weekStart: 1,
+                    todayBtn: 1,
+                    autoclose: 1,
+                    todayHighlight: 1,
+                    startView: 2,
+                    minView: 2,
+                    forceParse: 0
+                }).on("changeDate", function (ev) {
+                    self.initialDate = mo(ev.date).format("YYYY-MM-DD");
+                    uku.refresh();
+                });
+
+                this.initialDate = "2011-05-06";
+            }
+        })(moment);
+    </script>
+</uku-component>

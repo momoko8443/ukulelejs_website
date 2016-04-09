@@ -1,3 +1,5 @@
+<uku-component>
+<template>
 <h3 uku-text="res.getResource('LABEL_EXAMPLE_15')"></h3>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
@@ -28,7 +30,7 @@
     </div>
 	<div role="tabpanel" class="tab-pane" id="comp15" style="margin: 20px">
         <pre>
-			<code class="html">
+			<code>
 &lt;uku-component&gt;
     &lt;template&gt;
         &lt;div&gt;
@@ -44,32 +46,37 @@
         &lt;/div&gt;
     &lt;/template&gt;
     &lt;script&gt;
-        function(uku){
-            this.users = [];
-			this.selectedUsers = "";
-			this.cbChangedHandler = function(){
-				var tempArr = [];
-				for(var i=0;i&lt;this.users.length;i++){
-					var user = this.users[i];
-					if(user.selected === true){
-						tempArr.push(user.name);
-					}
-				}
-				this.selectedUsers = tempArr.join(', ');
-			};
-			
-            var usersFromOutside;
-            Object.defineProperty(this, "usersFromOutside", {
-                set: function (value) {
-                    usersFromOutside = value;
-                    for(var i=0;i&lt;usersFromOutside.length;i++){
-                        var user = {'name':usersFromOutside[i],'selected':false};
-                        this.users.push(user);
-                    }
-                    console.log(this.users);
-                }
-            });
-        }
+    (function() {
+      return function(uku) {
+        this.users = [];
+        this.selectedUsers = "";
+        this.cbChangedHandler = function() {
+          var tempArr = [];
+          for (var i = 0; i < this.users.length; i++) {
+            var user = this.users[i];
+            if (user.selected === true) {
+              tempArr.push(user.name);
+            }
+          }
+          this.selectedUsers = tempArr.join(', ');
+        };
+
+        var usersFromOutside;
+        Object.defineProperty(this, "usersFromOutside", {
+          set: function(value) {
+            usersFromOutside = value;
+            for (var i = 0; i < usersFromOutside.length; i++) {
+              var user = {
+                'name': usersFromOutside[i],
+                'selected': false
+              };
+              this.users.push(user);
+            }
+            console.log(this.users);
+          }
+        });
+      }
+    })();
     &lt;/script&gt;
 &lt;/uku-component&gt;
 			</code>
@@ -78,10 +85,12 @@
     <div role="tabpanel" class="tab-pane" id="js15" style="margin: 20px">
         <pre>
 			<code class="javascript">
-function Example15Ctrl() 
+function Example15Ctrl()
 	this.users = ['momoko','sakura','lily','lowe'];
 }
 			</code>
 		</pre>
     </div>
 </div>
+</template>
+</uku-component>

@@ -1,3 +1,5 @@
+<uku-component>
+<template>
 <h3 uku-text="res.getResource('LABEL_EXAMPLE_11')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
@@ -13,15 +15,15 @@
 <div class="tab-content">
 	<div role="tabpanel" class="tab-pane active" id="demo11" style="margin: 20px">
 		<input type="checkbox" uku-value="ex11Ctrl.isCheckboxSelected">
-        <em>{{ex11Ctrl.isCheckboxSelected}}</em> 
+        <em>{{ex11Ctrl.isCheckboxSelected}}</em>
         <br />
-        Male: 
+        Male:
         <input type="radio" name="Sex" value="male" uku-selected="ex11Ctrl.sex">
         <br />
-        Female: 
+        Female:
         <input type="radio" name="Sex" value="female" uku-selected="ex11Ctrl.sex">
         <br/>
-        You selected: 
+        You selected:
         <em>{{ex11Ctrl.sex}}</em>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html11" style="margin: 20px">
@@ -30,13 +32,13 @@
 			<code class="html">
 &lt;input type="checkbox" uku-value="ex11Ctrl.isCheckboxSelected"&gt;
 &lt;em>{{ex11Ctrl.isCheckboxSelected}}&lt;/em&gt;
-Male: 
+Male:
 &lt;input type="radio" name="Sex" value="male" uku-selected="ex11Ctrl.sex"&gt;
-Female: 
+Female:
 &lt;input type="radio" name="Sex" value="female" uku-selected="ex11Ctrl.sex"&gt;
-You selected: 
+You selected:
 &lt;em>{{ex11Ctrl.sex}}&lt;/em&gt;
-			</code>		    		
+			</code>
 		</pre>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="js11" style="margin: 20px">
@@ -46,7 +48,9 @@ function Example11Ctrl() {
     this.isCheckboxSelected = true;
     this.sex = "female";
 }
-			</code>		    		
+			</code>
 		</pre>
 	</div>
 </div>
+</template>
+</uku-component>

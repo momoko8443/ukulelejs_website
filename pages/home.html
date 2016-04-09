@@ -5,52 +5,43 @@
     </div>
 </div>
 <div class="row content">
+
     <div class="col-md-11" style="margin: 40px">
-        <h2 uku-text="res.getResource('TITLE_REASON')"></h2>
+
+        <h3 uku-text="res.getResource('LABEL_WHAT_IS_UKUJS')"></h2>
+        <P uku-text="res.getResource('TEXT_WHAT_IS_UKUJS')"></P>
+
+        <h3 uku-text="res.getResource('TITLE_REASON')"></h2>
         <ul style="color: #FF6666">
             <li uku-text="res.getResource('PROS_1')"></li>
             <li uku-text="res.getResource('PROS_2')"></li>
             <li uku-text="res.getResource('PROS_3')"></li>
             <li uku-text="res.getResource('PROS_4')"></li>
         </ul>
-    </div>
-    <div class="col-md-11" style="margin: 40px">
-        <h2 uku-text="res.getResource('LABEL_DEMO')"></h2>
-        <a href="http://ukujstore.tiger.mopaasapp.com/" target="_blank"><h4>DEMO: http://ukujstore.tiger.mopaasapp.com/</h4></a>
-    </div>
-    <div class="col-md-11" style="margin: 40px">
-        <h2 uku-text="res.getResource('LABEL_INSTALL_UKUJS')"></h2>
-        <pre>
-			<code class="js">
-$npm install -g bower
-bower install ukulelejs#pure
-			</code>
-		</pre>
-    </div>
-    <div class="col-md-11" style="margin: 40px">
-        <h2 uku-text="res.getResource('LABEL_GETTING_START')"></h2>
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation">
-                <a href="#native" aria-controls="native" role="tab" data-toggle="tab" uku-text="res.getResource('TAB_NATIVE')"></a>
-            </li>
-            <li role="presentation">
-                <a href="#amd" aria-controls="amd" role="tab" data-toggle="tab" uku-text="res.getResource('TAB_AMD')"></a>
-            </li>
-            <li role="presentation">
-                <a href="#cmd" aria-controls="cmd" role="tab" data-toggle="tab" uku-text="res.getResource('TAB_CMD')"></a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="native" style="margin: 20px">
-                <div class="uku-include" src="pages/native.html"></div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="amd" style="margin: 20px">
-                <div class="uku-include" src="pages/amd.html"></div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="cmd" style="margin: 20px">
-                <div class="uku-include" src="pages/cmd.html" uku-onload="root.loadSuccessHandler()"></div>
-            </div>
-        </div>
 
+        <h3 uku-text="res.getResource('LABEL_SIMPLE_DEMO')"></h3>
+        <img src="resources/images/simple_demo.gif">
+        <pre>
+            <code>
+//View
+&lt;div uku-application&gt;
+    &lt;input type="text" uku-value="myCtrl.message"&gt;
+    &lt;input type="text" uku-value="myCtrl.message"&gt;
+    &lt;textarea rows="4" uku-value="myCtrl.message"&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+            </code>
+        </pre>
+        <pre>
+            <code>
+//Register ViewModel
+var uku = new Ukulele();
+uku.registerController("myCtrl",new MyController());
+
+//Define ViewModel
+function MyController(){
+    this.hello = "hello, ukulele";
+}
+            </code>
+        </pre>
     </div>
 </div>

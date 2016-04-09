@@ -1,3 +1,5 @@
+<uku-component>
+<template>
 <h3 uku-text="res.getResource('LABEL_EXAMPLE_12')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
@@ -30,7 +32,7 @@
         </p>
         <br/>
         <button class="btn btn-default" uku-onclick="ex12Ctrl.addClass()">add class</button>
-        <button class="btn btn-default" uku-onclick="ex12Ctrl.removeClass()">remove class</button>      
+        <button class="btn btn-default" uku-onclick="ex12Ctrl.removeClass()">remove class</button>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html12" style="margin: 20px">
 		<pre>
@@ -41,7 +43,7 @@
     balabalabalbalabala...
 &lt;/p&gt;
 &lt;button uku-onclick="ex12Ctrl.addClass()">add class&lt;/button&gt;
-&lt;button uku-onclick="ex12Ctrl.removeClass()">remove class&lt;/button&gt; 
+&lt;button uku-onclick="ex12Ctrl.removeClass()">remove class&lt;/button&gt;
 			</code>
 		</pre>
 	</div>
@@ -79,7 +81,9 @@ function Example12Ctrl() {
         this.classList = ["class1"].join(" ");
     };
 }
-			</code>		    		
+			</code>
 		</pre>
 	</div>
 </div>
+</template>
+</uku-component>

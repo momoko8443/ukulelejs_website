@@ -1,7 +1,6 @@
 body {
     overflow-x: hidden;
     font-family: "微软雅黑";
-    /*visibility: hidden;*/
 }
 
 .languageSelect {
@@ -54,8 +53,7 @@ ul.ukuNav li a {
     height: 60px;
     line-height: 60px;
     color: #FFF;
-    /*font-family: "\5FAE\8F6F\96C5\9ED1";*/
-    font-size: 16px
+    font-size: 16px;
 }
 
 ul.ukuNav li a:hover {

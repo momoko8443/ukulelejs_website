@@ -1,3 +1,5 @@
+<uku-component>
+<template>
 <h3 uku-text="res.getResource('LABEL_EXAMPLE_10')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
@@ -31,21 +33,21 @@
 &lt;select uku-selected="ex10Ctrl.selectedOption|value" uku-onchange="ex10Ctrl.selectedOptionChanged()"&gt;
   &lt;option uku-repeat="option in ex10Ctrl.options"
   			uku-value="option.value" uku-data-item="option">{{option.name}}&lt;/option&gt;
-&lt;/select>	
+&lt;/select>
 &lt;select uku-selected="ex10Ctrl.selectedChildOption|name"&gt;
   &lt;option uku-repeat="child in ex10Ctrl.selectedOption.children"
   			uku-value="child.name" uku-data-item="child">{{child.name}}&lt;/option&gt;
 &lt;/select>
 &lt;label>{{ex10Ctrl.selectedOption.name}}&lt;/label&gt;
 &lt;label>{{ex10Ctrl.selectedChildOption.name}}&lt;/label&gt;
-			</code>		    		
+			</code>
 		</pre>
 	</div>
 
 	<div role="tabpanel" class="tab-pane" id="js10" style="margin: 20px">
 		<pre>
 			<code class="javascript">
-function Example10Ctrl() {		 
+function Example10Ctrl() {
 	this.options = [
 		{"name":"Kamaka","value":"kamaka","children":[
 			{"name":"HF1"},{"name":"HF2"},{"name":"HF3"}
@@ -62,13 +64,15 @@ function Example10Ctrl() {
 	];
 	this.selectedOption = this.options[2];
 	this.selectedChildOption = this.selectedOption.children[0];
-	
+
 	this.selectedOptionChanged = function(){
-		this.selectedChildOption = this.selectedOption.children[0];	
+		this.selectedChildOption = this.selectedOption.children[0];
 		uku.refresh();
 	};
 }
-			</code>		    		
+			</code>
 		</pre>
 	</div>
 </div>
+</template>
+</uku-component>

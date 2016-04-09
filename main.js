@@ -7,8 +7,6 @@ require.config({
         "locale": 'resources/locale/example_properties',
         "routejs": 'bower_components/uku-routejs/build/js/uku-route',
         "domReady": 'bower_components/domReady/domReady',
-        "datetimepicker": 'resources/plugin/bootstrap_datetimepicker/js/bootstrap-datetimepicker',
-        "moment": 'bower_components/moment/min/moment.min',
         "Chart": 'bower_components/Chart.js/Chart.min',
         "Example01Ctrl": 'resources/js/example01',
         "Example02Ctrl": 'resources/js/example02',
@@ -16,14 +14,11 @@ require.config({
         "Example04Ctrl": 'resources/js/example04',
         "Example05Ctrl": 'resources/js/example05',
         "Example06Ctrl": 'resources/js/example06',
-        "Example07Ctrl": 'resources/js/example07',
-        "Example08Ctrl": 'resources/js/example08',
         "Example09Ctrl": 'resources/js/example09',
         "Example10Ctrl": 'resources/js/example10',
         "Example11Ctrl": 'resources/js/example11',
         "Example12Ctrl": 'resources/js/example12',
         "Example13Ctrl": 'resources/js/example13',
-        "Example14Ctrl": 'resources/js/example14',
         "Example15Ctrl": 'resources/js/example15',
         "PerformanceCtrl": 'resources/js/performance'
     },
@@ -34,12 +29,6 @@ require.config({
         "jquery.bootstrap": {
             deps: ["jquery"]
         },
-        "datetimepicker": {
-            deps: ["jquery", "jquery.bootstrap"]
-        },
-        "moment": {
-            exports: "moment"
-        },
         "Chart": {
             exports: "Chart"
         }
@@ -47,12 +36,12 @@ require.config({
 });
 
 require(["domReady", "routejs", "Ukulele", "RootCtrl", "GuideCtrl","OtherCtrl",
-"Example01Ctrl", "Example02Ctrl", "Example03Ctrl", "Example04Ctrl", "Example05Ctrl", "Example06Ctrl", "Example07Ctrl",
-"Example08Ctrl", "Example09Ctrl", "Example10Ctrl", "Example11Ctrl", "Example12Ctrl", "Example13Ctrl", "Example14Ctrl", "Example15Ctrl",
-"PerformanceCtrl", "Chart", "jquery", "jquery.bootstrap", "highlight", "locale", "datetimepicker"],
+"Example01Ctrl", "Example02Ctrl", "Example03Ctrl", "Example04Ctrl", "Example05Ctrl", "Example06Ctrl",
+"Example09Ctrl", "Example10Ctrl", "Example11Ctrl", "Example12Ctrl", "Example13Ctrl", "Example15Ctrl",
+"PerformanceCtrl", "Chart", "jquery", "jquery.bootstrap", "highlight", "locale"],
 function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
-            Example01Ctrl, Example02Ctrl, Example03Ctrl, Example04Ctrl, Example05Ctrl, Example06Ctrl, Example07Ctrl,
-            Example08Ctrl, Example09Ctrl, Example10Ctrl, Example11Ctrl, Example12Ctrl, Example13Ctrl, Example14Ctrl, Example15Ctrl, PerformanceCtrl) {
+            Example01Ctrl, Example02Ctrl, Example03Ctrl, Example04Ctrl, Example05Ctrl, Example06Ctrl,
+            Example09Ctrl, Example10Ctrl, Example11Ctrl, Example12Ctrl, Example13Ctrl, Example15Ctrl, PerformanceCtrl) {
 
     var uku;
     var route;
@@ -69,17 +58,35 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
         uku.registerController("ex04Ctrl", new Example04Ctrl());
         uku.registerController("ex05Ctrl", new Example05Ctrl());
         uku.registerController("ex06Ctrl", new Example06Ctrl());
-        uku.registerController("ex07Ctrl", new Example07Ctrl());
-        uku.registerController("ex08Ctrl", new Example08Ctrl());
+
         uku.registerController("ex09Ctrl", new Example09Ctrl(uku));
         uku.registerController("ex10Ctrl", new Example10Ctrl(uku));
         uku.registerController("ex11Ctrl", new Example11Ctrl());
         uku.registerController("ex12Ctrl", new Example12Ctrl());
         uku.registerController("ex13Ctrl", new Example13Ctrl());
-        uku.registerController("ex14Ctrl", new Example14Ctrl(uku));
         uku.registerController("ex15Ctrl", new Example15Ctrl(uku));
 
+        uku.registerComponent("tab-bar","pages/components/tabbar.html");
+        uku.registerComponent("example-00","pages/example/components/example_00.html");
+        uku.registerComponent("example-01","pages/example/components/example_01.html");
+        uku.registerComponent("example-02","pages/example/components/example_02.html");
+        uku.registerComponent("example-03","pages/example/components/example_03.html");
+        uku.registerComponent("example-04","pages/example/components/example_04.html");
+        uku.registerComponent("example-05","pages/example/components/example_05.html");
+        uku.registerComponent("example-06","pages/example/components/example_06.html");
+        uku.registerComponent("example-07","pages/example/components/example_07.html");
+        uku.registerComponent("example-08","pages/example/components/example_08.html");
+        uku.registerComponent("example-09","pages/example/components/example_09.html");
+        uku.registerComponent("example-10","pages/example/components/example_10.html");
+        uku.registerComponent("example-11","pages/example/components/example_11.html");
+        uku.registerComponent("example-12","pages/example/components/example_12.html");
+        uku.registerComponent("example-13","pages/example/components/example_13.html");
+        uku.registerComponent("example-14","pages/example/components/example_14.html");
+        uku.registerComponent("example-15","pages/example/components/example_15.html");
+        uku.registerComponent("example-16","pages/example/components/example_16.html");
+        uku.registerComponent("datetiem-picker","pages/example/components/datetimepicker.html");
         uku.registerComponent("user-list", "pages/example/components/user_list.html");
+
         uku.registerComponent("guide-install", "pages/guide/install.html");
         uku.registerComponent("guide-config", "pages/guide/config.html");
         uku.registerComponent("guide-native", "pages/guide/native.html");
@@ -117,15 +124,16 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
 				.when("#about", "pages/about.html")
 				.otherwise("pages/home.html")
 				.addAnchor("repeat");
-        uku.refreshHandler = function(element){
-            if(element){
+        /*uku.addListener(Ukulele.REFRESH,function(e){
+            if(e){
                 var codeDoms = element.querySelectorAll('pre code');
                 for (var i = 0; i < codeDoms.length; i++) {
                     hljs.highlightBlock(codeDoms[i]);
                 }
             }
-        };
-        uku.initHandler = function (element) {
+        });*/
+        uku.addListener(Ukulele.INITIALIZED,function(e){
+            var element = e.element;
             route.work();
             var elementId = element.getAttribute("id");
             if (!initRoutePool[elementId]) {
@@ -139,22 +147,21 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
 
 			route.onRouteChange = function (page) {
 				if (page && page.page && !page.cache) {
-					document.getElementById("mainView").classList.add('blur');
-					document.getElementById("loadingBar").style.display = "block";
+					//document.getElementById("mainView").classList.add('blur');
+					//document.getElementById("loadingBar").style.display = "block";
 					uku.dealWithElement(page.page);
 					if (page.key === "#performance" || page.key === "#about" || page.key === "#api" || page.key === "#guide") {
 						setTimeout(function () {
-							document.getElementById("mainView").classList.remove('blur');
-							document.getElementById("loadingBar").style.display = "none";
+							//document.getElementById("mainView").classList.remove('blur');
+							//document.getElementById("loadingBar").style.display = "none";
 						}, 1000);
 					}
 				}
 				if (page.key === "#performance") {
 					perforCtrl.init();
 				}
-
 			};
-        };
+        });
         uku.init();
     });
 

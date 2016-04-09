@@ -1,0 +1,74 @@
+<uku-component>
+<template>
+<h3 uku-text="res.getResource('LABEL_EXAMPLE_16')"></h3>
+<ul class="nav nav-tabs" role="tablist">
+	<li role="presentation" class="active">
+		<a href="#demo16" aria-controls="demo16" role="tab" data-toggle="tab">Demo</a>
+	</li>
+	<li role="presentation">
+		<a href="#html16" aria-controls="html16" role="tab" data-toggle="tab">Html</a>
+	</li>
+    <li role="presentation">
+		<a href="#comp16" aria-controls="comp16" role="tab" data-toggle="tab">Component</a>
+	</li>
+</ul>
+<div class="tab-content">
+	<div role="tabpanel" class="tab-pane active" id="demo16" style="margin: 20px">
+        <datetiem-picker></datetiem-picker>
+		<B>Plugin: </B><a target="_blank" href="https://github.com/smalot/bootstrap-datetimepicker" >https://github.com/smalot/bootstrap-datetimepicker</a>
+	</div>
+	<div role="tabpanel" class="tab-pane" id="html16" style="margin: 20px">
+		<pre>
+			<code class="html">
+&lt;div&gt;
+	&lt;datetiem-picker&gt;&lt;/datetiem-picker&gt;
+&lt;/div&gt;
+			</code>
+		</pre>
+	</div>
+    <div role="tabpanel" class="tab-pane" id="comp16" style="margin: 20px">
+		<pre>
+			<code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="input-group date form_date col-md-5" uku-data-date="cc.initialDate" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd"&gt;
+                &lt;input class="form-control" size="16" type="text" uku-value="cc.initialDate" readonly&gt;
+                &lt;span class="input-group-addon"&gt;&lt;span class="glyphicon glyphicon-remove">&lt;/span>&lt;/span&gt;
+                &lt;span class="input-group-addon"&gt;&lt;span class="glyphicon glyphicon-calendar">&lt;/span>&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;h4&gt;You choose: &lt;/h4&gt;
+            &lt;h4&gt;{{cc.initialDate}}&lt;/h4&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script src="resources/plugin/bootstrap_datetimepicker/js/bootstrap-datetimepicker.js"&gt;&lt;/script&gt;
+    &lt;script src="bower_components/moment/moment.js"&gt;&lt;/script&gt;
+    &lt;script>
+        (function(mo) {
+            return function(uku) {
+                var self = this;
+                var $picker = $('.form_date').datetimepicker({
+                    language: 'zh-CN',
+                    weekStart: 1,
+                    todayBtn: 1,
+                    autoclose: 1,
+                    todayHighlight: 1,
+                    startView: 2,
+                    minView: 2,
+                    forceParse: 0
+                }).on("changeDate", function (ev) {
+                    self.initialDate = mo(ev.date).format("YYYY-MM-DD");
+                    uku.refresh();
+                });
+
+                this.initialDate = "2011-05-06";
+            }
+        })(moment);
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+			</code>
+		</pre>
+	</div>
+</div>
+</template>
+</uku-component>
