@@ -1,21 +1,8 @@
 <uku-component>
     <template>
         <div>
-            <h3>绑定输入控件</h3>
-            <p>
-                绑定输入控件input，其实是对上个小节，绑定属性的一种实现，我们使用 uku-value来实现这个功能，从而完成
-                <ol>
-                    <li>
-                        model->view: 模型在视图上显示
-                    </li>
-                    <li>
-                        user behaviour->view: 用户的行为影响了视图改变
-                    </li>
-                    <li>
-                        view -> model: 视图改变后更新了与之绑定的模型
-                    </li>
-                </ol>
-                这一双向绑定的完整过程
+            <h3 uku-text="res.getResource('GUIDE_LABEL_BIND_FUNCTION')"></h3>
+            <p uku-text="res.getResource('GUIDE_TEXT_BIND_FUNCTION')">
             </p>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -30,36 +17,47 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
-                    <input type="text" uku-value="cc.message">
-                    <h4>{{cc.message}}</h4>
+                    <h4>{{cc.func()}}</h4>
+                    <h4>{{cc.func('with argument')}}</h4>
+                    <input type="text" uku-value="cc.func(cc.arg)">
                 </div>
                 <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
                     <pre>
                         <code class="html">
-&lt;input type="text" uku-value="myCtrl.message"&gt;
-&lt;h4&gt;{{myCtrl.message}}&lt;/h4&gt;
+&lt;h4&gt;{{myCtrl.func()}}&lt;/h4&gt;
+&lt;h4&gt;{{myCtrl.func('with argument')}}&lt;/h4&gt;
+&lt;input type="text" uku-value="myCtrl.func(myCtrl.arg)"&gt;
                         </code>
                     </pre>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="js" style="margin: 20px">
                     <pre>
                         <code class="javascript">
-function MyCtrl() {
-    this.message = "Hey, please say something.";
+function MyCtrl(uku) {
+    this.arg = 'arg from model';
+    this.func = function(){
+        var returnString = "run func ";
+        var arr = Array.prototype.slice.call(arguments);
+        return "run func " + arr.join(",");
+    };
 }
                         </code>
                     </pre>
                 </div>
             </div>
-            <p>
-                input中的checkbox, radio等比较特殊，Ukujs对其进行了一定的扩展，你可以在进阶章节或示例板块中学习具体的用法。
+            <p uku-text="res.getResource('GUIDE_TEXT_BIND_FUNCTION2')">
             </p>
         </div>
     </template>
     <script>
         (function () {
             return function(uku){
-                this.message = "Hey, please say something.";
+                this.arg = "with arg from model";
+                this.func = function(){
+                    var returnString = "run func ";
+                    var arr = Array.prototype.slice.call(arguments);
+                    return "run func " + arr.join(",");
+                };
             };
         })();
     </script>

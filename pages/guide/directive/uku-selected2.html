@@ -1,10 +1,8 @@
 <uku-component>
     <template>
         <div>
-            <h3>特殊属性（指令） —— uku-text</h3>
-            <p>
-                uku-text是妥协的产物，它的出现是为了解决{{xxx}}在html加载时还没有获得模型数值时闪现的问题，为了提高用户体验作者不得不作出了妥协，
-                增加了这个特殊的指令。（作者为了降低学习曲线希望把特殊属性的数量控制在最低）
+            <h3 uku-text="res.getResource('GUIDE_LABEL2_DIRECTIVE_UKU_SELECT')"></h3>
+            <p uku-text="res.getResource('GUIDE_TEXT2_DIRECTIVE_UKU_SELECT')">
             </p>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -19,14 +17,30 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
-                    <h4>{{cc.message}}</h4>
-                    <h4 uku-text="cc.message"></h4>
+                    <div>
+                        Male:
+                        <input type="radio" name="Sex" value="male" uku-selected="cc.sex">
+                    </div>
+                    <div>
+                        Female:
+                        <input type="radio" name="Sex" value="female" uku-selected="cc.sex">
+                    </div>
+                    You selected:
+                    <em>{{cc.sex}}</em>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
                     <pre>
                         <code class="html">
-&lt;h4&gt;{{myCtrl.message}}&lt;/h4&gt;
-&lt;h4 uku-text="myCtrl.message"&gt;&lt;/h4&gt;
+&lt;div&gt;
+    Male:
+    &lt;input type="radio" name="Sex" value="male" uku-selected="myCtrl.sex"&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    Female:
+    &lt;input type="radio" name="Sex" value="female" uku-selected="myCtrl.sex"&gt;
+&lt;/div&gt;
+You selected:
+&lt;em&gt;{{myCtrl.sex}}&lt;/em&gt;
                         </code>
                     </pre>
                 </div>
@@ -34,21 +48,18 @@
                     <pre>
                         <code class="javascript">
 function MyCtrl(uku) {
-    this.message = "hello uku-text";
+    this.sex = "female";
 }
                         </code>
                     </pre>
                 </div>
             </div>
-            <p>
-                uku-text可以取代{{}}的功能。
-            </p>
         </div>
     </template>
     <script>
         (function () {
             return function(uku){
-                this.message = "hello uku-text";
+                this.sex = "female";
             };
         })();
     </script>

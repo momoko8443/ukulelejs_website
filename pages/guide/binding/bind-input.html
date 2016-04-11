@@ -1,10 +1,21 @@
 <uku-component>
     <template>
         <div>
-            <h3>绑定属性</h3>
-            <p>
-                绑定属性可以说是ukujs最重要的功能之一，你只要记住一条规则 “uku-”这个前缀加上任意的html标签上的属性即可生成属性的绑定。
-                例如 uku-src="myCtrl.imageUrl" 即可将img标签的src属性与模型上的 imageUrl变量进行绑定。
+            <h3 uku-text="res.getResource('GUIDE_LABEL_BIND_INPUT')"></h3>
+            <p uku-text="res.getResource('GUIDE_TEXT_BIND_INPUT')">
+                <ol>
+                    <li>
+                        {{res.getResource('GUIDE_LI_BIND_INPUT1')}}
+                    </li>
+                    <li>
+                        {{res.getResource('GUIDE_LI_BIND_INPUT2')}}
+                    </li>
+                    <li>
+                        {{res.getResource('GUIDE_LI_BIND_INPUT3')}}
+                    </li>
+                </ol>
+            </p>
+            <p uku-text="res.getResource('GUIDE_TEXT_BIND_INPUT2')">        
             </p>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -19,12 +30,14 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
-                    <img uku-src="cc.imageUrl">
+                    <input type="text" uku-value="cc.message">
+                    <h4>{{cc.message}}</h4>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
                     <pre>
                         <code class="html">
-&lt;img uku-src="myCtrl.imageUrl"&gt;&lt;/img&gt;
+&lt;input type="text" uku-value="myCtrl.message"&gt;
+&lt;h4&gt;{{myCtrl.message}}&lt;/h4&gt;
                         </code>
                     </pre>
                 </div>
@@ -32,22 +45,20 @@
                     <pre>
                         <code class="javascript">
 function MyCtrl() {
-    this.imageUrl = "pages/images/hf1.jpg";
+    this.message = "Hey, please say something.";
 }
                         </code>
                     </pre>
                 </div>
             </div>
-            <p>
-                你还可以尝试uku-value , uku-style, uku-class... <span style="color:red">uku-+任何原生的属性，uku-+任何原生的属性，uku-+任何原生的属性</span>（重说三）。
-                在接下去的几个关于双向绑定的小节其实都是围绕这条规则展开的。
+            <p uku-text="res.getResource('GUIDE_TEXT_BIND_INPUT3')">
             </p>
         </div>
     </template>
     <script>
         (function () {
             return function(uku){
-                this.imageUrl = "pages/example/images/hf1.jpg";
+                this.message = "Hey, please say something.";
             };
         })();
     </script>

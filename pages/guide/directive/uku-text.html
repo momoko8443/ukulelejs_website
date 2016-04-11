@@ -1,10 +1,8 @@
 <uku-component>
     <template>
         <div>
-            <h3>特殊属性（指令） —— uku-selected（2）</h3>
-            <p>
-                uku-selected除了使用于select控件，也使用与radio单选框控件中，如果多个radio都使用uku-selected绑定了同一个model，那么
-                被选中的radio的value就会被赋给与之绑定的模型，反之亦然。
+            <h3 uku-text="res.getResource('GUIDE_LABEL_DIRECTIVE_UKU_TEXT')"></h3>
+            <p uku-text="res.getResource('GUIDE_TEXT_DIRECTIVE_UKU_TEXT')">
             </p>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -19,30 +17,14 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
-                    <div>
-                        Male:
-                        <input type="radio" name="Sex" value="male" uku-selected="cc.sex">
-                    </div>
-                    <div>
-                        Female:
-                        <input type="radio" name="Sex" value="female" uku-selected="cc.sex">
-                    </div>
-                    You selected:
-                    <em>{{cc.sex}}</em>
+                    <h4>{{cc.message}}</h4>
+                    <h4 uku-text="cc.message"></h4>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
                     <pre>
                         <code class="html">
-&lt;div&gt;
-    Male:
-    &lt;input type="radio" name="Sex" value="male" uku-selected="myCtrl.sex"&gt;
-&lt;/div&gt;
-&lt;div&gt;
-    Female:
-    &lt;input type="radio" name="Sex" value="female" uku-selected="myCtrl.sex"&gt;
-&lt;/div&gt;
-You selected:
-&lt;em&gt;{{myCtrl.sex}}&lt;/em&gt;
+&lt;h4&gt;{{myCtrl.message}}&lt;/h4&gt;
+&lt;h4 uku-text="myCtrl.message"&gt;&lt;/h4&gt;
                         </code>
                     </pre>
                 </div>
@@ -50,18 +32,20 @@ You selected:
                     <pre>
                         <code class="javascript">
 function MyCtrl(uku) {
-    this.sex = "female";
+    this.message = "hello uku-text";
 }
                         </code>
                     </pre>
                 </div>
             </div>
+            <p uku-text="res.getResource('GUIDE_TEXT_DIRECTIVE_UKU_TEXT2')">
+            </p>
         </div>
     </template>
     <script>
         (function () {
             return function(uku){
-                this.sex = "female";
+                this.message = "hello uku-text";
             };
         })();
     </script>

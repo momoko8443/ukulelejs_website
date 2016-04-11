@@ -1,13 +1,8 @@
 <uku-component>
     <template>
         <div>
-            <h3>特殊属性（指令） —— uku-selected（1）</h3>
-            <p>
-                uku-selected使用于select（下拉菜单控件），它需要和uku-data-item一同服用。下面的例子中uku-selected来指定被选中的模型
-                而<span style="color:red;font-weight:bold;"> | </span>符号来标示使用哪个字段作为key来指定唯一选中的item。例如uku-selected="myCtrl.selectedItem|value"
-                则表示使用“value”这个item中的field来唯一标注某个选项（不过前提是也需要你把这个value设置成为option的value，
-                这里我们用uku-value=”item.value”来标识），uku-data-item(只有在option控件上才会使用)表示每个option所具体代表的是什么东西，它可以是整个item对象，也可以是item中的某个字段，
-                比如，uku-data-item="item.name"那么选中的selectedItem就是item的name而非item对象本身。
+            <h3 uku-text="res.getResource('GUIDE_LABEL_DIRECTIVE_UKU_SELECT')"></h3>
+            <p uku-text="res.getResource('GUIDE_TEXT_DIRECTIVE_UKU_SELECT')">
             </p>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -59,8 +54,8 @@ function MyCtrl(uku) {
                     </pre>
                 </div>
             </div>
-            <p>
-                uku-selected也被使用在radio控件中，下一节中 会有介绍
+            <p uku-text="res.getResource('GUIDE_TEXT_DIRECTIVE_UKU_SELECT2')">
+
             </p>
         </div>
     </template>

@@ -1,9 +1,9 @@
 <uku-component>
     <template>
         <div>
-        	<h4 uku-text="res.getResource('LABEL_REQUIREJS_CONFIG')"></h4>
+        	<h4 uku-text="res.getResource('GUIDE_LABEL_AMD_CONFIG')"></h4>
         	<pre>
-    			<code class="js">
+    			<code>
     require.config({
         paths: {
             "domReady": 'bower_components/domReady/domReady',
@@ -12,17 +12,17 @@
     });
     			</code>
     		</pre>
-        	<h4 uku-text="res.getResource('LABEL_ADD_UKU_APP')"></h4>
+        	<h4 uku-text="res.getResource('GUIDE_LABEL_ADD_UKU_APP')"></h4>
         	<pre>
-    			<code class="html">
+    			<code>
     &lt;body uku-application&gt;
     	...
     &lt;/body&gt;
     			</code>
     		</pre>
-        	<h4 uku-text="res.getResource('LABEL_INITIALIZE_UKUJS')"></h4>
+        	<h4 uku-text="res.getResource('GUIDE_LABEL_INIT_UKUJS')"></h4>
         	<pre>
-    			<code class="js">
+    			<code>
     require(["domReady","Ukulele","MyController"], function(domReady,Ukulele,MyController) {
     	var uku;
     	domReady(function() {
@@ -40,6 +40,17 @@
     });
     			</code>
     		</pre>
+            <h4 uku-text="res.getResource('GUIDE_LABEL_BIND_ATTR')"></h4>
+            <pre>
+                <code>
+&lt;body uku-application&gt;
+    ...
+    &lt;input type="text" uku-value="myCtrl.message"&gt;
+    &lt;h3&gt;{{myCtrl.message}}&lt;h3/&gt;
+    ...
+&lt;/body&gt;
+                </code>
+            </pre>
         </div>
     </template>
 </uku-component>

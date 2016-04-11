@@ -1,0 +1,58 @@
+<uku-component>
+    <template>
+        <div>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_DIRECTIVE_UKU_REPEAT')"></h3>
+            <p uku-text="res.getResource('GUIDE_TEXT_DIRECTIVE_UKU_REPEAT')">
+            </p>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#demo" aria-controls="demo" role="tab" data-toggle="tab">Demo</a>
+                </li>
+                <li role="presentation">
+                    <a href="#html" aria-controls="html" role="tab" data-toggle="tab">Html</a>
+                </li>
+                <li role="presentation">
+                    <a href="#js" aria-controls="js" role="tab" data-toggle="tab">JavaScript</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="demo" style="margin: 20px">
+                    <ul>
+                        <li uku-repeat="item in cc.users">
+                            {{item.username}}
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;ul&gt;
+    &lt;li uku-repeat="item in myCtrl.users"&gt;
+        {{item.username}}
+    &lt;/li&gt;
+&lt;/ul&gt;
+                        </code>
+                    </pre>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="js" style="margin: 20px">
+                    <pre>
+                        <code class="javascript">
+function MyCtrl(uku) {
+    this.users = [{username:'ukujs'},{username:'angular'},{username:'react'},{username:'vue'}];
+}
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            <p uku-text="res.getResource('GUIDE_TEXT_DIRECTIVE_UKU_REPEAT2')">
+            </p>
+        </div>
+    </template>
+    <script>
+        (function () {
+            return function(uku){
+                this.users = [{username:'ukujs'},{username:'angular'},{username:'react'},{username:'vue'}];
+            };
+        })();
+    </script>
+</uku-component>

@@ -1,9 +1,9 @@
 <uku-component>
     <template>
         <div>
-        	<h4 uku-text="res.getResource('LABEL_SEAJS_CONFIG')"></h4>
+        	<h4 uku-text="res.getResource('GUIDE_LABEL_CMD_CONFIG')"></h4>
         	<pre>
-    			<code class="js">
+    			<code>
     seajs.config({
         alias:{
     		"main":"src_url/main.js",
@@ -17,7 +17,7 @@
     });
     			</code>
     		</pre>
-        	<h4 uku-text="res.getResource('LABEL_ADD_UKU_APP')"></h4>
+        	<h4 uku-text="res.getResource('GUIDE_LABEL_ADD_UKU_APP')"></h4>
         	<pre>
     			<code class="html">
     &lt;body uku-application&gt;
@@ -25,9 +25,9 @@
     &lt;/body&gt;
     			</code>
     		</pre>
-        	<h4 uku-text="res.getResource('LABEL_INITIALIZE_UKUJS')"></h4>
+        	<h4 uku-text="res.getResource('GUIDE_LABEL_INIT_UKUJS')"></h4>
         	<pre>
-    			<code class="js">
+    			<code>
     seajs.use('main',function(main){
         main.bootstrap();
     });
@@ -55,6 +55,17 @@
 
     			</code>
     		</pre>
+            <h4 uku-text="res.getResource('GUIDE_LABEL_BIND_ATTR')"></h4>
+            <pre>
+                <code>
+&lt;body uku-application&gt;
+    ...
+    &lt;input type="text" uku-value="myCtrl.message"&gt;
+    &lt;h3&gt;{{myCtrl.message}}&lt;h3/&gt;
+    ...
+&lt;/body&gt;
+                </code>
+            </pre>
         </div>
     </template>
 </uku-component>

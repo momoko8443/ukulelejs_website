@@ -1,0 +1,51 @@
+<uku-component>
+    <template>
+        <div>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_API_FUNCTION')"></h3>
+            <b>refresh(controllerAlias)</b>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_API_ARGUMENT')"></h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                controllerAlias
+                            </td>
+                            <td>
+                                String/Array
+                            </td>
+                            <td uku-text="res.getResource('GUIDE_TEXT_API_REFRESH')">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p uku-text="res.getResource('GUIDE_TEXT_API_REFRESH2')">
+            </p>
+            <pre>
+                <code class="js">
+function MyController(uku){
+    this.users = [];
+    var self = this;
+    this.getUsersFromServer = function(){
+        ajax.get("/users",function(result){
+            self.users = result;
+            uku.refresh("myCtrl");
+        });
+    }
+}
+                </code>
+            </pre>
+            <p>
+
+            </p>
+        </div>
+    </template>
+</uku-component>

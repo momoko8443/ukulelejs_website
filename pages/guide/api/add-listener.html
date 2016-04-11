@@ -1,9 +1,9 @@
 <uku-component>
     <template>
         <div>
-            <h3>方法:</h3>
-            <b>registerComponent(componentTagName, filePath)</b>
-            <h3>参数:</h3>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_API_FUNCTION')"></h3>
+            <b>addListener(eventType, handler)</b>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_API_ARGUMENT')"></h3>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -16,51 +16,45 @@
                     <tbody>
                         <tr>
                             <td>
-                                componentTagName
+                                eventType
                             </td>
                             <td>
                                 String
                             </td>
                             <td>
-                                Component的TagName，例如 <mydiv></mydiv>中的mydiv即为componentTagName
+                                type of event
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                filePath
+                                handler
                             </td>
                             <td>
-                                String
+                                Function
                             </td>
                             <td>
-                                定义Component的html文件，该路进相对于index.html文件。
+                                Handler function will be called when ukujs has initialized.
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p>
-                registerComponent方法用来注册“Web Component”，这样你就可以在任意地方使用标签引入你的自定义组件了。
-            </p>
             <pre>
                 <code class="js">
 var uku = new Ukulele();
-uku.registerComponent("mydiv","view/components/mydiv.html");
+...
+uku.registerController("myCtrl",new MyController(uku));
+uku.registerController("myCtrl2",new MyController2(uku));
+uku.registerComponent("myComp","component.html");
+uku.registerComponent("myComp2","component2.html");
+...
+uku.addListener(Ukulele.INITIALIZED,function(e){
+    alert(e);
+})
 uku.init();
                 </code>
             </pre>
-            <p>
-                此处注册mydiv为组件的tagName，那么在下例的html中就可以使用<mydiv></mydiv>来引入组件了。
-            </p>
-            <pre>
-                <code class="html">
-&lt;div&gt;
-    &lt;mydiv&gt;&lt;/mydiv&gt;
-&lt;/div&gt;
-                </code>
-            </pre>
-            <p>
-                Web Component的定义会在组件化章节中做具体的介绍
+            <p uku-text="res.getResource('GUIDE_TEXT_API_ADD_LISTENER')">
             </p>
         </div>
     </template>

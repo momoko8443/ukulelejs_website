@@ -1,9 +1,9 @@
 <uku-component>
     <template>
         <div>
-            <h3>方法:</h3>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_API_FUNCTION')"></h3>
             <b>registerController(aliasName, controller)</b>
-            <h3>参数:</h3>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_API_ARGUMENT')"></h3>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -22,7 +22,7 @@
                                 String
                             </td>
                             <td>
-                                Controller的别名
+                                Controller's alias
                             </td>
                         </tr>
                         <tr>
@@ -33,14 +33,13 @@
                                 Object
                             </td>
                             <td>
-                                Controller的实例
+                                Controller's instance
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p>
-                registerController方法用来注册“视图模型”（视图模型——在ukujs中为了使ng粉丝们可以路转粉，故沿用了Controller这个名词）
+            <p uku-text="res.getResource('GUIDE_TEXT_API_REG_CTRL')">
             </p>
             <pre>
                 <code class="js">
@@ -53,9 +52,7 @@ function MyController(uku){
 }
                 </code>
             </pre>
-            <p>
-                我们将MyController的实例new MyController()以及它的别名myCtrl注册成一个Controller（"视图模型"），这样你就可以在html中使用
-                myCtrl.message来引用模型上的变量，从而与视图进行绑定了(如下例)
+            <p uku-text="res.getResource('GUIDE_TEXT_API_REG_CTRL2')">
             </p>
             <pre>
                 <code class="html">

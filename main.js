@@ -87,31 +87,29 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
         uku.registerComponent("datetiem-picker","pages/example/components/datetimepicker.html");
         uku.registerComponent("user-list", "pages/example/components/user_list.html");
 
-        uku.registerComponent("guide-install", "pages/guide/install.html");
-        uku.registerComponent("guide-config", "pages/guide/config.html");
-        uku.registerComponent("guide-native", "pages/guide/native.html");
-        uku.registerComponent("guide-amd", "pages/guide/amd.html");
-        uku.registerComponent("guide-cmd", "pages/guide/cmd.html");
-        uku.registerComponent("guide-webpack", "pages/guide/webpack.html");
-        uku.registerComponent("guide-bind-text", "pages/guide/bind-text.html");
-        uku.registerComponent("guide-bind-attr", "pages/guide/bind-attr.html");
-        uku.registerComponent("guide-bind-input", "pages/guide/bind-input.html");
-        uku.registerComponent("guide-bind-event", "pages/guide/bind-event.html");
-        uku.registerComponent("guide-bind-style", "pages/guide/bind-style.html");
-        uku.registerComponent("guide-bind-function", "pages/guide/bind-function.html");
+        uku.registerComponent("guide-install", "pages/guide/prepare/install.html");
+        uku.registerComponent("guide-config", "pages/guide/prepare/config.html");
+        uku.registerComponent("guide-native", "pages/guide/prepare/native.html");
+        uku.registerComponent("guide-amd", "pages/guide/prepare/amd.html");
+        uku.registerComponent("guide-cmd", "pages/guide/prepare/cmd.html");
+        uku.registerComponent("guide-webpack", "pages/guide/prepare/webpack.html");
+        uku.registerComponent("guide-bind-text", "pages/guide/binding/bind-text.html");
+        uku.registerComponent("guide-bind-attr", "pages/guide/binding/bind-attr.html");
+        uku.registerComponent("guide-bind-input", "pages/guide/binding/bind-input.html");
+        uku.registerComponent("guide-bind-event", "pages/guide/binding/bind-event.html");
+        uku.registerComponent("guide-bind-style", "pages/guide/binding/bind-style.html");
+        uku.registerComponent("guide-bind-function", "pages/guide/binding/bind-function.html");
         uku.registerComponent("guide-building", "pages/guide/building.html");
-        uku.registerComponent("guide-uku-text", "pages/guide/uku-text.html");
-        uku.registerComponent("guide-uku-repeat", "pages/guide/uku-repeat.html");
-        uku.registerComponent("guide-uku-include", "pages/guide/uku-include.html");
-        uku.registerComponent("guide-uku-selected", "pages/guide/uku-selected.html");
-        uku.registerComponent("guide-uku-selected2", "pages/guide/uku-selected2.html");
-        uku.registerComponent("guide-register-controller", "pages/guide/register-controller.html");
-        uku.registerComponent("guide-register-component", "pages/guide/register-component.html");
-        uku.registerComponent("guide-init", "pages/guide/init.html");
-        uku.registerComponent("guide-init-handler", "pages/guide/init-handler.html");
-        uku.registerComponent("guide-refresh", "pages/guide/refresh.html");
-        uku.registerComponent("guide-refresh-handler", "pages/guide/refresh-handler.html");
-        uku.registerComponent("guide-deal-with-element", "pages/guide/deal-with-element.html");
+        uku.registerComponent("guide-uku-text", "pages/guide/directive/uku-text.html");
+        uku.registerComponent("guide-uku-repeat", "pages/guide/directive/uku-repeat.html");
+        uku.registerComponent("guide-uku-selected", "pages/guide/directive/uku-selected.html");
+        uku.registerComponent("guide-uku-selected2", "pages/guide/directive/uku-selected2.html");
+        uku.registerComponent("guide-register-controller", "pages/guide/api/register-controller.html");
+        uku.registerComponent("guide-register-component", "pages/guide/api/register-component.html");
+        uku.registerComponent("guide-init", "pages/guide/api/init.html");
+        uku.registerComponent("guide-refresh", "pages/guide/api/refresh.html");
+        uku.registerComponent("guide-add-listener", "pages/guide/api/add-listener.html");
+        uku.registerComponent("guide-deal-with-element", "pages/guide/api/deal-with-element.html");
         perforCtrl = new PerformanceCtrl();
         uku.registerController("perforCtrl", perforCtrl);
         uku.registerController("res", new ResourceManager());
@@ -124,14 +122,6 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
 				.when("#about", "pages/about.html")
 				.otherwise("pages/home.html")
 				.addAnchor("repeat");
-        /*uku.addListener(Ukulele.REFRESH,function(e){
-            if(e){
-                var codeDoms = element.querySelectorAll('pre code');
-                for (var i = 0; i < codeDoms.length; i++) {
-                    hljs.highlightBlock(codeDoms[i]);
-                }
-            }
-        });*/
         uku.addListener(Ukulele.INITIALIZED,function(e){
             var element = e.element;
             route.work();
@@ -149,7 +139,15 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
 				if (page && page.page && !page.cache) {
 					//document.getElementById("mainView").classList.add('blur');
 					//document.getElementById("loadingBar").style.display = "block";
-					uku.dealWithElement(page.page);
+                    uku.addListener(Ukulele.HANDLE_ELEMENT_COMPLETED,function(e){
+                        if(e.element){
+                            var codeDoms = e.element.querySelectorAll('pre code');
+                            for (var i = 0; i < codeDoms.length; i++) {
+                                hljs.highlightBlock(codeDoms[i]);
+                            }
+                        }
+                    });
+					uku.handleElement(page.page);
 					if (page.key === "#performance" || page.key === "#about" || page.key === "#api" || page.key === "#guide") {
 						setTimeout(function () {
 							//document.getElementById("mainView").classList.remove('blur');

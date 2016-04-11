@@ -1,9 +1,9 @@
 <uku-component>
     <template>
         <div>
-            <h3>方法:</h3>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_API_FUNCTION')"></h3>
             <b>dealWithElement(element)</b>
-            <h3>参数:</h3>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_API_ARGUMENT')"></h3>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -22,16 +22,12 @@
                                 dom node
                             </td>
                             <td>
-                                需要被ukujs支持，动态添加的dom节点
+                                runtime appending dom ,which want to be managed by ukujs.
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p>
-                由于Ukujs是使用标签形式声明的双向绑定，因此如果有新的dom节点被添加到主程序中时，需要调用dealWithElement方法来对新加入的dom
-                进行一系列的扫描，解析，绑定动作。
-            </p>
             <pre>
                 <code class="js">
 function MyController(uku){
@@ -43,6 +39,8 @@ function MyController(uku){
 }
                 </code>
             </pre>
+            <p uku-text="res.getResource('GUIDE_TEXT_API_DEAL_WITH_ELE')">
+            </p>
         </div>
     </template>
 </uku-component>

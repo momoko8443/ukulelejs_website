@@ -1,10 +1,8 @@
 <uku-component>
     <template>
         <div>
-            <h3>绑定事件</h3>
-            <p>
-                绑定事件其实也是对上个小节，绑定属性的一种实现，我们使用 uku-onEventType来实现这个功能，例如原生事件使用onclick来设置点击事件的回调函数，那么在
-                Ukujs中，你使用uku-onclick 即可，无需额外的记忆。
+            <h3 uku-text="res.getResource('GUIDE_LABEL_BIND_EVENT')"></h3>
+            <p uku-text="res.getResource('GUIDE_TEXT_BIND_EVENT')">
             </p>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -40,9 +38,8 @@ function MyCtrl(uku) {
                     </pre>
                 </div>
             </div>
-            <h3>关于Handler的参数</h3>
-            <p>
-                buttonClickHandler函数中的最后一个参数默认为事件的event,event不需要你显示地去传递(Ukujs会自动添加在最后),你只需要专注于自己想传递的参数，例如
+            <h3 uku-text="res.getResource('GUIDE_LABEL_BIND_EVENT2')"></h3>
+            <p uku-text="res.getResource('GUIDE_TEXT_BIND_EVENT2')">
             </p>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">

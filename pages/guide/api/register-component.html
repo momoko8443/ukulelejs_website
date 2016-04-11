@@ -1,0 +1,64 @@
+<uku-component>
+    <template>
+        <div>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_API_FUNCTION')"></h3>
+            <b>registerComponent(componentTagName, filePath)</b>
+            <h3 uku-text="res.getResource('GUIDE_LABEL_API_ARGUMENT')"></h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                componentTagName
+                            </td>
+                            <td>
+                                String
+                            </td>
+                            <td>
+                                Component's tag name, e.g. <mydiv></mydiv>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                filePath
+                            </td>
+                            <td>
+                                String
+                            </td>
+                            <td>
+                                Path of the component's file, related to index.html。
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p uku-text="res.getResource('GUIDE_TEXT_API_REG_COMP')">
+            </p>
+            <pre>
+                <code class="js">
+var uku = new Ukulele();
+uku.registerComponent("mydiv","view/components/mydiv.html");
+uku.init();
+                </code>
+            </pre>
+            <p uku-text="res.getResource('GUIDE_TEXT_API_REG_COMP2')">
+            </p>
+            <pre>
+                <code class="html">
+&lt;div&gt;
+    &lt;mydiv&gt;&lt;/mydiv&gt;
+&lt;/div&gt;
+                </code>
+            </pre>
+            <p uku-text="res.getResource('GUIDE_TEXT_API_REG_COMP3')">
+            </p>
+        </div>
+    </template>
+</uku-component>
