@@ -202,7 +202,7 @@ define("GuideCtrl", function(){
                 var menuItem = e.target.dataset.menuItem;
                 if(currentMenuItem !== menuItem){
                     var componentTag = "guide-"+menuItem;
-                    var comp = uku.getComponentsDefinition()[componentTag];
+                    var comp = uku.getComponents(componentTag);
                     var guideItem;
                     if(comp){
                         guideItem = document.createElement(componentTag);
@@ -212,7 +212,8 @@ define("GuideCtrl", function(){
                     var guideContentPanel = document.getElementById("guideContentPanel");
                     guideContentPanel.removeChild(guideContentPanel.children[0]);
                     guideContentPanel.appendChild(guideItem);
-                    uku.dealWithElement(guideItem);
+                    //uku.dealWithElement(guideItem);
+                    uku.handleElement(guideItem);
                     currentMenuItem = menuItem;
                 }
             }
