@@ -70,7 +70,7 @@ var locale = {
         "GUIDE_MENU_ITEM_API_INIT":"uku.init()",
         "GUIDE_MENU_ITEM_API_REFRSH":"uku.refresh()",
         "GUIDE_MENU_ITEM_API_ADD_LISTENER":"uku.addListener()",
-        "GUIDE_MENU_ITEM_API_DEAL_ELEMENT":"uku.dealWithElement()",
+        "GUIDE_MENU_ITEM_API_DEAL_ELEMENT":"uku.handleElement()",
 
         "GUIDE_MENU_ITEM_COMP":"组件化",
         "GUIDE_MENU_ITEM_CUSTOM_COMP":"自定义组件",
@@ -164,9 +164,10 @@ var locale = {
                                 +"比如使用setInterval后改变了模型的值，"
                                 +"比如，你发现双向绑定没有如你预计生效的时候，"
                                 +"你都可以调用uku.refresh()来手动执行刷新以同步视图和视图模型",
-        "GUIDE_TEXT_API_ADD_LISTENER":"目前Ukujs内置的事件有 Ukulele.INITIALIZED 和 Ukulele.REFRESH 2种，分别在每次初始化完成时，和脏检测完成时触发",
+        "GUIDE_TEXT_API_ADD_LISTENER":"目前Ukujs内置的事件有 Ukulele.INITIALIZED, Ukulele.HANDLE_ELEMENT_COMPLETED 和 Ukulele.REFRESH 3种，分别在每次初始化完成时，handleElement()执行完，和脏检测完成时触发",
 
-        "GUIDE_TEXT_API_DEAL_WITH_ELE":"由于Ukujs是使用标签形式声明的双向绑定，因此如果有新的dom节点被添加到主程序中时，需要调用dealWithElement方法来对新加入的dom进行一系列的扫描，解析，绑定动作",
+        "GUIDE_TEXT_API_DEAL_WITH_ELE":"由于Ukujs是使用标签形式声明的双向绑定，因此如果有新的dom节点被添加到主程序中时，需要调用handelElement方法来对新加入的dom进行一系列的扫描，解析，绑定动作"
+                                +"<br/>执行handleElement()方法会触发Ukulele.HANDLE_ELEMENT_COMPLETED事件",
     },
     "en_US" :{
 

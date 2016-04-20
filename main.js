@@ -109,7 +109,7 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
         uku.registerComponent("guide-init", "pages/guide/api/init.html");
         uku.registerComponent("guide-refresh", "pages/guide/api/refresh.html");
         uku.registerComponent("guide-add-listener", "pages/guide/api/add-listener.html");
-        uku.registerComponent("guide-deal-with-element", "pages/guide/api/deal-with-element.html");
+        uku.registerComponent("guide-handle-element", "pages/guide/api/handle-element.html");
         perforCtrl = new PerformanceCtrl();
         uku.registerController("perforCtrl", perforCtrl);
         uku.registerController("res", new ResourceManager());
@@ -202,7 +202,7 @@ define("GuideCtrl", function(){
                 var menuItem = e.target.dataset.menuItem;
                 if(currentMenuItem !== menuItem){
                     var componentTag = "guide-"+menuItem;
-                    var comp = uku.getComponents(componentTag);
+                    var comp = uku.getComponent(componentTag);
                     var guideItem;
                     if(comp){
                         guideItem = document.createElement(componentTag);
