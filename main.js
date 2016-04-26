@@ -2,7 +2,7 @@ require.config({
     paths: {
         "jquery": 'bower_components/jquery/dist/jquery.min',
         "jquery.bootstrap": 'bower_components/bootstrap/dist/js/bootstrap.min',
-        "Ukulele": 'bower_components/ukulelejs/dist/ukulele',
+        "Ukulele": 'bower_components/ukulelejs/dist/ukulele.min',
         "highlight": 'bower_components/highlightjs/highlight.pack',
         "locale": 'resources/locale/example_properties',
         "routejs": 'bower_components/uku-routejs/build/js/uku-route',
@@ -137,8 +137,8 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
 
 			route.onRouteChange = function (page) {
 				if (page && page.page && !page.cache) {
-					//document.getElementById("mainView").classList.add('blur');
-					//document.getElementById("loadingBar").style.display = "block";
+					document.getElementById("mainView").classList.add('blur');
+					document.getElementById("loadingBar").style.display = "block";
                     uku.addListener(Ukulele.HANDLE_ELEMENT_COMPLETED,function(e){
                         if(e.element){
                             var codeDoms = e.element.querySelectorAll('pre code');
@@ -147,13 +147,11 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
                             }
                         }
                     });
+                    uku.addListener(Ukulele.HANDLE_ELEMENT_COMPLETED,function(e){
+                        document.getElementById("mainView").classList.remove('blur');
+                        document.getElementById("loadingBar").style.display = "none";
+                    });
 					uku.handleElement(page.page);
-					if (page.key === "#performance" || page.key === "#about" || page.key === "#api" || page.key === "#guide") {
-						setTimeout(function () {
-							//document.getElementById("mainView").classList.remove('blur');
-							//document.getElementById("loadingBar").style.display = "none";
-						}, 1000);
-					}
 				}
 				if (page.key === "#performance") {
 					perforCtrl.init();
@@ -212,7 +210,6 @@ define("GuideCtrl", function(){
                     var guideContentPanel = document.getElementById("guideContentPanel");
                     guideContentPanel.removeChild(guideContentPanel.children[0]);
                     guideContentPanel.appendChild(guideItem);
-                    //uku.dealWithElement(guideItem);
                     uku.handleElement(guideItem);
                     currentMenuItem = menuItem;
                 }
