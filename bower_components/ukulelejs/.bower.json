@@ -1,14 +1,14 @@
 {
   "name": "ukulelejs",
   "homepage": "https://github.com/momoko8443/ukulelejs",
-  "_release": "ba8787af49",
+  "_release": "6da47c1049",
   "_resolution": {
     "type": "branch",
-    "branch": "pure",
-    "commit": "ba8787af494af52005caa62b9440d7c9bad623f4"
+    "branch": "typescript",
+    "commit": "6da47c10494d0c3fff818a39e9f59f274d234b0b"
   },
-  "_source": "git://github.com/momoko8443/ukulelejs.git",
-  "_target": "pure",
+  "_source": "https://github.com/momoko8443/ukulelejs.git",
+  "_target": "typescript",
   "_originalSource": "ukulelejs",
   "_direct": true
 }

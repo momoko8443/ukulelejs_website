@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script src="../../bower_components/ukulelejs/dist/ukulele.js"></script>
+    <script src="../../bower_components/ukulelejs/dist/uku.js"></script>
 </head>
 
 <body uku-application>
@@ -18,9 +18,9 @@
         uku.registerComponent('my-item','ukujs-components/item.html');
         var myCtrl = new MyController(uku);
         uku.registerController('myCtrl',myCtrl);
-        uku.initHandler = function(){
+        uku.addListener(Ukulele.INITIALIZED,function(e){
             myCtrl.init();
-        };
+        });
         uku.init();
 
         function MyController(uku){

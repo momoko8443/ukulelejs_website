@@ -2,7 +2,7 @@ require.config({
     paths: {
         "jquery": 'bower_components/jquery/dist/jquery.min',
         "jquery.bootstrap": 'bower_components/bootstrap/dist/js/bootstrap.min',
-        "Ukulele": 'bower_components/ukulelejs/dist/ukulele.min',
+        "uku": 'bower_components/ukulelejs/dist/uku',
         "highlight": 'bower_components/highlightjs/highlight.pack',
         "locale": 'resources/locale/example_properties',
         "routejs": 'bower_components/uku-routejs/build/js/uku-route',
@@ -35,11 +35,11 @@ require.config({
     }
 });
 
-require(["domReady", "routejs", "Ukulele", "RootCtrl", "GuideCtrl","OtherCtrl",
+require(["domReady", "routejs", "uku", "RootCtrl", "GuideCtrl","OtherCtrl",
 "Example01Ctrl", "Example02Ctrl", "Example03Ctrl", "Example04Ctrl", "Example05Ctrl", "Example06Ctrl",
 "Example09Ctrl", "Example10Ctrl", "Example11Ctrl", "Example12Ctrl", "Example13Ctrl", "Example15Ctrl",
 "PerformanceCtrl", "Chart", "jquery", "jquery.bootstrap", "highlight", "locale"],
-function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
+function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
             Example01Ctrl, Example02Ctrl, Example03Ctrl, Example04Ctrl, Example05Ctrl, Example06Ctrl,
             Example09Ctrl, Example10Ctrl, Example11Ctrl, Example12Ctrl, Example13Ctrl, Example15Ctrl, PerformanceCtrl) {
 
@@ -48,6 +48,7 @@ function (domReady, Route, Ukulele, RootCtrl, GuideCtrl,OtherCtrl,
     var initRoutePool = {};
     var perforCtrl;
     domReady(function () {
+        var Ukulele = uku.Ukulele;
         uku = new Ukulele();
         uku.registerController("root", new RootCtrl(uku));
         uku.registerController("guideCtrl", new GuideCtrl(uku));

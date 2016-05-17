@@ -37,6 +37,6 @@
     "moment": "~2.10.6",
     "requirejs": "~2.1.18",
     "uku-routejs": "*",
-    "ukulelejs": "pure"
+    "ukulelejs": "typescript"
   }
 }

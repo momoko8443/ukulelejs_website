@@ -3,7 +3,7 @@
 
 <head>
     <title>Ukulelejs Performance Test</title>
-    <script src="../../bower_components/ukulelejs/dist/ukulele.min.js"></script>
+    <script src="../../bower_components/ukulelejs/dist/uku.js"></script>
 </head>
 
 <body uku-application>
@@ -65,7 +65,7 @@
             this.total = 0;
             timer_em.innerHTML = 0;
         };
-        this.generateTesingData = function () {           
+        this.generateTesingData = function () {
             this.items = [];
             var rowLen = this.rowNum;
             var columnLen = 10;
@@ -79,9 +79,9 @@
             this.total = rowLen * columnLen * 2;
             calulateTime(rowLen);
         }
-        
+
     }
-    
+
     var timer_em = document.getElementById("timer");
     var mainOL = document.getElementById("mainOL");
     var interval = 50;
@@ -97,7 +97,7 @@
             }
         },interval);
     }
-    function checkIsRenderOver(rowLen){ 
+    function checkIsRenderOver(rowLen){
         if(mainOL.children.length > rowLen){
             return true;
         }
