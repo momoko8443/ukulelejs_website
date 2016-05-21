@@ -37,6 +37,7 @@
         return {
             'bootstrap': function () {
                 require("Ukulele");
+                var Ukulele = Ukulele.Ukulele;
                 uku = new Ukulele();
                 var myCtrl = require('MyController');
                 uku.registerController('myCtrl', myCtrl);

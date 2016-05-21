@@ -26,6 +26,7 @@
     require(["domReady","Ukulele","MyController"], function(domReady,Ukulele,MyController) {
     	var uku;
     	domReady(function() {
+            var Ukulele = Ukulele.Ukulele;
     		uku = new Ukulele();
     		uku.registerController("myCtrl", new MyController(uku));
     		uku.init();

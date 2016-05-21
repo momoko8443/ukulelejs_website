@@ -1,7 +1,7 @@
 # Install UkuleleJS
 ```
 $npm install -g bower
-bower install ukulelejs#pure
+bower install ukulelejs
 ```
 # Getting Start
 ## Native Way
@@ -19,7 +19,7 @@ bower install ukulelejs#pure
 ```html
 <body uku-application>
 	...
-</body>	
+</body>
 ```
 Initialize ukulelejs and register Controller in the $(document).ready's callback function
 ```javascript
@@ -44,7 +44,7 @@ function MyController() {
 	<input type="text" uku-value="myCtrl.message">
 	<h3>{{myCtrl.message}}<h3/>
 	...
-</body>	
+</body>
 ```
 
 ***
@@ -98,5 +98,5 @@ define("MyController",function(){
 ```
 
 ***
- 
+
 ### Find more examples and API document at [http://momoko8443.github.io/ukulelejs_website/](http://momoko8443.github.io/ukulelejs_website/)
