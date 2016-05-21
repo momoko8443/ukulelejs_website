@@ -1,0 +1,33 @@
+<uku-component>
+    <template>
+        <div class="compFather">
+            <h3>this is father</h3>
+            <p>{{cc.message}}</p>
+            <me id="me"></me>
+            <brother id="brother" uku-message="cc.msg2brother"></brother>
+        </div>
+    </template>
+    <script>
+    (function(){
+        return function(uku){
+            this._initialized = function(){
+                var self = this;
+                this.message = "";
+                this.msg2brother = "";
+                var me = document.getElementById('me');
+                me.addEventListener('messagefromchild',function(e){
+                    var msg = e.data.message;
+                    if(e.data.toGrandFather){
+                        self.fire('messagefromchild',{'message':msg});
+                    }else if(e.data.toBrother){
+                        self.msg2brother = msg;
+                    }else{
+                        self.message = msg;
+                    }
+                    uku.refresh();
+                });
+            }
+        };
+    })();
+    </script>
+</uku-component>

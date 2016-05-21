@@ -1,0 +1,55 @@
+<uku-component>
+    <template>
+        <div id="dynamic_comp_demo_contrainer">
+            <h3>如何在运行时动态的加入component</h3>
+            <p>
+                首先，肯定先要注册这个component
+            </p>
+            <pre>
+                <code class="js">
+...
+uku.registerComponent('dynamic-comp','pages/guide/comp/communication/father.html');
+...
+                </code>
+            </pre>
+            <p>
+                然后在运行时，使用document.createElement('dynamic_comp')，来创建这个动态dom,append到父dom后，再使用
+                uku.handleElement(newComp);来使Ukujs来操控这个dom。
+            </p>
+            <pre>
+                <code class="html">
+&lt;template&gt;
+    &lt;div id="dynamic_comp_demo_contrainer"&gt;
+        &lt;button uku-onclick="<span>cc</span>.createDynamcalComp()"&gt;create a dyamical compoment&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    (function(){
+        return function(uku){
+            this.createDynamcalComp = function(){
+                var container = document.getElementById('dynamic_comp_demo_contrainer');
+                var fatherDom = document.createElement("father");
+                container.appendChild(fatherDom);
+                uku.handleElement(fatherDom);
+            };
+        };
+    })();
+&lt;/script&gt;
+                </code>
+            </pre>
+            <button uku-onclick="cc.createDynamcalComp()">create a dyamical compoment</button>
+        </div>
+    </template>
+    <script>
+        (function(){
+            return function(uku){
+                this.createDynamcalComp = function(){
+                    var container = document.getElementById('dynamic_comp_demo_contrainer');
+                    var fatherDom = document.createElement("father");
+                    container.appendChild(fatherDom);
+                    uku.handleElement(fatherDom);
+                };
+            };
+        })();
+    </script>
+</uku-component>

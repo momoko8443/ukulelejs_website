@@ -1,0 +1,58 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>组件的嵌套</h3>
+            <span>sub_comp.html</span>
+            <pre>
+                <code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div&gt;
+            &lt;h1&gt;cc.message&lt;/h1&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script&gt;
+        (function () {
+            return function(uku){
+                this.message = "this is a nest component";
+            };
+        })();
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+                </code>
+            </pre>
+            <pre>
+                <code class="js">
+uku.registerComponent('sub-comp','./sub_comp.html');
+                </code>
+            </pre>
+            <span>main_comp.html</span>
+            <pre>
+                <code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div&gt;
+            &lt;sub-comp&gt;&lt;/sub-comp&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script&gt;
+        (function () {
+            return function(uku){
+                ...
+            };
+        })();
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+                </code>
+            </pre>
+            <pre>
+                <code class="js">
+uku.registerComponent('main-comp','./main_comp.html');
+                </code>
+            </pre>
+            <p>
+                父组件套子组件，就是这么简单。。。
+            </p>
+        </div>
+    </template>
+</uku-component>

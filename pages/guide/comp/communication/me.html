@@ -1,0 +1,36 @@
+<uku-component>
+    <template>
+        <div class="compMe">
+            <h3>this is me</h3>
+            <button uku-onclick="cc.talk2father('hello, my father')">talk to my father</button>
+            <button uku-onclick="cc.talk2grandFather('hello, my grand father')">talk to my grand father directly</button>
+            <button uku-onclick="cc.talk2grandFather2('hello again, my grand father')">talk to my grand father by father's transfer</button>
+            <button uku-onclick="cc.talk2brother('hello, my brother')">talk to my brother</button>
+            <button uku-onclick="cc.talk2brotherInLaw('hello, my brother in law')">talk to my brother in law</button>
+        </div>
+    </template>
+    <script src="resources/js/eventbus.js"></script>
+    <script>
+        (function(EB){
+            return function(uku){
+                this.talk2father = function(msg){
+                    this.fire("messagefromchild",{'message':msg});
+                };
+                this.talk2grandFather = function(msg){
+                    this.fire("transfermessage2parents",{'message':msg,'toGrandFather':true},true);
+                };
+                this.talk2grandFather2 = function(msg){
+                    this.fire("messagefromchild",{'message':msg,'toGrandFather':true},false);
+                };
+
+                this.talk2brother = function(msg){
+                    this.fire("messagefromchild",{'message':msg,'toBrother':true});
+                };
+                this.talk2brotherInLaw = function(msg){
+                    var eb = EB.getInstance();
+                    eb.dispatchEvent({'eventType':'global_event','data':msg});
+                };
+            };
+        })(EventBus);
+    </script>
+</uku-component>

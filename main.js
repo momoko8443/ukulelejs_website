@@ -111,6 +111,18 @@ function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
         uku.registerComponent("guide-refresh", "pages/guide/api/refresh.html");
         uku.registerComponent("guide-add-listener", "pages/guide/api/add-listener.html");
         uku.registerComponent("guide-handle-element", "pages/guide/api/handle-element.html");
+        uku.registerComponent("guide-custom-comp", "pages/guide/comp/custom_comp.html");
+        uku.registerComponent("guide-nest-comp", "pages/guide/comp/nest_comp.html");
+        uku.registerComponent("guide-communicate-comp", "pages/guide/comp/communicate_comp.html");
+        uku.registerComponent("guide-3rd-part-comp", "pages/guide/comp/3rd_part_comp.html");
+        uku.registerComponent("guide-dynamic-comp", "pages/guide/comp/dynamic_comp.html");
+
+        uku.registerComponent("me","pages/guide/comp/communication/me.html");
+        uku.registerComponent("father","pages/guide/comp/communication/father.html");
+        uku.registerComponent("grand-father","pages/guide/comp/communication/grand_father.html");
+        uku.registerComponent("brother","pages/guide/comp/communication/brother.html");
+        uku.registerComponent("uncle","pages/guide/comp/communication/uncle.html");
+        uku.registerComponent("brother-in-law","pages/guide/comp/communication/brother_in_law.html");
         perforCtrl = new PerformanceCtrl();
         uku.registerController("perforCtrl", perforCtrl);
         uku.registerController("res", new ResourceManager());

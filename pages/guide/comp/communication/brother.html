@@ -1,0 +1,24 @@
+<uku-component>
+    <template>
+        <div class="compBrother">
+            <h3>this is brother</h3>
+            <p>
+                {{cc.myMsg}}
+            </p>
+        </div>
+    </template>
+    <script>
+        (function(){
+            return function(uku){
+                this.myMsg = "";
+                Object.defineProperty(this, "message", {
+                    set: function (value) {
+                        if(value){
+                            this.myMsg = value;
+                        }
+                    }
+                });
+            };
+        })();
+    </script>
+</uku-component>

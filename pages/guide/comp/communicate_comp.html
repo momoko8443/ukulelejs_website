@@ -1,0 +1,298 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>组件间的通讯</h3>
+            <p>组件间的通讯大致分成以下4类场景</p>
+            <ul>
+                <li>父子之间——子抛事件，父接收到事件后set子的属性</li>
+                <li>兄弟之间——子抛事件，父接收到事件后set另外个子的属性</li>
+                <li>爷孙之间—— 方式1 子抛事件，父接收到事件后，继续往爷抛  方式2 子抛冒泡事件，直接冒泡到爷处</li>
+                <li>远亲之间——直接使用全局事件</li>
+            </ul>
+            <p>
+                可以说组件通讯是所有组件式开发framework的核心之一，下面一个例子实现了以上4类通讯
+            </p>
+            <p>
+                Uku中的web component提供了2个供外界接触的接口，分别是接受外界（即父组件）数据的dom attribute：uku-prorpetyName，
+                以及向上层组件发送事件的接口fire(eventName,param,bubbles,cancelable)。
+            </p>
+            <grand-father></grand-father>
+            <ul class="nav nav-tabs" role="tablist">
+            	<li role="presentation" class="active">
+            		<a href="#tab_me" aria-controls="tab_me" role="tab" data-toggle="tab">me.html</a>
+            	</li>
+            	<li role="presentation">
+            		<a href="#tab_father" aria-controls="tab_father" role="tab" data-toggle="tab">father.html</a>
+            	</li>
+            	<li role="presentation">
+            		<a href="#tab_brother" aria-controls="tab_brother" role="tab" data-toggle="tab">brother.html</a>
+            	</li>
+                <li role="presentation">
+            		<a href="#tab_grand_father" aria-controls="tab_grand_father" role="tab" data-toggle="tab">grand_father.html</a>
+            	</li>
+                <li role="presentation">
+            		<a href="#tab_uncle" aria-controls="tab_uncle" role="tab" data-toggle="tab">uncle.html</a>
+            	</li>
+                <li role="presentation">
+            		<a href="#tab_brother_in_law" aria-controls="tab_brother_in_law" role="tab" data-toggle="tab">brother_in_law.html</a>
+            	</li>
+                <li role="presentation">
+            		<a href="#tab_eventbus" aria-controls="tab_eventbus" role="tab" data-toggle="tab">eventbus.js</a>
+            	</li>
+            </ul>
+            <div class="tab-content">
+            	<div role="tabpanel" class="tab-pane active" id="tab_me" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div class="compMe"&gt;
+            &lt;h3&gt;this is me&lt;/h3&gt;
+            &lt;button uku-onclick="<span>cc</span>.talk2father('hello, my father')"&gt;talk to my father&lt;/button&gt;
+            &lt;button uku-onclick="<span>cc</span>.talk2grandFather('hello, my grand father')"&gt;talk to my grand father directly&lt;/button&gt;
+            &lt;button uku-onclick="<span>cc</span>.talk2grandFather2('hello again, my grand father')"&gt;talk to my grand father by father's transfer&lt;/button&gt;
+            &lt;button uku-onclick="<span>cc</span>.talk2brother('hello, my brother')"&gt;talk to my brother&lt;/button&gt;
+            &lt;button uku-onclick="<span>cc</span>.talk2brotherInLaw('hello, my brother in law')"&gt;talk to my brother in law&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script src="resources/js/eventbus.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        (function(EB){
+            return function(uku){
+                this.talk2father = function(msg){
+                    this.fire("messagefromchild",{'message':msg});
+                };
+                this.talk2grandFather = function(msg){
+                    this.fire("transfermessage2parents",{'message':msg,'toGrandFather':true},true);
+                };
+                this.talk2grandFather2 = function(msg){
+                    this.fire("messagefromchild",{'message':msg,'toGrandFather':true},false);
+                };
+
+                this.talk2brother = function(msg){
+                    this.fire("messagefromchild",{'message':msg,'toBrother':true});
+                };
+                this.talk2brotherInLaw = function(msg){
+                    var eb = EB.getInstance();
+                    eb.dispatchEvent({'eventType':'global_event','data':msg});
+                };
+            };
+        })(EventBus);
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+
+                        </code>
+                    </pre>
+            	</div>
+                <div role="tabpanel" class="tab-pane" id="tab_father" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div class="compFather"&gt;
+            &lt;h3&gt;this is father&lt;/h3&gt;
+            &lt;p&gt;{{<span>cc</span>.message}}&lt;/p&gt;
+            &lt;me id="me"&gt;&lt;/me&gt;
+            &lt;brother id="brother" uku-message="<span>cc</span>.msg2brother"&gt;&lt;/brother&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script&gt;
+        (function(){
+            return function(uku){
+                this._initialized = function(){
+                    var self = this;
+                    this.message = "";
+                    this.msg2brother = "";
+                    var me = document.getElementById('me');
+                    me.addEventListener('messagefromchild',function(e){
+                        var msg = e.data.message;
+                        if(e.data.toGrandFather){
+                            self.fire('messagefromchild',{'message':msg});
+                        }else if(e.data.toBrother){
+                            self.msg2brother = msg;
+                        }else{
+                            self.message = msg;
+                        }
+                        uku.refresh();
+                    });
+                }
+            };
+        })();
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+                        </code>
+                    </pre>
+            	</div>
+                <div role="tabpanel" class="tab-pane" id="tab_brother" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div class="compBrother"&gt;
+            &lt;h3&gt;this is brother&lt;/h3&gt;
+            &lt;p&gt;
+                {{<span>cc</span>.myMsg}}
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script&gt;
+        (function(){
+            return function(uku){
+                this.myMsg = "";
+                Object.defineProperty(this, "message", {
+                    set: function (value) {
+                        if(value){
+                            this.myMsg = value;
+                        }
+                    }
+                });
+            };
+        })();
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+                        </code>
+                    </pre>
+            	</div>
+                <div role="tabpanel" class="tab-pane" id="tab_grand_father" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div class="compGrandFa"&gt;
+            &lt;h3&gt;this is grand father&lt;/h3&gt;
+            &lt;p&gt;{{<span>cc</span>.message}}&lt;/p&gt;
+            &lt;father id="father"&gt;&lt;/father&gt;
+
+            &lt;uncle id="uncle"&gt;&lt;/uncle&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script&gt;
+            (function(){
+                return function(uku){
+                    this._initialized = function(){
+                        var self = this;
+                        this.message = "";
+                        this.msg2brother = "";
+                        var father = document.getElementById('father');
+                        father.addEventListener('transfermessage2parents',function(e){
+                            var msg = e.data.message;
+                            self.message = msg;
+                            uku.refresh();
+                        });
+                        father.addEventListener('messagefromchild',function(e){
+                            var msg = e.data.message;
+                            self.message = msg;
+                            uku.refresh();
+                        });
+                    }
+                };
+            })();
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+                        </code>
+                    </pre>
+            	</div>
+                <div role="tabpanel" class="tab-pane" id="tab_uncle" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div class="compUncle"&gt;
+            &lt;h3&gt;this is uncle&lt;/h3&gt;
+            &lt;brother-in-law&gt;&lt;/brother-in-law&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script&gt;
+
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+                        </code>
+                    </pre>
+            	</div>
+                <div role="tabpanel" class="tab-pane" id="tab_brother_in_law" style="margin: 20px">
+                    <pre>
+                        <code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div class="compBrotherInLaw"&gt;
+            &lt;h3&gt;this is brother in law&lt;/h3&gt;
+            &lt;p&gt;
+                {{<span>cc</span>.message}}
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script src="resources/js/eventbus.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        (function(EB){
+            return function(uku){
+                this.message = "";
+                this._initialized = function(){
+                    var eb = EB.getInstance();
+                    var self = this;
+                    eb.addEventListener('global_event',function(e){
+                        self.message = e.data;
+                        uku.refresh();
+                    });
+                };
+            };
+        })(EventBus);
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+                        </code>
+                    </pre>
+            	</div>
+                <div role="tabpanel" class="tab-pane" id="tab_eventbus" style="margin: 20px">
+                    <pre>
+                        <code class="js">
+var eventBus;
+
+function EventBus(){
+    this.eventsPool = {};
+}
+EventBus.getInstance = function(){
+    if(!eventBus){
+        eventBus = new EventBus();
+    }
+    return eventBus;
+}
+EventBus.prototype.addEventListener = function(eventType, handler){
+    if(!this.eventsPool[eventType]){
+        this.eventsPool[eventType] = [];
+    }
+    this.eventsPool[eventType].push(handler);
+}
+
+EventBus.prototype.removeEventListener = function(eventType, handler){
+    if(this.eventsPool[eventType]){
+        for(var i=this.eventsPool[eventType].length-1;i&gt;=0;i--){
+            if(this.eventsPool[eventType][i] === handler){
+                this.eventsPool[eventType].splice(i,1);
+                break;
+            }
+        }
+    }
+};
+
+EventBus.prototype.hasListener = function(eventType){
+    if(this.eventsPool[eventType] &amp;&amp; this.eventsPool[eventType].length > 0){
+        return true;
+    }
+    return false;
+};
+EventBus.prototype.dispatchEvent = function(event){
+    if(event &amp;&amp; event.eventType){
+        var handlers = this.eventsPool[event.eventType];
+        if(handlers){
+            for(let i=0;i&lt;handlers.length;i++){
+                handlers[i].call(this,event);
+            }
+        }
+    }
+};
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </template>
+</uku-component>

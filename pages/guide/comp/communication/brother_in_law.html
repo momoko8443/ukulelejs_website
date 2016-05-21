@@ -1,0 +1,26 @@
+<uku-component>
+    <template>
+        <div class="compBrotherInLaw">
+            <h3>this is brother in law</h3>
+            <p>
+                {{cc.message}}
+            </p>
+        </div>
+    </template>
+    <script src="resources/js/eventbus.js"></script>
+    <script>
+        (function(EB){
+            return function(uku){
+                this.message = "";
+                this._initialized = function(){
+                    var eb = EB.getInstance();
+                    var self = this;
+                    eb.addEventListener('global_event',function(e){
+                        self.message = e.data;
+                        uku.refresh();
+                    });
+                };
+            };
+        })(EventBus);
+    </script>
+</uku-component>

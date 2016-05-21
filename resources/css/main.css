@@ -167,3 +167,34 @@ ul.ukuNav li a:hover {
 .myClass2{
     font-style: italic;
 }
+
+.compMe{
+    background: #FFCC00;
+    padding: 10px;
+    margin: 10px;
+}
+.compFather{
+    background:#009999;
+    padding:10px;
+    margin: 10px;
+}
+.compGrandFa{
+    background: #CCC333;
+    padding: 10px;
+    margin: 10px;
+}
+.compBrother{
+    background: #CCFF66;
+    padding: 10px;
+    margin: 10px;
+}
+.compUncle{
+    background: #339933;
+    padding: 10px;
+    margin: 10px;
+}
+.compBrotherInLaw{
+    background: #cc99cc;
+    padding: 10px;
+    margin: 10px;
+}

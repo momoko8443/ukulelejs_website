@@ -1,0 +1,30 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>如何引入依赖的第三方类库</h3>
+            <p>
+                可以在&lt;script&gt;&lt;/script&gt;标签之前使用别的script标签引入第三方类库,然后在()();这个立即执行函数中把这个库注入进去。
+                有几点注意事项，第三方库必须用scr的方式引入，必须写在component自己的controller script之前，必须在window上有引用，即UMD/global var这类打包形式的类库。
+            </p>
+            <pre>
+                <code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div&gt;
+            &lt;h1&gt;{{<span>cc</span>.message}}&lt;/h1&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script src="bower_components/moment/moment.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        (function (mo) {
+            return function(uku){
+                this.message = mo(new Date()).format("YYYY-MM-DD");
+            };
+        })(moment);
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+                </code>
+            </pre>
+        </div>
+    </template>
+</uku-component>

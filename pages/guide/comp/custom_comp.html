@@ -1,0 +1,48 @@
+<uku-component>
+    <template>
+        <div>
+            <h3>如何自定义组件</h3>
+            <p>
+                我们先来看一个基本Component的组成
+            </p>
+            <pre>
+                <code class="html">
+&lt;uku-component&gt;
+    &lt;template&gt;
+        &lt;div&gt;
+            &lt;h1&gt;{{<span>cc</span>.message}}&lt;/h1&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script&gt;
+        (function () {
+            return function(uku){
+                this.message = "how to define a component";
+            };
+        })();
+    &lt;/script&gt;
+&lt;/uku-component&gt;
+                </code>
+            </pre>
+            <p>
+                ukujs中的web component目前由2部分组成，&lt;template&gt;&lt;/template&gt;中定义dom，在&lt;script&gt;&lt;/script&gt;中定义逻辑。最外层由&lt;uku-component&gt;&lt;/uku-component&gt;包裹
+            </p
+            <p>
+                &lt;script&gt;&lt;/script&gt;中的逻辑必须以上面的格式书写在return function(uku)中
+            </p>
+            <p>
+                在dom中进行双向绑定的过程中，非component的情况下我们一般是使用{{controllerAliasName.property}}的方式进行绑定，而在web-component中，我们用cc来代替controllerAliasName，
+                cc为Component Controller的缩写，所以上例中使用{{<span>cc</span>.message}}来绑定&lt;script&gt;&lt;/script&gt;中的controller的this.message值。
+            </p>
+            <h3>如何注册自定义组件</h3>
+            <p>
+                使用api，uku.registerComponent('comp-tag','comp-path',preload)，来对component进行注册
+            </p>
+            <h3>
+                如何使用注册好的自定义组件
+            </h3>
+            <p>
+                在dom中使用&lt;comp-tag&gt;&lt;/comp-tag&gt;即可就像使用原生dom一样方便。
+            </p>
+        </div>
+    </template>
+</uku-component>
