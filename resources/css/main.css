@@ -198,3 +198,10 @@ ul.ukuNav li a:hover {
     padding: 10px;
     margin: 10px;
 }
+
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus {
+  background-color: #a8a8a8;
+  border-color: #a8a8a8;
+}
