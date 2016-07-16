@@ -5,7 +5,7 @@
         <li uku-repeat="user in cc.users">
           <div>
             <input type="checkbox" uku-value="user.selected" uku-onchange="parent.cc.cbChangedHandler()">
-            <label>{{user.name}}</label>
+            <label uku-text="user.name"></label>
           </div>
         </li>
       </ul>
@@ -39,7 +39,6 @@
               };
               this.users.push(user);
             }
-            console.log(this.users);
           }
         });
       }
