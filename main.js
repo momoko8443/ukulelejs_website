@@ -185,8 +185,12 @@ function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
              "name": "English",
              "value": "en_US"
          }];
-
-        this.selectedLanguage = this.languages[0];
+        var lang = navigator.language || navigator.userLanguage;
+        if(lang === "zh-CN"){
+            this.selectedLanguage = this.languages[0];
+        }else{
+            this.selectedLanguage = this.languages[1];
+        }
         this.getResource = function (key) {
             var currentLocale = this.selectedLanguage.value;
             var str = locale[currentLocale][key];
