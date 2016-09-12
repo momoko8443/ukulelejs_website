@@ -181,11 +181,11 @@ function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
         this.languages = [{
             "name": "中文",
             "value": "zh_CN"
-        }];
-        // , {
-        //     "name": "English",
-        //     "value": "en_US"
-        // }
+        },{
+             "name": "English",
+             "value": "en_US"
+         }];
+
         this.selectedLanguage = this.languages[0];
         this.getResource = function (key) {
             var currentLocale = this.selectedLanguage.value;
