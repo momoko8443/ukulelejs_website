@@ -25,7 +25,7 @@ export class Ukulele extends EventEmitter implements IUkulele{
 
 	handleElement(element:HTMLElement):void {
 		this.analyizeElement(element,(e)=>{
-			this.dispatchEvent(new Event(UkuEventType.HANDLE_ELEMENT_COMPLETED,element));
+			this.dispatchEvent(new Event(UkuEventType.HANDLE_ELEMENT_COMPLETED,e));
 		});
 	}
 
@@ -44,7 +44,11 @@ export class Ukulele extends EventEmitter implements IUkulele{
 	getComponent(tagName:string){
 		return this._internal_getDefinitionManager().getComponent(tagName);
 	}
-
+	
+	getComponentController(componentId:string):Object{
+		return this._internal_getDefinitionManager().getControllerInstByDomId(componentId);
+	}
+	
 	refresh(alias?:string|Array<string>,excludeElement?:HTMLElement) {
 		if(!this.dirtyChecker){
 			this.dirtyChecker = new DirtyChecker(this);

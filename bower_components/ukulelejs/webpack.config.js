@@ -7,7 +7,8 @@ module.exports = {
         libraryTarget: "umd",
 		umdNamedDefine: false
     },
-    devtool: 'source-map',
+    devtool: 'eval-source-map',
+	//devtool: 'source-map',
     plugins: [
         new webpack.optimize.UglifyJsPlugin()
     ],

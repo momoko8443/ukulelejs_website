@@ -10,7 +10,7 @@ import {elementChangedBinder} from "./ElementActionBinder";
 import {IUkulele} from "./IUkulele";
 import {EventListener} from "../extend/EventListener";
 import {Selector} from "../extend/Selector";
-import {Event} from "./Event";
+import {Event as UkuEvent} from "./Event";
 export class Analyzer extends EventEmitter{
     private uku:IUkulele;
     private defMgr;
@@ -74,7 +74,7 @@ export class Analyzer extends EventEmitter{
             }
             this.defMgr.copyAllController();
             if (this.hasListener(Analyzer.ANALYIZE_COMPLETED)) {
-                this.dispatchEvent(new Event(Analyzer.ANALYIZE_COMPLETED,element));
+                this.dispatchEvent(new UkuEvent(Analyzer.ANALYIZE_COMPLETED,element));
             }
         });
     }
@@ -137,9 +137,13 @@ export class Analyzer extends EventEmitter{
         }
     }
     
-    private dealWithComponent(tag,template,Clazz,attrs,callback) {
+    private dealWithComponent(tag,template,Clazz,attrs,callback):void {
         let randomAlias = 'cc_'+Math.floor(10000 * Math.random()).toString();
-        template = template.replace(new RegExp('cc.','gm'),randomAlias+'.');
+        template = template.replace(new RegExp("\'cc\\.",'gm'),"'"+randomAlias+'.');
+        template = template.replace(new RegExp('"cc\\.','gm'),'"'+randomAlias+'.');
+        template = template.replace(new RegExp('\{\{cc\\.','gm'),"{{"+randomAlias+'.');
+        template = template.replace(new RegExp(' cc\\.','gm'),' '+randomAlias+'.');
+        template = template.replace(new RegExp('\\.cc\\.','gm'),'.'+randomAlias+'.');
         let tempFragment = document.createElement('div');
         tempFragment.insertAdjacentHTML('afterBegin',template);
         if(tempFragment.children.length > 1){
@@ -147,13 +151,13 @@ export class Analyzer extends EventEmitter{
         }
         tag.insertAdjacentHTML('beforeBegin', template);
         let htmlDom = tag.previousElementSibling;
+        htmlDom.classList.add(tag.localName);
         let cc;
         if(Clazz){
             cc = new Clazz(this.uku);
             cc._dom = htmlDom;
-            cc.fire = function(eventType,data){
-                let event = document.createEvent('HTMLEvents');
-                event.initEvent(eventType.toLowerCase(), true, true);
+            cc.fire = (eventType:string,data:any, bubbles:boolean=false,cancelable:boolean=true)=>{
+                let event = new Event(eventType.toLowerCase(), {"bubbles":bubbles, "cancelable":cancelable});
                 event['data'] = data;
                 cc._dom.dispatchEvent(event);
             };
@@ -170,6 +174,13 @@ export class Analyzer extends EventEmitter{
                         controllerModel.addBoundItem(boundItem);
                         boundItem.render(controllerModel.controllerInstance);
                     }
+                }
+            }
+        }else{
+            for(let i=0;i<attrs.length;i++){
+                let attr = attrs[i];
+                if(UkuleleUtil.searchUkuAttrTag(attr.nodeName) !== 0 || attr.nodeName.search("uku-on") !== -1){
+                    htmlDom.setAttribute(attr.nodeName,attr.nodeValue);
                 }
             }
         }
