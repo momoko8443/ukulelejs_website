@@ -174,7 +174,7 @@ var locale = {
         "TAB_EXAMPLE":"EXAMPLES",
         "TAB_PERFORMANCE":"PERFORMANCE",
         "TAB_ABOUT":"ABOUT ME(CN)",
-        "TITLE_UKULELEJS":"A light Two Way Binding Tool",
+        "TITLE_UKULELEJS":"A light Two Way Binding & Component Tool",
         "TITLE_REASON":"Why choose Ukujs?",
         "PROS_1":"Small size gizp≈9k，min≈40k，dev≈200k",
         "PROS_2":"Compatible with AMD/CMD",
