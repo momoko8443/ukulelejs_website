@@ -1,5 +1,4 @@
 import {EventEmitter} from "./EventEmitter";
-import {AsyncCaller} from "../util/AsyncCaller"
 import {DefinitionManager} from "./DefinitionManager";
 import {DirtyChecker} from "./DirtyChecker";
 import {Analyzer} from "./Analyzer";
@@ -10,60 +9,60 @@ import {Event} from "./Event";
 export class Ukulele extends EventEmitter implements IUkulele{
 	private defMgr:DefinitionManager;
 	private dirtyChecker:DirtyChecker;
-	private asyncCaller = new AsyncCaller();
-
+	private promiseArray = [];
 	public parentUku:IUkulele;
 	static INITIALIZED:string = 'initialized';
 	static REFRESH:string = 'refresh';
 	static HANDLE_ELEMENT_COMPLETED:string = "handle_element_completed";
 
-	init():void{
-		this.asyncCaller.exec(()=>{
+	public init():void{
+		Promise.all(this.promiseArray).then(()=>{
 			this.manageApplication();
 		});
 	}
 
-	handleElement(element:HTMLElement):void {
+	public handleElement(element:HTMLElement):void {
 		this.analyizeElement(element,(e)=>{
 			this.dispatchEvent(new Event(UkuEventType.HANDLE_ELEMENT_COMPLETED,e));
 		});
 	}
 
-	registerController(instanceName:string, controllerInst:Object):void{
+	public registerController(instanceName:string, controllerInst:Object):void{
 		this._internal_getDefinitionManager().addControllerDefinition(instanceName,controllerInst);
 	}
 
-	getController(instanceName:string){
+	public getController(instanceName:string){
 		return this._internal_getDefinitionManager().getControllerDefinition(instanceName).controllerInstance;
 	}
 
-	registerComponent(tag:string,templateUrl:string,preload:boolean){
-		this._internal_getDefinitionManager().addComponentDefinition(tag,templateUrl,preload,this.asyncCaller);
+	public registerComponent(tag:string,templateUrl:string,preload:boolean):void{
+		var p:Promise<void> =  this._internal_getDefinitionManager().addComponentDefinition(tag,templateUrl,preload);
+		this.promiseArray.push(p);
 	}
 
-	getComponent(tagName:string){
+	public getComponent(tagName:string){
 		return this._internal_getDefinitionManager().getComponent(tagName);
 	}
 	
-	getComponentController(componentId:string):Object{
+	public getComponentController(componentId:string):Object{
 		return this._internal_getDefinitionManager().getControllerInstByDomId(componentId);
 	}
 	
-	refresh(alias?:string|Array<string>,excludeElement?:HTMLElement) {
+	public refresh(alias?:string|Array<string>,excludeElement?:HTMLElement) {
 		if(!this.dirtyChecker){
 			this.dirtyChecker = new DirtyChecker(this);
 		}
 		this.dirtyChecker.runDirtyChecking(alias,excludeElement);
 	}
 	//internal function
-	_internal_getDefinitionManager():DefinitionManager{
+	public _internal_getDefinitionManager():DefinitionManager{
 		if(!this.defMgr){
 			this.defMgr = new DefinitionManager(this);
 		}
 		return this.defMgr;
 	}
-	_internal_dealWithElement(element:HTMLElement):void {
-		this.analyizeElement(element);
+	public _internal_dealWithElement(element:HTMLElement,callback:Function):void {
+		this.analyizeElement(element,callback);
 	}
 
 	private manageApplication():void{
@@ -78,11 +77,6 @@ export class Ukulele extends EventEmitter implements IUkulele{
 	}
 	private analyizeElement(element:HTMLElement, callback?:Function):void{
 		let anylyzer = new Analyzer(this);
-		// if(callback){
-		// 	anylyzer.addListener(Analyzer.ANALYIZE_COMPLETED,(e)=>{
-		// 		callback(e.element);
-		// 	});
-		// }
 		if(callback){
 			((retFunc:Function)=>{
 				anylyzer.addListener(Analyzer.ANALYIZE_COMPLETED, (e)=>{
@@ -93,4 +87,3 @@ export class Ukulele extends EventEmitter implements IUkulele{
 		anylyzer.analyizeElement(element);
 	}
 }
-

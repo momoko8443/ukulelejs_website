@@ -5,9 +5,9 @@ var locale = {
         "TAB_EXAMPLE":"示例",
         "TAB_PERFORMANCE":"性能",
         "TAB_ABOUT":"关于作者",
-        "TITLE_UKULELEJS":"一个双向数据绑定工具",
+        "TITLE_UKULELEJS":"一个双向数据绑定&组件化工具",
         "TITLE_REASON":"选择Ukujs的理由",
-        "PROS_1":"体积小 gizp≈7k，min≈23k，dev≈60k",
+        "PROS_1":"体积小 gizp≈9k，min≈40k，dev≈200k",
         "PROS_2":"兼容AMD/CMD",
         "PROS_3":"性能还算不错",
         "PROS_4":"学习成本非常低",
@@ -18,7 +18,7 @@ var locale = {
         "TOOL_TIPS_UKU_SELECTED_2":"radio button中可以设置uku-selected='some value'来决定某个button的选中",
 
         "LABEL_WHAT_IS_UKUJS":"什么是Ukulelejs(以下简称Ukujs)",
-        "TEXT_WHAT_IS_UKUJS":"Ukulelejs是一个轻量级的双向绑定工具(注意它不是一个框架)，你可以把它暂时理解为超易学的精简版的Angular",
+        "TEXT_WHAT_IS_UKUJS":"Ukulelejs是一个提供了双向绑定工具以及组件化功能的轻量工具，你可以把它暂时理解为超易学的精简版的Angular&Polymer的合体",
         "LABEL_SIMPLE_DEMO":"来看一个简单的双向绑定例子",
 
 
@@ -176,7 +176,7 @@ var locale = {
         "TAB_ABOUT":"ABOUT ME(CN)",
         "TITLE_UKULELEJS":"A light Two Way Binding Tool",
         "TITLE_REASON":"Why choose Ukujs?",
-        "PROS_1":"Small size gizp≈7k，min≈23k，dev≈60k",
+        "PROS_1":"Small size gizp≈9k，min≈40k，dev≈200k",
         "PROS_2":"Compatible with AMD/CMD",
         "PROS_3":"Performance is good",
         "PROS_4":"Very easy to learn",
@@ -187,7 +187,7 @@ var locale = {
         "TOOL_TIPS_UKU_SELECTED_2":"You can set uku-selected='some value' in the radio button to set default selected item",
 
         "LABEL_WHAT_IS_UKUJS":"What is Ukulelejs (Ukujs for short)",
-        "TEXT_WHAT_IS_UKUJS":"Ukulelejs is light two way binding tool (it is not a framework), you can consider it as a lite version of Angular temporarily",
+        "TEXT_WHAT_IS_UKUJS":"Ukulelejs is a light tool which provides two way binding & component functions, you can consider it as a lite version of Angular&Polymer's mixture temporarily",
         "LABEL_SIMPLE_DEMO":"Let's see a quick demo",
 
 

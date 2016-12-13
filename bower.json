@@ -37,6 +37,7 @@
     "moment": "~2.10.6",
     "requirejs": "~2.1.18",
     "uku-routejs": "*",
-    "ukulelejs": "typescript"
+    "es6-promise": "^4.0.5",
+    "ukulelejs": "^1.2.4"
   }
 }

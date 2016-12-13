@@ -1,7 +1,6 @@
 import {ObjectUtil} from "../util/ObjectUtil";
 import {Ajax} from "../extend/Ajax";
 import {ControllerModel} from "../model/ControllerModel";
-import {AsyncCaller} from "../util/AsyncCaller"
 import {ComponentModel} from "../model/ComponentModel";
 import {ComponentPoolItem} from "../model/ComponentPoolItem";
 import {ComponentConfiguration} from "../model/ComponentConfiguration";
@@ -87,30 +86,29 @@ export class DefinitionManager{
 	}
 
 	
-    addComponentDefinition(tag:string,templateUrl:string,preload:boolean,asyncCaller:AsyncCaller):void{
-		let _this:DefinitionManager = this;
-        if(!preload){
-			this.componentsPool[tag] = new ComponentPoolItem(tag,templateUrl,true);
-		}else{
-			this.componentsPool[tag] = new ComponentPoolItem(tag,templateUrl,false);;
-			asyncCaller.pushAll(dealWithComponentConfig,[tag,templateUrl]);
-		}
-		function dealWithComponentConfig(tag:string,template:string){
-			_this.ajax.get(templateUrl,function(result){
-				let componentConfig = UkuleleUtil.getComponentConfiguration(result);
-				_this.analyizeComponent(tag,componentConfig,function(){
-					dealWithComponentConfig.resolve(asyncCaller);
+    addComponentDefinition(tag:string,templateUrl:string,preload:boolean):Promise<void>{
+		return new Promise<void>((resolve,reject) => {
+			if(!preload){
+				this.componentsPool[tag] = new ComponentPoolItem(tag,templateUrl,true);
+				resolve();
+			}else{
+				this.componentsPool[tag] = new ComponentPoolItem(tag,templateUrl,false);
+				return this.ajax.get(templateUrl).then((result) => {
+					let componentConfig = UkuleleUtil.getComponentConfiguration(result);
+					return this.analyizeComponent(tag,componentConfig);
 				});
-			});
-		}
+			}
+		});
     }
 
-    addLazyComponentDefinition(tag:string,templateUrl:string,callback:Function):void{
-		this.ajax.get(templateUrl,(result)=>{
-			let componentConfig = UkuleleUtil.getComponentConfiguration(result);
-			this.analyizeComponent(tag,componentConfig,()=>{
-				this.componentsPool[tag] = {'tagName':tag,'templateUrl':templateUrl,'lazy':false};
-				callback();
+    addLazyComponentDefinition(tag:string,templateUrl:string):Promise<void>{
+		return new Promise<void>((resolve ,reject) => {
+			return this.ajax.get(templateUrl).then((result)=>{
+				let componentConfig = UkuleleUtil.getComponentConfiguration(result);
+				return this.analyizeComponent(tag,componentConfig).then(()=>{
+					this.componentsPool[tag] = {'tagName':tag,'templateUrl':templateUrl,'lazy':false};
+					resolve();
+				});
 			});
 		});
 	}
@@ -120,7 +118,6 @@ export class DefinitionManager{
 	getBoundAttributeValue(attr:string, ...additionalArgu):any{
 		let controllerModel = this.getBoundControllerModelByName(attr);
 		let controllerInst = controllerModel.controllerInstance;
-		//let result = UkuleleUtil.getFinalValue(this.uku, controllerInst, attr, additionalArgu);
 		let parameters:Array<any> = [this.uku,controllerInst,attr];
 		parameters = parameters.concat(additionalArgu);
 		let result = UkuleleUtil.getFinalValue.apply(null,parameters);
@@ -152,60 +149,69 @@ export class DefinitionManager{
 		}
 		return controllerModel;
 	}
-
-    private analyizeComponent(tag:string,config:ComponentConfiguration,callback:Function):void{
+	
+    private async analyizeComponent(tag:string,config:ComponentConfiguration):Promise<void>{
 		let deps:Array<string> = config.dependentScripts;
 		let self:DefinitionManager = this;
 		if(deps && deps.length > 0){
-			let ac = new AsyncCaller();
 			let tmpAMD;
 			if(typeof window['define'] === 'function' && window['define'].amd){
 				tmpAMD = window['define'];
 				window['define'] = undefined;
 			}
+			if(!config.componentControllerScript){
+				let ccsExternal = deps[deps.length-1];
+				config.componentControllerScript = await this.ajax.get(ccsExternal);
+				deps.pop();
+			}
 			for (let i = 0; i < deps.length; i++) {
 				let dep = deps[i];
-				ac.pushAll(loadDependentScript,[ac,dep]);
+				await loadDependentScript(dep);
 			}
-			ac.exec(()=>{
-				if(tmpAMD){
-					window['define'] = tmpAMD;
-				}
-				this.buildeComponentModel(tag,config.template,config.componentControllerScript,config.stylesheet);
-				callback();
-			});
+			if(tmpAMD){
+				window['define'] = tmpAMD;
+			}
+			this.buildeComponentModel(tag,config.template,config.componentControllerScript,config.stylesheet);
+			return;
 		}else{
 			this.buildeComponentModel(tag,config.template,config.componentControllerScript,config.stylesheet);
-			callback();
+			return;
 		}
 		
-		function loadDependentScript(ac:AsyncCaller,src:string):void{
-			if(!self.dependentScriptsCache[src]){
-				let head = document.getElementsByTagName('HEAD')[0];
-				let script = document.createElement('script');
-				script.type = 'text/javascript';
-				script.charset = 'utf-8';
-				script.async = true;
-				script.src = src;
-				script.onload = (e)=>{
-					self.dependentScriptsCache[e.target['src']] = true;
-					loadDependentScript.resolve(ac);
-				};
-				head.appendChild(script);
-			}else{
-				loadDependentScript.resolve(ac);
-			}
+		function loadDependentScript(src:string):Promise<void>{
+			return new Promise<void>((resolve, reject) => {
+				if(!self.dependentScriptsCache[src]){
+					let head = document.getElementsByTagName('HEAD')[0];
+					let script = document.createElement('script');
+					script.type = 'text/javascript';
+					script.charset = 'utf-8';
+					script.async = true;
+					script.src = src;
+					script.onload = (e)=>{
+						self.dependentScriptsCache[e.target['src']] = true;
+						resolve();
+					};
+					head.appendChild(script);
+				}else{
+					resolve();
+				}
+			});
 		}
 	}
 
 	private buildeComponentModel(tag:string,template:string,script:string,style:string):void{
 		let debugComment = "//# sourceURL="+tag+".js";
-		script += debugComment;
 		try{
-			let controllerClazz = eval(script);
+			let controllerClazz
+			if(script){
+				script += debugComment;
+				controllerClazz = eval(script);
+			}
 			let newComp = new ComponentModel(tag, template,controllerClazz);
 			this.componentsDefinition[tag] = newComp;
-			dealWithShadowStyle(tag,style);
+			if(style){
+				dealWithShadowStyle(tag,style);
+			}
 		}catch(e){
 			console.error(e);
 		}
