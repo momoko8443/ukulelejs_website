@@ -1,0 +1,31 @@
+<uku-component>
+    <template>
+        <div class="hbox">
+            <button style="width:14px;height:14px" uku-onclick="cc.remove(cc.myItem)">
+                <img src="assets/trashcan.png" style="position:relative;left:-3px">
+            </button>
+            <img uku-src="cc.myItem.image" style="margin-left:4px;width:12px;height:24px">
+        </div>
+        <h6><b>{{cc.myItem.name}}</b></h6>
+        <h6><b>$</b><b>{{cc.myItem.price}}</b></h6>
+        <input type="number" uku-value="cc.myItem.piece" style="width:36px;height:24px" step="1" min="1" max="99" uku-onchange="cc.numberChange()">
+    </template>
+    <script>
+        (function() {
+            return function(uku) {
+                this.myItem = {};
+                Object.defineProperty(this, 'item', {
+                    set: function(value) {
+                        this.myItem = value;
+                    }
+                });
+                this.remove = function(removeItem) {
+                    this.fire('removeCartItem', removeItem);
+                };
+                this.numberChange = function() {
+                    this.fire('changeItemNumber');
+                };
+            };
+        })();
+    </script>
+</uku-component>

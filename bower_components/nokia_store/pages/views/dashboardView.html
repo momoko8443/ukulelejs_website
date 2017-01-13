@@ -1,0 +1,187 @@
+<uku-component>
+    <template>
+        <div id="dashboardView">
+            <div id="gridView" class="flexgrid">
+                <dash-item class="phoneItemDiv" uku-phone="phone" uku-repeat="phone in cc.phones" draggable="true" uku-ondragstart="parent.cc.doDrag(phone)"
+                    uku-onaddItemToCart="parent.cc.addItemToCart()" uku-onaddItemToCompart="parent.cc.addItemToCompart()"
+                    uku-onshowItemDetail="parent.cc.showItemDetail()">
+                    </dash-item>
+            </div>
+            <div id="detailView">
+                <div id="detailPanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#features" aria-controls="features" role="tab" data-toggle="tab">Features</a></li>
+                        <li role="presentation"><a href="#support" aria-controls="support" role="tab" data-toggle="tab">Support</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="features" style="padding:10px">
+                            <item-detail uku-selected-detail-item="cc.selectedDetailItem" uku-onaddItemToCart="cc.addItemToCart()" uku-onaddItemToCompart="cc.addItemToCompart()"
+                                uku-onexitDetailView="cc.exitDetailView()"></item-detail>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="support" style="padding:10px">
+                            <video src="resources/video/phone.mp4" width="320" height="240" controls="controls"></video>
+                        </div>
+                    </div>
+                </div>
+                <div id="othersList">
+                    <dash-item class="phoneItemDiv" uku-phone="phone" uku-repeat="phone in cc.phones" draggable="true" uku-ondragstart="parent.cc.doDrag(phone)"
+                        uku-onaddItemToCart="parent.cc.addItemToCart()" uku-onaddItemToCompart="parent.cc.addItemToCompart()"
+                        uku-onshowItemDetail="parent.cc.showItemDetail()">
+                        </dash-item>
+                </div>
+            </div>
+            <div id="compareView">
+                <compare-item-detail class="compareItemDiv" uku-repeat="phone in cc.itemsInCompare" uku-item="phone" uku-onaddItemToCart="parent.cc.addItemToCart()"
+                    uku-onshowItemDetail="parent.cc.showItemDetail()" uku-onexitDetailView="parent.cc.exitDetailView()">
+                    </compare-item-detail>
+            </div>
+        </div>
+    </template>
+    <script>
+        (function (EventBusSingleton) {
+            return function (uku) {
+                this.phones = [];
+                var self = this;
+                var backupPhones;
+                (function () {
+                    $.get('resources/data/catalog.json', function (result) {
+                        self.phones = result.catalog.product;
+                        if (!backupPhones) {
+                            backupPhones = [];
+                            for (var i = 0; i < self.phones.length; i++) {
+                                backupPhones.push(self.phones[i]);
+                            }
+                        }
+                        uku.refresh(cc_name);
+                    });
+                })();
+
+                Object.defineProperty(this,"compareItems",{
+                    set: function(value){
+                        if(value){
+                            this.itemsInCompare = value;
+                            uku.refresh(cc_name);
+                        }
+                    }
+                });
+
+                var cc_name;
+                this._initialized = function(cc,dom){
+                    cc_name = cc;
+                };
+
+                EventBusSingleton.getInstance().addEventListener("FILTER_CONDITION_CHANGED", function (data) {
+                    self.phones = [];
+                    for (var i = 0; i < backupPhones.length; i++) {
+                        var phone = backupPhones[i];
+                        if (isMatchSeries(phone, data) && isMatchPriceRange(phone, data) &&
+                            isMatchFeature(phone, data)) {
+                            self.phones.push(phone);
+                        }
+                    }
+                    uku.refresh(cc_name);
+
+                    function isMatchSeries(phone, filter) {
+                        if (filter.series === "all") {
+                            return true;
+                        } else {
+                            return filter.series === phone.series;
+                        }
+                    }
+
+                    function isMatchPriceRange(phone, filter) {
+                        if (phone.price >= filter.price[0] && phone.price <= filter.price[1]) {
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    function isMatchFeature(phone, filter) {
+                        if (hasTriband(phone, filter) && hasCamera(phone, filter) && hasVideo(phone,
+                                filter)) {
+                            return true;
+                        }
+                        return false;
+
+                        function hasTriband(phone, filter) {
+                            if (filter.triband === true) {
+                                return filter.triband.toString() === phone.triband;
+                            }
+                            return true;
+                        }
+
+                        function hasCamera(phone, filter) {
+                            if (filter.camera === true) {
+                                return filter.camera.toString() === phone.camera;
+                            }
+                            return true;
+                        }
+
+                        function hasVideo(phone, filter) {
+                            if (filter.video === true) {
+                                return filter.video.toString() === phone.video;
+                            }
+                            return true;
+                        }
+                    }
+                });
+                this.displayStyleFunc = function (isShow) {
+                    var show = "none";
+                    if (isShow === "true") {
+                        show = "block";
+                    }
+                    return "display:" + show;
+                };
+
+                this.selectedDetailItem = undefined;
+                this.addItemToCart = function (event) {
+                    if(!event.data){
+                        event = event.originalEvent;
+                    }
+                    var event = {
+                        "type": "ADD_ITEM_TO_CART",
+                        "data": event.data
+                    };
+                    EventBusSingleton.getInstance().dispatchEvent(event);
+                };
+                this.addItemToCompart = function (event) {
+                    if(!event.data){
+                        event = event.originalEvent;
+                    }
+                    var event = {
+                        "type": "ADD_ITEM_TO_COMPARE",
+                        "data": event.data
+                    };
+                    EventBusSingleton.getInstance().dispatchEvent(event);
+                };
+                this.showItemDetail = function (event) {
+                    if(!event.data){
+                        event = event.originalEvent;
+                    }
+                    var event = {
+                        "type": "SHOW_ITEM_DETAIL",
+                        "data": event.data
+                    };
+                    this.selectedDetailItem = event.data;
+                    uku.refresh();
+                    EventBusSingleton.getInstance().dispatchEvent(event);
+                };
+                this.exitDetailView = function () {
+                    var event = {
+                        "type": "EXIT_DETAIL_VIEW",
+                        "data": null
+                    };
+                    EventBusSingleton.getInstance().dispatchEvent(event);
+                };
+
+                this.doDrag = function (item, e) {
+                    var jsonStr = JSON.stringify(item);
+                    if(!e.dataTrander){
+                        e = e.originalEvent;
+                    }
+                    e.dataTransfer.setData("Text", jsonStr);
+                };
+            };
+        })(EventBusSingleton);
+    </script>
+</uku-component>

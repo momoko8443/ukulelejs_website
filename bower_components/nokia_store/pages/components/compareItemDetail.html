@@ -1,0 +1,74 @@
+<uku-component>
+    <template>
+        <h6><b>{{cc.myItem.name}}</b></h6>
+        <div class="hbox">
+            <div class="imgGroup">
+                <img uku-src="cc.myItem.image" style="width:45px;height:90px">
+            </div>
+            <div class="infoGroup">
+                <h6><b>$</b><b>{{cc.myItem.price}}</b></h6>
+                <h6>
+                    <em uku-style="cc.displayStyleFunc(cc.myItem.triband)">Tri-band</em>
+                </h6>
+                <h6>
+                    <em uku-style="cc.displayStyleFunc(cc.myItem.camera)">Camera</em>
+                </h6>
+                <h6>
+                    <em uku-style="cc.displayStyleFunc(cc.myItem.video)">Video</em>
+                </h6>
+            </div>
+            <div class="btnGroup">
+                <button class="btn btn-default itemBtn" uku-onclick="cc.addItemToCart(cc.myItem)">
+                    <img src="assets/icon_cart_empty.png">
+                </button>
+                <button class="btn btn-default itemBtn" uku-onclick="cc.showItemDetail(cc.myItem)">
+                    <img src="assets/icon_details.png">
+                </button>
+                <button class="btn btn-default itemBtn" uku-onclick="cc.exitDetailView()">
+                    <img src="assets/icon_tiles.png">
+                </button>
+            </div>
+        </div>
+        <div>
+            <h6>Battery: 36 h</h6>
+            <h6>Warranty: 1 year</h6>
+            <h6>Headset: Included</h6>
+            <h6>Email: Yes</h6>
+            <h6>Width: 2'</h6>
+            <h6>Height: 5'</h6>
+            <h6>Height: 5'</h6>
+            <h6>Weight: 4</h6>
+            <h6>Mail-in Rebate: $20</h6>
+        </div>
+    </template>
+    <script>
+        (function() {
+            return function(uku) {
+                this.myItem = {};
+                Object.defineProperty(this, 'item', {
+                    set: function(value) {
+                        this.myItem = value;
+                    }
+                });
+                this.displayStyleFunc = function(isShow) {
+                    var show = "none";
+                    if (isShow === "true") {
+                        show = "block";
+                    }
+                    return {
+                        display: show
+                    };
+                };
+                this.addItemToCart = function(item) {
+                    this.fire('addItemToCart', item);
+                };
+                this.showItemDetail = function(item) {
+                    this.fire('showItemDetail', item);
+                };
+                this.exitDetailView = function() {
+                    this.fire('exitDetailView');
+                }
+            };
+        })();
+    </script>
+</uku-component>
