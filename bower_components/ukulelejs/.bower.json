@@ -1,15 +1,14 @@
 {
   "name": "ukulelejs",
   "homepage": "https://github.com/momoko8443/ukulelejs",
-  "version": "1.2.4",
-  "_release": "1.2.4",
+  "version": "1.2.6",
+  "_release": "1.2.6",
   "_resolution": {
     "type": "version",
-    "tag": "v1.2.4",
-    "commit": "b35412ac7352f9e302d4ad288af4c049b04aa8a7"
+    "tag": "v1.2.6",
+    "commit": "3e9bb95e4a050c213114771bc1bddae05474f610"
   },
   "_source": "https://github.com/momoko8443/ukulelejs.git",
   "_target": "^1.2.4",
-  "_originalSource": "ukulelejs",
-  "_direct": true
+  "_originalSource": "ukulelejs"
 }

@@ -131,10 +131,14 @@ export class Analyzer extends EventEmitter {
 
     private async dealWithComponent(tag, template, Clazz, attrs): Promise<any> {
         let randomAlias = 'cc_' + Math.floor(10000 * Math.random()).toString();
+
+        //shoud consider white space between characters
         template = template.replace(new RegExp("\'cc\\.", 'gm'), "'" + randomAlias + '.');
         template = template.replace(new RegExp('"cc\\.', 'gm'), '"' + randomAlias + '.');
         template = template.replace(new RegExp('\{\{cc\\.', 'gm'), "{{" + randomAlias + '.');
         template = template.replace(new RegExp(' cc\\.', 'gm'), ' ' + randomAlias + '.');
+        template = template.replace(new RegExp('\\(cc\\.', 'gm'), '(' + randomAlias + '.');
+        template = template.replace(new RegExp('\\,cc\\.', 'gm'), ',' + randomAlias + '.');
         template = template.replace(new RegExp('\\.cc\\.', 'gm'), '.' + randomAlias + '.');
         let tempFragment = document.createElement('div');
         tempFragment.insertAdjacentHTML('afterBegin', template);
@@ -192,12 +196,12 @@ export class Analyzer extends EventEmitter {
                 await this.searchComponent(child);
             }
             if (cc && cc._initialized && typeof (cc._initialized) === 'function') {
-                cc._initialized();
+                cc._initialized(randomAlias,cc._dom);
             }
             return htmlDom;
         } else {
             if (cc && cc._initialized && typeof (cc._initialized) === 'function') {
-                cc._initialized();
+                cc._initialized(randomAlias,cc._dom);
             }
             return htmlDom;
         }

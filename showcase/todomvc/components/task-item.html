@@ -1,0 +1,13 @@
+<uku-component>
+	<template>
+		<li uku-class="cc.getTaskClassName()">
+			<div class="view">
+				<input class="toggle" type="checkbox" uku-value="cc.task.completed" uku-onchange="cc.toggleTaskStatus()">
+				<label uku-text="cc.task.title" uku-ondblclick="cc.editBegin()"></label>
+				<button class="destroy" uku-onclick="cc.removeTask()"></button>
+			</div>
+			<input class="edit" uku-id="cc.task.id" uku-value="cc.titleBackup" uku-onkeyup="cc.onKeyUp()" uku-onblur="cc.editEnd()" autofocus>
+		</li>
+	</template>
+	<script src="./js/components/task-item.js"></script>
+</uku-component>

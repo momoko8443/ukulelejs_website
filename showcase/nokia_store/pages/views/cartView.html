@@ -1,0 +1,113 @@
+<uku-component>
+    <template>
+        <div id="cartDiv">
+            <label for="searchInput">Your Shopping Cart</label>
+            <div id="submitDiv" style="width:250px" uku-ondragover="cc.acceptDragEnter()" uku-ondrop="cc.itemDrop()">
+                <cart-item uku-repeat="item in cc.itemsInCart" class="hbox cartItem" style="padding:4px" uku-item="item" uku-onremovecartItem="parent.cc.removeItemFromCart()"
+                    uku-onchangeitemnumber="parent.cc.itemCountChanged()"></cart-item>
+            </div>
+            <div class="hbox">
+                <h6>Total:</h6>
+                <h6><b>$</b><b>{{cc.total}}</b></h6>
+            </div>
+            <div class="hbox">
+                <h6>Shipping:</h6>
+                <h6><b>$</b><b>{{cc.shipping}}</b></h6>
+            </div>
+            <div class="hbox">
+                <h6><b>Grand Total:</b></h6>
+                <h6><b>$</b><b>{{cc.grandTotal}}</b></h6>
+            </div>
+            <button class="btn btn-default" uku-onclick="cc.submitOrder()">Submit Order</button>
+        </div>
+    </template>
+    <script>
+        (function (EventBusSingleton) {
+            return function (uku) {
+                this.itemsInCart = [];
+                var self = this;
+                EventBusSingleton.getInstance().addEventListener("ADD_ITEM_TO_CART", function (data) {
+                    addItem2Cart(data);
+                });
+
+                this.total = 0;
+                this.shipping = 0;
+                this.grandTotal = (0).toFixed(2);
+
+                this.submitOrder = function () {
+                    alert('Submit function is not supported in this DEMO');
+                };
+                this.removeItemFromCart = function (event) {
+                    if(!event.data){
+                        event = event.originalEvent;
+                    }
+                    for (var i = 0; i < self.itemsInCart.length; i++) {
+                        var item = self.itemsInCart[i];
+                        if (item.name === event.data.name) {
+                            self.itemsInCart.splice(i, 1);
+                            break;
+                        }
+                    }
+                    calculateTotal();
+                    uku.refresh(cc_name);
+                };
+
+                this.itemCountChanged = function () {
+                    calculateTotal();
+                    uku.refresh(cc_name);
+                };
+
+                this.acceptDragEnter = function (e) {
+                    e.preventDefault();
+                };
+
+                this.itemDrop = function (e) {
+                    if(!e.dataTrander){
+                        e = e.originalEvent;
+                    }
+                    var jsonStr = e.dataTransfer.getData("Text");
+                    var item = JSON.parse(jsonStr);
+                    addItem2Cart(item);
+                };
+                var cc_name;
+                this._initialized = function(cc,dom){
+                    cc_name = cc;
+                };
+
+                function addItem2Cart(data) {
+                    var isUpdate = false;
+                    for (var i = 0; i < self.itemsInCart.length; i++) {
+                        var item = self.itemsInCart[i];
+                        if (item.name === data.name) {
+                            item.piece++;
+                            isUpdate = true;
+                            break;
+                        }
+                    }
+                    if (!isUpdate) {
+                        data.piece = 1;
+                        self.itemsInCart.push(data);
+                    }
+                    calculateTotal();
+                    uku.refresh(cc_name);
+                }
+
+                function calculateTotal() {
+                    self.total = 0;
+                    self.shipping = 0;
+                    self.grandTotal = 0;
+                    var totalPiece = 0;
+                    for (var i = 0; i < self.itemsInCart.length; i++) {
+                        var item = self.itemsInCart[i];
+                        self.total += item.price * item.piece;
+                        totalPiece += item.piece;
+                    }
+                    self.shipping = 1.99 * totalPiece;
+                    self.grandTotal = (self.total + self.shipping).toFixed(2);
+                    self.shipping = self.shipping.toFixed(2);
+                    self.total = self.total.toFixed(2);
+                }
+            };
+        })(EventBusSingleton);
+    </script>
+</uku-component>

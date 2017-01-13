@@ -1,0 +1,63 @@
+<uku-component>
+    <template>
+        <h6><b>{{phone.name}}</b></h6>
+        <div class="hbox">
+            <div class="imgGroup">
+                <img uku-src="cc.myPhone.image" style="width:45px;height:90px">
+            </div>
+            <div class="infoGroup">
+                <h6><b>$</b><b>{{phone.price}}</b></h6>
+                <h6>
+                    <em uku-style="cc.displayStyleFunc(cc.myPhone.triband)">Tri-band</em>
+                </h6>
+                <h6>
+                    <em uku-style="cc.displayStyleFunc(cc.myPhone.camera)">Camera</em>
+                </h6>
+                <h6>
+                    <em uku-style="cc.displayStyleFunc(cc.myPhone.video)">Video</em>
+                </h6>
+            </div>
+            <div class="btnGroup">
+                <button class="btn btn-default itemBtn" uku-onclick="cc.addItemToCart(cc.myPhone)">
+                    <img src="assets/icon_cart_empty.png">
+                </button>
+                <button class="btn btn-default itemBtn" uku-onclick="cc.addItemToCompart(cc.myPhone)">
+                    <img src="assets/icon_compare.png">
+                </button>
+                <button class="btn btn-default itemBtn" uku-onclick="cc.showItemDetail(cc.myPhone)">
+                    <img src="assets/icon_details.png">
+                </button>
+            </div>
+        </div>
+    </template>
+    <script>
+        (function() {
+            return function(uku) {
+                this.myPhone = {};
+                Object.defineProperty(this, 'phone', {
+                    set: function(value) {
+                        this.myPhone = value;
+                    }
+                });
+                this.displayStyleFunc = function(isShow) {
+                    var show = "none";
+                    if (isShow === "true") {
+                        show = "block";
+                    }
+                    return {
+                        display: show
+                    };
+                };
+                this.addItemToCart = function(item) {
+                    this.fire('addItemToCart', item);
+                };
+                this.addItemToCompart = function(item) {
+                    this.fire('addItemToCompart', item);
+                };
+                this.showItemDetail = function(item) {
+                    this.fire('showItemDetail', item);
+                }
+            };
+        })();
+    </script>
+</uku-component>

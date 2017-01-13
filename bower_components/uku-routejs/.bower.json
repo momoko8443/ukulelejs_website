@@ -24,7 +24,7 @@
     "branch": "master",
     "commit": "fc45d894b58eb223c9b211c595212e9f730e328a"
   },
-  "_source": "git://github.com/momoko8443/routejs.git",
+  "_source": "https://github.com/momoko8443/routejs.git",
   "_target": "*",
   "_originalSource": "uku-routejs"
 }

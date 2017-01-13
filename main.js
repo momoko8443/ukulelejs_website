@@ -133,6 +133,7 @@ function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
 				.when("#example", "pages/example.html")
 				.when("#performance", "pages/performance.html")
 				.when("#api", "pages/api.html")
+                .when("#showcase", "pages/showcase.html")
 				.when("#about", "pages/about.html")
 				.otherwise("pages/home.html")
 				.addAnchor("repeat");

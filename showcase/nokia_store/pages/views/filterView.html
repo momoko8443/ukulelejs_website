@@ -1,0 +1,171 @@
+<uku-component>
+    <template>
+        <div id="filterDiv">
+            <label for="searchInput">Find</label>
+            <div>
+                <input type="text" class="form-control" style="width:250px;float:left" id="searchInput">
+                <button class="btn btn-default" style="float:left;margin-left:10px" uku-onclick="cc.doSearch()">Go</button>
+                <div style="clear: both;"></div>
+            </div>
+            <hr/>
+            <label>Filter</label>
+            <h6>Series</h6>
+            <select class="form-control" style="width:250px" uku-selected="cc.selectedSeries|value" uku-onchange="cc.doFilter()">
+                <option uku-repeat="option in cc.series" uku-value="option.value" uku-data-item="option">{{option.name}}</option>
+            </select>
+            <h6>Price</h6>
+            <input id="priceRange" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1100" data-slider-step="10"
+                data-slider-value="[0,1100]">
+                <h6>Required Features</h6>
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox" uku-value="cc.requiredTriband" uku-onchange="cc.doFilter()"> Tri-Band
+                </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox" uku-value="cc.requiredCamera" uku-onchange="cc.doFilter()"> Camera
+                </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox" uku-value="cc.requiredVideo" uku-onchange="cc.doFilter()"> Video
+                </label>
+                </div>
+                <hr/>
+                <label>Compare</label>
+                <div id="compareDiv" style="width:250px" uku-ondragover="cc.acceptDragEnter()" uku-ondrop="cc.itemDrop()">
+                    <compare-item uku-repeat="item in cc.itemsInCompare" uku-item="item" class="hbox cartItem" style="padding:4px" uku-onremoveCompareItem="parent.cc.removeItemFromCompare()">
+                    </compare-item>
+                </div>
+                <button class="btn btn-default" uku-onclick="cc.showCompareView()">Compare Items</button>
+        </div>
+    </template>
+    <script>
+        (function (EventBusSingleton) {
+            return function (uku) {
+                this.itemsInCompare = [];
+                var self = this;
+                EventBusSingleton.getInstance().addEventListener("ADD_ITEM_TO_COMPARE", function (
+                    data) {
+                    addItem2Compare(data);
+                });
+
+                this.doSearch = function () {
+                    alert('Search function is not supported in this DEMO');
+                };
+
+                this.removeItemFromCompare = function (event) {
+                    if(!event.data){
+                        event = event.originalEvent;
+                    }
+                    for (var i = 0; i < self.itemsInCompare.length; i++) {
+                        var item = self.itemsInCompare[i];
+                        if (event.data && item.name === event.data.name) {
+                            self.itemsInCompare.splice(i, 1);
+                            break;
+                        }
+                    }
+                    uku.refresh("cc");
+                };
+
+                this.series = [{
+                        'name': 'All Series',
+                        'value': 'all'
+                    },
+                    {
+                        'name': '3000',
+                        'value': '3000'
+                    },
+                    {
+                        'name': '6000',
+                        'value': '6000'
+                    },
+                    {
+                        'name': '7000',
+                        'value': '7000'
+                    },
+                    {
+                        'name': '9000',
+                        'value': '9000'
+                    }
+                ];
+
+                this.selectedSeries = this.series[0];
+                this.requiredTriband = false;
+                this.requiredCamera = false;
+                this.requiredVideo = false;
+                var mySlider;
+                var cc_name;
+                this._initialized = function(cc,dom){
+                    cc_name = cc;
+                    mySlider = new Slider("#priceRange", {
+                        formatter: function (value) {
+                            return 'Current value: $' + value[0] + " ~ $" + value[1];
+                        }
+                    });
+
+                    mySlider.on("slideStop", function () {
+                        self.doFilter();
+                    });
+                };
+
+                var backupItems;
+                this.doFilter = function () {
+                    var filterObj = {
+                        'series': this.selectedSeries.value,
+                        'price': mySlider.getValue(),
+                        'triband': this.requiredTriband,
+                        'camera': this.requiredCamera,
+                        'video': this.requiredVideo
+                    };
+                    var event = {
+                        "type": "FILTER_CONDITION_CHANGED",
+                        "data": filterObj
+                    };
+                    EventBusSingleton.getInstance().dispatchEvent(event);
+                };
+
+                this.showCompareView = function () {
+                    if (this.itemsInCompare && this.itemsInCompare.length > 0) {
+                        var event = {
+                            "type": "SHOW_COMPARE_VIEW",
+                            "data": this.itemsInCompare
+                        };
+                        EventBusSingleton.getInstance().dispatchEvent(event);
+                    }
+                };
+
+                this.acceptDragEnter = function (e) {
+                    e.preventDefault();
+                };
+
+                this.itemDrop = function (e) {
+                    if(!e.dataTrander){
+                        e = e.originalEvent;
+                    }
+                    var jsonStr = e.dataTransfer.getData("Text");
+                    var item = JSON.parse(jsonStr);
+                    addItem2Compare(item);
+                };
+
+                function addItem2Compare(data) {
+                    var isExist = false;
+                    for (var i = 0; i < self.itemsInCompare.length; i++) {
+                        var item = self.itemsInCompare[i];
+                        if (item.name === data.name) {
+                            isExist = true;
+                            break;
+                        }
+                    }
+                    if (!isExist) {
+                        if (self.itemsInCompare.length < 4) {
+                            self.itemsInCompare.push(data);
+                            uku.refresh(cc_name);
+                        }
+                    }
+                }
+            };
+        })(EventBusSingleton);
+    </script>
+</uku-component>
