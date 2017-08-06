@@ -183,7 +183,7 @@ var locale = {
         "PROS_3":"Performance is good",
         "PROS_4":"Very easy to learn",
         "TOOL_TIPS_UKU_TEXT":"uku-text is a specifical attribute in ukujs, it equals with {{xxx}}, uku-text will not be flash in page's loading phase",
-        "TOOL_TIPS_UKU_REPEAT":"uku-repeat is a specifical attribute in ukujs, using it to render a collection data, if you want to access parent controller from inner renderer, please use parent.ctrlAlias.xxx",
+        "TOOL_TIPS_UKU_REPEAT":"uku-repeat is a specifical attribute in ukujs, using it to render a collection data, if you want to access parent controller from inner renderer, please use ctrlAlias.xxx",
         "TOOL_TIPS_UKU_REFRESH":"You can use uku.refresh() to sync view and view-model manually, use refresh('ctrlAlias') to sync specifical controller, use refresh(['ctrlAliasA','ctrlAliasB']) to sync multipart controllers, use refresh() to sync all controllers",
         "TOOL_TIPS_UKU_SELECTED":"uku-selected='ex10Ctrl.selectedOption|value' to set the default selected item of SELECT by right key of | symbol, set uku-data-item as the binding object of OPTION",
         "TOOL_TIPS_UKU_SELECTED_2":"You can set uku-selected='some value' in the radio button to set default selected item",

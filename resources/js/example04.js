@@ -27,11 +27,11 @@ define("Example04Ctrl", function () {
                     "name": "HF-3 with pickup"
                 }]
 	}];
-        this.sayHelloWithInstanceArgument = function (instance) {
+        this.sayHelloWithInstanceArgument = function (e,instance) {
             alert("Hi," + instance.name);
         };
 
-        this.sayHelloWith2Argument = function (name, name2) {
+        this.sayHelloWith2Argument = function (e,name, name2) {
             alert("Hi," + name + " and " + name2);
         };
     };

@@ -4,7 +4,7 @@
       <ul>
         <li uku-repeat="user in cc.users">
           <div>
-            <input type="checkbox" uku-value="user.selected" uku-onchange="parent.cc.cbChangedHandler()">
+            <input type="checkbox" uku-value="user.selected" uku-onchange="cc.cbChangedHandler()">
             <label uku-text="user.name"></label>
           </div>
         </li>
@@ -26,6 +26,7 @@
             }
           }
           this.selectedUsers = tempArr.join(', ');
+          uku.refresh(this._alias);
         };
 
         var usersFromOutside;

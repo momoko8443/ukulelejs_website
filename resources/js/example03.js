@@ -5,10 +5,10 @@ define("Example03Ctrl", function () {
         this.sayHello = function () {
             alert(this.myName);
         };
-        this.sayHelloWithString = function (str) {
+        this.sayHelloWithString = function (e,str) {
             alert(str);
         };
-        this.sayHelloWithArgument = function (name) {
+        this.sayHelloWithArgument = function (e,name) {
             alert("Hi," + name);
         };
     };

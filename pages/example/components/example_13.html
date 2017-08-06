@@ -30,8 +30,8 @@
             </thead>
             <tbody>
                 <tr uku-repeat="city in ex13Ctrl.cities">
-                    <td uku-rowspan="parent.ex13Ctrl.setRowSpan(city,'area')" uku-style="parent.ex13Ctrl.setRowStyle(city,'area')">{{city.area}}</td>
-                    <td uku-rowspan="parent.ex13Ctrl.setRowSpan(city,'country')" uku-style="parent.ex13Ctrl.setRowStyle(city,'country')">{{city.country}}</td>
+                    <td uku-rowspan="ex13Ctrl.setRowSpan(city,'area')" uku-style="ex13Ctrl.setRowStyle(city,'area')">{{city.area}}</td>
+                    <td uku-rowspan="ex13Ctrl.setRowSpan(city,'country')" uku-style="ex13Ctrl.setRowStyle(city,'country')">{{city.country}}</td>
                     <td>{{city.city}}</td>
                     <td>{{city.total}}</td>
                 </tr>
@@ -52,8 +52,8 @@
     &lt;/thead>
     &lt;tbody>
         &lt;tr uku-repeat="city in ex13Ctrl.cities"&gt;
-            &lt;td uku-rowspan="parent.ex13Ctrl.setRowSpan(city,'area')" uku-style="parent.ex13Ctrl.setRowStyle(city,'area')"&gt;{{city.area}}&lt;/td&gt;
-            &lt;td uku-rowspan="parent.ex13Ctrl.setRowSpan(city,'country')" uku-style="parent.ex13Ctrl.setRowStyle(city,'country')"&gt;{{city.country}}&lt;/td>
+            &lt;td uku-rowspan="ex13Ctrl.setRowSpan(city,'area')" uku-style="ex13Ctrl.setRowStyle(city,'area')"&gt;{{city.area}}&lt;/td&gt;
+            &lt;td uku-rowspan="ex13Ctrl.setRowSpan(city,'country')" uku-style="ex13Ctrl.setRowStyle(city,'country')"&gt;{{city.country}}&lt;/td>
             &lt;td&gt;{{city.city}}&lt;/td&gt;
             &lt;td&gt;{{city.total}}&lt;/td&gt;
         &lt;/tr&gt;

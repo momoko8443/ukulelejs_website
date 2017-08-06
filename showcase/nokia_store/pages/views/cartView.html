@@ -4,7 +4,7 @@
             <label for="searchInput">Your Shopping Cart</label>
             <div id="submitDiv" style="width:250px" uku-ondragover="cc.acceptDragEnter()" uku-ondrop="cc.itemDrop()">
                 <cart-item uku-repeat="item in cc.itemsInCart" class="hbox cartItem" style="padding:4px" uku-item="item" uku-onremovecartItem="parent.cc.removeItemFromCart()"
-                    uku-onchangeitemnumber="parent.cc.itemCountChanged()"></cart-item>
+                    uku-onchangeitemnumber="cc.itemCountChanged()"></cart-item>
             </div>
             <div class="hbox">
                 <h6>Total:</h6>

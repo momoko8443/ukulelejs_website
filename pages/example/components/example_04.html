@@ -16,10 +16,10 @@
 	<div role="tabpanel" class="tab-pane active" id="demo4" style="margin: 20px">
 		<ul>
 			<li uku-repeat="item in ex04Ctrl.items">
-				<a style="cursor:pointer" uku-onclick="parent.ex04Ctrl.sayHelloWith2Argument(parent.ex04Ctrl.myName,item.name)">
+				<a style="cursor:pointer" uku-onclick="ex04Ctrl.sayHelloWith2Argument(ex04Ctrl.myName,item.name)">
 					{{item.name}}
 				</a>
-				<img uku-src="item.imgUrl" style="cursor:pointer"uku-onclick="parent.ex04Ctrl.sayHelloWithInstanceArgument(item)"/>
+				<img uku-src="item.imgUrl" style="cursor:pointer" uku-onclick="ex04Ctrl.sayHelloWithInstanceArgument(item)"/>
 				<ul>
 					<li uku-repeat="sub in item.subModels">{{sub.name}}</li>
 				</ul>
@@ -32,10 +32,10 @@
 			<code class="html">
 &lt;ul&gt;
     &lt;li uku-repeat="item in ex04Ctrl.items"&gt;
-        &lt;a style="cursor:pointer" uku-onclick="parent.ex04Ctrl.sayHelloWith2Argument(parent.ex04Ctrl.myName,item.name)"&gt;
+        &lt;a style="cursor:pointer" uku-onclick="ex04Ctrl.sayHelloWith2Argument(ex04Ctrl.myName,item.name)"&gt;
             {{item.name}}
         &lt;/a&gt;
-        &lt;img uku-src="item.imgUrl" style="cursor:pointer"uku-onclick="parent.ex04Ctrl.sayHelloWithInstanceArgument(item)"/&gt;
+        &lt;img uku-src="item.imgUrl" style="cursor:pointer"uku-onclick="ex04Ctrl.sayHelloWithInstanceArgument(item)"/&gt;
         &lt;ul&gt;
             &lt;li uku-repeat="sub in item.subModels">{{sub.name}}&lt;/li&gt;
         &lt;/ul&gt;
@@ -63,11 +63,11 @@ function Example04Ctrl() {
 		"imgUrl": "pages/example/images/hf3.jpg",
 		"subModels" : [{"name" : "HF-3 basical version"},{"name" : "HF-3 with pickup"}]
 	}];
-	this.sayHelloWithInstanceArgument = function(instance) {
+	this.sayHelloWithInstanceArgument = function(event,instance) {
 		alert("Hi," + instance.name);
 	};
 
-	this.sayHelloWith2Argument = function(name, name2) {
+	this.sayHelloWith2Argument = function(event,name, name2) {
 		alert("Hi," + name + " and " + name2);
 	};
 }

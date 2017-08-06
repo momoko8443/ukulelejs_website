@@ -37,7 +37,7 @@
             &lt;ul&gt;
                 &lt;li uku-repeat="user in cc.users"&gt;
                     &lt;div&gt;
-                        &lt;input type="checkbox" uku-value="user.selected" uku-onchange="parent.cc.cbChangedHandler()"&gt;
+                        &lt;input type="checkbox" uku-value="user.selected" uku-onchange="cc.cbChangedHandler()"&gt;
                         &lt;label&gt;{{user.name}}&lt;/label&gt;
                     &lt;/div&gt;
                 &lt;/li&gt;
@@ -59,6 +59,7 @@
             }
           }
           this.selectedUsers = tempArr.join(', ');
+          this.refresh(uku._alias);
         };
 
         var usersFromOutside;

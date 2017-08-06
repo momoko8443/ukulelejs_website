@@ -50,10 +50,10 @@ function Example03Ctrl() {
 	this.sayHello = function() {
 		alert(this.myName);
 	};
-	this.sayHelloWithString = function(str) {
+	this.sayHelloWithString = function(event,str) {
 		alert(str);
 	};
-	this.sayHelloWithArgument = function(name) {
+	this.sayHelloWithArgument = function(event,name) {
 		alert("Hi," + name);
 	};
 }
