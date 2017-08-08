@@ -36,22 +36,22 @@ define("Example13Ctrl", function () {
         this.cities = [{
             'area': 'Asia',
             'country': 'China',
-            'city': 'Shanghai',
+            'name': 'Shanghai',
             'total': 100
     }, {
             'area': 'Asia',
             'country': 'China',
-            'city': 'Beijing',
+            'name': 'Beijing',
             'total': 200
     }, {
             'area': 'Asia',
             'country': 'Japan',
-            'city': 'Tokyo',
+            'name': 'Tokyo',
             'total': 300
     }, {
             'area': 'Asia',
             'country': 'Japan',
-            'city': 'Yokohama',
+            'name': 'Yokohama',
             'total': 400
     }];
 

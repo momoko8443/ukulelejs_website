@@ -59,10 +59,10 @@
                         display: show
                     };
                 };
-                this.addItemToCart = function(item) {
+                this.addItemToCart = function(e,item) {
                     this.fire('addItemToCart', item);
                 };
-                this.showItemDetail = function(item) {
+                this.showItemDetail = function(e,item) {
                     this.fire('showItemDetail', item);
                 };
                 this.exitDetailView = function() {

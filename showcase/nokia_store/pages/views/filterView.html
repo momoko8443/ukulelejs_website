@@ -35,7 +35,7 @@
                 <hr/>
                 <label>Compare</label>
                 <div id="compareDiv" style="width:250px" uku-ondragover="cc.acceptDragEnter()" uku-ondrop="cc.itemDrop()">
-                    <compare-item uku-repeat="item in cc.itemsInCompare" uku-item="item" class="hbox cartItem" style="padding:4px" uku-onremoveCompareItem="parent.cc.removeItemFromCompare()">
+                    <compare-item uku-repeat="item in cc.itemsInCompare" uku-item="item" class="hbox cartItem" style="padding:4px" uku-onremoveCompareItem="cc.removeItemFromCompare()">
                     </compare-item>
                 </div>
                 <button class="btn btn-default" uku-onclick="cc.showCompareView()">Compare Items</button>
@@ -66,7 +66,7 @@
                             break;
                         }
                     }
-                    uku.refresh("cc");
+                    uku.refresh(this._alias);
                 };
 
                 this.series = [{
@@ -96,9 +96,7 @@
                 this.requiredCamera = false;
                 this.requiredVideo = false;
                 var mySlider;
-                var cc_name;
                 this._initialized = function(cc,dom){
-                    cc_name = cc;
                     mySlider = new Slider("#priceRange", {
                         formatter: function (value) {
                             return 'Current value: $' + value[0] + " ~ $" + value[1];
@@ -161,7 +159,7 @@
                     if (!isExist) {
                         if (self.itemsInCompare.length < 4) {
                             self.itemsInCompare.push(data);
-                            uku.refresh(cc_name);
+                            uku.refresh(self._alias);
                         }
                     }
                 }

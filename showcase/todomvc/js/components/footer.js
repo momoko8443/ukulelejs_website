@@ -6,7 +6,7 @@
 		this.clear = false;
 		this.currentFilterType = 'all';
 		this.activeTodoWord = ' item left';
-		this.dofilter = function (filterType, event) {
+		this.dofilter = function (event,filterType) {
 			this.currentFilterType = filterType;
 			this.fire('filtertodos', {
 				message: filterType

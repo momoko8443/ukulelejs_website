@@ -44,10 +44,10 @@
                         display: show
                     };
                 };
-                this.addItemToCart = function(item) {
+                this.addItemToCart = function(e,item) {
                     this.fire('addItemToCart', item);
                 };
-                this.addItemToCompart = function(item) {
+                this.addItemToCompart = function(e,item) {
                     this.fire('addItemToCompart', item);
                 };
                 this.exitDetailView = function() {

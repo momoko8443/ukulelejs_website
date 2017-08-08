@@ -19,7 +19,7 @@
                         this.myItem = value;
                     }
                 });
-                this.remove = function(removeItem) {
+                this.remove = function(e,removeItem) {
                     this.fire('removeCartItem', removeItem);
                 };
                 this.numberChange = function() {

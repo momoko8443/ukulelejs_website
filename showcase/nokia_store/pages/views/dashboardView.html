@@ -2,9 +2,9 @@
     <template>
         <div id="dashboardView">
             <div id="gridView" class="flexgrid">
-                <dash-item class="phoneItemDiv" uku-phone="phone" uku-repeat="phone in cc.phones" draggable="true" uku-ondragstart="parent.cc.doDrag(phone)"
-                    uku-onaddItemToCart="parent.cc.addItemToCart()" uku-onaddItemToCompart="parent.cc.addItemToCompart()"
-                    uku-onshowItemDetail="parent.cc.showItemDetail()">
+                <dash-item class="phoneItemDiv" uku-phone="phone" uku-repeat="phone in cc.phones" draggable="true" uku-ondragstart="cc.doDrag(phone)"
+                    uku-onaddItemToCart="cc.addItemToCart()" uku-onaddItemToCompart="cc.addItemToCompart()"
+                    uku-onshowItemDetail="cc.showItemDetail()">
                     </dash-item>
             </div>
             <div id="detailView">
@@ -24,15 +24,15 @@
                     </div>
                 </div>
                 <div id="othersList">
-                    <dash-item class="phoneItemDiv" uku-phone="phone" uku-repeat="phone in cc.phones" draggable="true" uku-ondragstart="parent.cc.doDrag(phone)"
-                        uku-onaddItemToCart="parent.cc.addItemToCart()" uku-onaddItemToCompart="parent.cc.addItemToCompart()"
-                        uku-onshowItemDetail="parent.cc.showItemDetail()">
+                    <dash-item class="phoneItemDiv" uku-phone="phone" uku-repeat="phone in cc.phones" draggable="true" uku-ondragstart="cc.doDrag(phone)"
+                        uku-onaddItemToCart="cc.addItemToCart()" uku-onaddItemToCompart="cc.addItemToCompart()"
+                        uku-onshowItemDetail="cc.showItemDetail()">
                         </dash-item>
                 </div>
             </div>
             <div id="compareView">
-                <compare-item-detail class="compareItemDiv" uku-repeat="phone in cc.itemsInCompare" uku-item="phone" uku-onaddItemToCart="parent.cc.addItemToCart()"
-                    uku-onshowItemDetail="parent.cc.showItemDetail()" uku-onexitDetailView="parent.cc.exitDetailView()">
+                <compare-item-detail class="compareItemDiv" uku-repeat="phone in cc.itemsInCompare" uku-item="phone" uku-onaddItemToCart="cc.addItemToCart()"
+                    uku-onshowItemDetail="cc.showItemDetail()" uku-onexitDetailView="cc.exitDetailView()">
                     </compare-item-detail>
             </div>
         </div>
@@ -52,7 +52,7 @@
                                 backupPhones.push(self.phones[i]);
                             }
                         }
-                        uku.refresh(cc_name);
+                        uku.refresh(this._alias);
                     });
                 })();
 
@@ -60,15 +60,11 @@
                     set: function(value){
                         if(value){
                             this.itemsInCompare = value;
-                            uku.refresh(cc_name);
+                            uku.refresh(this._alias);
                         }
                     }
                 });
 
-                var cc_name;
-                this._initialized = function(cc,dom){
-                    cc_name = cc;
-                };
 
                 EventBusSingleton.getInstance().addEventListener("FILTER_CONDITION_CHANGED", function (data) {
                     self.phones = [];
@@ -79,7 +75,7 @@
                             self.phones.push(phone);
                         }
                     }
-                    uku.refresh(cc_name);
+                    uku.refresh(self._alias);
 
                     function isMatchSeries(phone, filter) {
                         if (filter.series === "all") {
@@ -163,7 +159,7 @@
                         "data": event.data
                     };
                     this.selectedDetailItem = event.data;
-                    uku.refresh();
+                    uku.refresh(this._alias);
                     EventBusSingleton.getInstance().dispatchEvent(event);
                 };
                 this.exitDetailView = function () {
@@ -174,7 +170,7 @@
                     EventBusSingleton.getInstance().dispatchEvent(event);
                 };
 
-                this.doDrag = function (item, e) {
+                this.doDrag = function (e,item) {
                     var jsonStr = JSON.stringify(item);
                     if(!e.dataTrander){
                         e = e.originalEvent;

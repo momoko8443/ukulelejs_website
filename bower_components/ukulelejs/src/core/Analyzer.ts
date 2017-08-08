@@ -132,7 +132,7 @@ export class Analyzer extends EventEmitter {
     private async dealWithComponent(tag, template, Clazz, attrs): Promise<any> {
         let randomAlias = 'cc_' + Math.floor(10000 * Math.random()).toString();
 
-        //shoud consider white space between characters
+        //should consider white space between characters
         template = template.replace(new RegExp("\'cc\\.", 'gm'), "'" + randomAlias + '.');
         template = template.replace(new RegExp('"cc\\.', 'gm'), '"' + randomAlias + '.');
         template = template.replace(new RegExp('\{\{cc\\.', 'gm'), "{{" + randomAlias + '.');
@@ -168,11 +168,16 @@ export class Analyzer extends EventEmitter {
                     htmlDom.setAttribute(attr.nodeName, attr.nodeValue);
                 } else {
                     let tagName = UkuleleUtil.getAttrFromUkuTag(attr.nodeName, true);
-                    let controllerModel = this.defMgr.getControllerModelByName(attr.nodeValue);
-                    if (controllerModel) {
+                    let controllerModels = this.defMgr.getControllerModelByName(attr.nodeValue);
+                    if (controllerModels && controllerModels.length > 0) {
                         let boundItem = new BoundItemComponentAttribute(attr.nodeValue, tagName, cc, this.uku);
-                        controllerModel.addBoundItem(boundItem);
-                        boundItem.render(controllerModel.controllerInstance);
+                        let controllers = [];
+                        controllerModels.forEach(controllerModel => {
+                            controllerModel.addBoundItem(boundItem);
+                            controllers.push(controllerModel.controllerInstance);
+                        });
+                        
+                        boundItem.render(controllers);
                     }
                 }
             }
@@ -226,11 +231,15 @@ export class Analyzer extends EventEmitter {
         let expression = Selector.directText(element);
         if (UkuleleUtil.searchUkuExpTag(expression) !== -1) {
             let attr = expression.slice(2, -2);
-            let controllerModel = this.defMgr.getControllerModelByName(attr);
-            if (controllerModel) {
+            let controllerModels = this.defMgr.getControllerModelByName(attr);
+            if (controllerModels && controllerModels.length > 0) {
                 let boundItem = new BoundItemExpression(attr, expression, element, this.uku);
-                controllerModel.addBoundItem(boundItem);
-                boundItem.render(controllerModel.controllerInstance);
+                let controllers = [];
+                controllerModels.forEach(controllerModel => {
+                    controllerModel.addBoundItem(boundItem);
+                    controllers.push(controllerModel.controllerInstance);
+                });       
+                boundItem.render(controllers);
             }
         }
     }
@@ -239,12 +248,17 @@ export class Analyzer extends EventEmitter {
     private dealWithAttribute: Function = function (element, tagName) {
         let attr = element.getAttribute("uku-" + tagName);
         //let elementName = element.tagName;
-        let controllerModel = this.defMgr.getControllerModelByName(attr);
-        if (controllerModel) {
+        let controllerModels = this.defMgr.getControllerModelByName(attr);
+        if (controllerModels && controllerModels.length > 0) {
             let boundItem = BoundItemAttributeFactory.getInstance().generateInstance(attr, tagName, element, this.uku);
-            controllerModel.addBoundItem(boundItem);
-            boundItem.render(controllerModel.controllerInstance);
-            elementChangedBinder(element, tagName, controllerModel, this.uku.refresh, this.uku);
+            let controllers = [];
+            controllerModels.forEach(controllerModel => {
+                controllerModel.addBoundItem(boundItem);
+                elementChangedBinder(element, tagName, controllerModel, this.uku.refresh, this.uku);
+                controllers.push(controllerModel.controllerInstance)
+            });           
+            boundItem.render(controllers);
+            
         }
     }
 
@@ -252,11 +266,15 @@ export class Analyzer extends EventEmitter {
     private dealWithInnerText(element) {
         let attr = element.getAttribute("uku-text");
         if (attr) {
-            let controllerModel = this.defMgr.getControllerModelByName(attr);
-            if (controllerModel) {
+            let controllerModels = this.defMgr.getControllerModelByName(attr);
+            if (controllerModels && controllerModels.length > 0) {
                 let boundItem = new BoundItemInnerText(attr, element, this.uku);
-                controllerModel.addBoundItem(boundItem);
-                boundItem.render(controllerModel.controllerInstance);
+                let controllers = [];
+                controllerModels.forEach(controllerModel => {
+                    controllerModel.addBoundItem(boundItem);
+                    controllers.push(controllerModel.controllerInstance);
+                });
+                boundItem.render(controllers);
             }
         }
     }
@@ -267,22 +285,43 @@ export class Analyzer extends EventEmitter {
         let expression = element.getAttribute("uku-" + eventName);
         let eventNameInListener = eventName.substring(2);
         eventNameInListener = eventNameInListener.toLowerCase();
-        let controllerModel = this.defMgr.getControllerModelByName(expression);
-        if (controllerModel) {
-            let controller = controllerModel.controllerInstance;
-            let temArr = expression.split(".");
-            let alias;
-            if (temArr[0] === "parent") {
-                alias = temArr[1];
-            } else {
-                alias = temArr[0];
-            }
-            EventListener.addEventListener(element, eventNameInListener, (event) => {
-                this.defMgr.copyControllerInstance(controller, alias);
-                this.defMgr.getBoundAttributeValue(expression, event);
-                this.uku.refresh(alias, element);
+        let controllerModels = this.defMgr.getControllerModelByName(expression);
+        if(!controllerModels || controllerModels.length === 0){
+            controllerModels = [];
+        }    
+        EventListener.addEventListener(element, eventNameInListener, (event) => {
+            let alias_list = [];
+            controllerModels.forEach(controllerModel => {
+                this.defMgr.copyControllerInstance(controllerModel.controllerInstance, controllerModels.alias);
+                alias_list.push(controllerModel.alias);
             });
-        }
+            
+            let index = UkuleleUtil.searchUkuFuncArg(expression);
+            if(index === -1){
+                // is an expression, not a function
+                let handler = new Function("event","return " + expression);
+                console.log(handler.toString());
+                handler(event);
+            }else{
+                // is a function
+                let i = expression.search(/\(/);
+                let arg = 'event';
+                if(expression[i+1] !== ')'){
+                    // has argument
+                    arg = 'event,'
+                }
+                let arr = expression.split('(');
+                arr[1] = arg + arr[1];
+                let new_expression = arr.join("(");
+                (function(e){
+                    let tempScope = {};
+                    tempScope['event'] = e;
+                    eval(new_expression);
+                    tempScope = null;
+                })(event);
+            }
+            this.uku.refresh(alias_list, element);
+        });
     }
     //处理 repeat
     private dealWithRepeat(element) {
@@ -290,12 +329,16 @@ export class Analyzer extends EventEmitter {
         let tempArr = repeatExpression.split(' in ');
         let itemName = tempArr[0];
         let attr = tempArr[1];
-        let controllerModel = this.defMgr.getControllerModelByName(attr);
-        if (controllerModel) {
-            let controllerInst = controllerModel.controllerInstance;
+        let controllerModels = this.defMgr.getControllerModelByName(attr);
+        if (controllerModels && controllerModels.length > 0) {
+            let controllers = [];
+            //let controllerInst = controllerModel.controllerInstance;
             let boundItem = new BoundItemRepeat(attr, itemName, element, this.uku);
-            controllerModel.addBoundItem(boundItem);
-            boundItem.render(controllerInst);
+            controllerModels.forEach(controllerModel => {
+                controllerModel.addBoundItem(boundItem);
+                controllers.push(controllerModel.controllerInstance);
+            });          
+            boundItem.render(controllers);
         }
     }
 }

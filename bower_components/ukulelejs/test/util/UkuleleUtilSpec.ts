@@ -1,6 +1,6 @@
 import {UkuleleUtil} from '../../src/util/UkuleleUtil';
 describe("UkuleleUtil Test Suite", ()=> {
-	it("test getFinalAttribute", ()=> {
+	/* it("test getFinalAttribute", ()=> {
 		let expression1 = "myCtrl.name";
 		let attr = UkuleleUtil.getFinalAttribute(expression1);
 		let expression2 = "myCtrl.child.name";
@@ -10,7 +10,7 @@ describe("UkuleleUtil Test Suite", ()=> {
 		expect(attr).toBe("name");
 		expect(attr2).toBe("child.name");
 		expect(attr3).toBe("child.name");
-	});
+	}); */
 
 	it("test isRepeat", ()=> {
         let div = document.createElement("div");
@@ -39,7 +39,24 @@ describe("UkuleleUtil Test Suite", ()=> {
 		expect(attr).toBe("myCtrl");
 		expect(attr2).toBe("myCtrl");
 	});
+	it("test getBoundModelInstantNames", ()=> {
+		let alias_list = ['myCtrl','yourCtrl','item'];
+		let expression1 = "myCtrl.name";
+		let arr1 = UkuleleUtil.getBoundModelInstantNames(alias_list,expression1);
+		expect(arr1[0]).toBe("myCtrl");
 
+		let expression2 = "!myCtrl.name";
+		let arr2 = UkuleleUtil.getBoundModelInstantNames(alias_list,expression2);
+		expect(arr2[0]).toBe("myCtrl");
+
+		let expression3 = "!myCtrl.name + yourCtrl.name";
+		let arr3 = UkuleleUtil.getBoundModelInstantNames(alias_list,expression3);
+		expect(arr3.length).toBe(2);
+
+		let expression4 = "!myCtrl.myFunc(item)";
+		let arr4 = UkuleleUtil.getBoundModelInstantNames(alias_list,expression4);
+		expect(arr4.length).toBe(2);
+	});
 	it("test searchUkuAttrTag", ()=> {
 		let htmlStr = "uku-test";
 		let index = UkuleleUtil.searchUkuAttrTag(htmlStr);
@@ -136,7 +153,7 @@ describe("UkuleleUtil Test Suite", ()=> {
 		let index = UkuleleUtil.searchUkuFuncArg(htmlStr);
 		expect(index).toBeGreaterThan(-1);
 
-		let htmlStr2 = "functionName(test";
+		 let htmlStr2 = "functionName(test";
 		let index2 = UkuleleUtil.searchUkuFuncArg(htmlStr2);
 		expect(index2).toBe(-1);
 
@@ -147,5 +164,14 @@ describe("UkuleleUtil Test Suite", ()=> {
 		let htmlStr4 = "functionNametest)(";
 		let index4 = UkuleleUtil.searchUkuFuncArg(htmlStr4);
 		expect(index4).toBe(-1);
+
+		let htmlStr5 = "functionName()";
+		let index5 = UkuleleUtil.searchUkuFuncArg(htmlStr5);
+		expect(index5).toBeGreaterThan(-1);
+
+		let htmlStr6 = "functionName() + functionName2()";
+		let index6 = UkuleleUtil.searchUkuFuncArg(htmlStr6);
+		console.log(index6);
+		expect(index6).toBe(-1);
 	});
 });

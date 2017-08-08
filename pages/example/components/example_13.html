@@ -32,7 +32,7 @@
                 <tr uku-repeat="city in ex13Ctrl.cities">
                     <td uku-rowspan="ex13Ctrl.setRowSpan(city,'area')" uku-style="ex13Ctrl.setRowStyle(city,'area')">{{city.area}}</td>
                     <td uku-rowspan="ex13Ctrl.setRowSpan(city,'country')" uku-style="ex13Ctrl.setRowStyle(city,'country')">{{city.country}}</td>
-                    <td>{{city.city}}</td>
+                    <td>{{city.name}}</td>
                     <td>{{city.total}}</td>
                 </tr>
             </tbody>
@@ -104,7 +104,7 @@ function Example13Ctrl() {
     this.cities = [{
         'area':'Asia',
         'country': 'China',
-        'city': 'Shanghai',
+        'name': 'Shanghai',
         'total': 100
     }, {
         'area':'Asia',
@@ -114,12 +114,12 @@ function Example13Ctrl() {
     }, {
         'area':'Asia',
         'country': 'Japan',
-        'city': 'Tokyo',
+        'name': 'Tokyo',
         'total': 300
     }, {
         'area':'Asia',
         'country': 'Japan',
-        'city': 'Yokohama',
+        'name': 'Yokohama',
         'total': 400
     }];
 }
