@@ -38,8 +38,6 @@
     "requirejs": "~2.1.18",
     "uku-routejs": "*",
     "es6-promise": "^4.0.5",
-    "ukulelejs": "^1.2.4",
-    "todomvc": "./showcase/todomvc",
-    "nokia_store": "./showcase/nokia_store"
+    "ukulelejs": "^1.2.4"
   }
 }

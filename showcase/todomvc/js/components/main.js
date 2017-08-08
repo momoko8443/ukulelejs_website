@@ -6,6 +6,7 @@
 		this._isAllCompleted = false;
 		this.isShowToggleAllBtn = false;
 		this.toggleAllTodos = function () {
+			this._isAllCompleted = !this._isAllCompleted;
 			this.fire('toggleall', {
 				message: this._isAllCompleted
 			});

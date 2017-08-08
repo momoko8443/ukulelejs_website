@@ -103,7 +103,7 @@
 			localStorage.setItem('todos-ukulelejs', JSON.stringify({
 				todos: self.todos
 			}));
-			uku.refresh('mainCtrl');
+			uku.refresh();
 
 		}
 		this.registerEventListener = function () {
