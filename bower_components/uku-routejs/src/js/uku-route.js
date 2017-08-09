@@ -24,6 +24,8 @@ function RouteController(container) {
     };
 
     var dispatchOnRouteChange = function (page) {
+        //document.location.hash = page.key;
+        window.history.pushState(null, null, page.key);
         if (self.onRouteChange && typeof (self.onRouteChange) === "function") {
             self.onRouteChange.call(self, page);
         }

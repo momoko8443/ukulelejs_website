@@ -11,6 +11,8 @@
         <div class="borderBox">
             <a href="#page1">go to page1</a>
             <a href="#page2">go to page2</a>
+            <button onclick="test_goto('#page1')">goto page1</button>
+            <button onclick="test_goto('#page2')">goto page2</button>
             <a href="#anchor">anchor</a>
             <a href="#anchor2">anchor in sub page</a>
             <div class="clear"></div>
@@ -31,6 +33,8 @@
         .otherwise("pages/404.html")
         .work(); 
         
-        
+        function test_goto(key){
+            route.goto(key);
+        };
     </script>
 </html>

@@ -1,3 +1,14 @@
 node_modules
 /*.project
 .DS_Store
+bower_component
+!bower_components/bootstrap/dist
+!bower_components/Chart.js/dist
+!bower_components/domReady/*.js
+!bower_components/es-promise/
+!bower_components/highlightjs/
+!bower_components/jquery/dist
+!bower_components/moment/
+!bower_components/requirejs/*.js
+!bower_components/uku-routejs/build
+!bower_components/ukulelejs/dist
