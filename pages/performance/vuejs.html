@@ -9,7 +9,6 @@
     <div id="vueApp">
         <h2>Vue</h2>
         <lable>Repeat Count:</lable>
-        <input type="text" v-model="rowNum">
         <select v-model="rowNum">
             <option v-repeat="option in options" value="{{option.value}}">{{option.name}}</option>
         </select>
