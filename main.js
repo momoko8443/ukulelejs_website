@@ -8,7 +8,7 @@ require.config({
         "locale": 'resources/locale/example_properties',
         "routejs": 'bower_components/uku-routejs/build/js/uku-route',
         "domReady": 'bower_components/domReady/domReady',
-        "Chart": 'bower_components/Chart.js/Chart.min',
+        "Chart": 'bower_components/Chart.js/dist/Chart.min',
         "Example01Ctrl": 'resources/js/example01',
         "Example02Ctrl": 'resources/js/example02',
         "Example03Ctrl": 'resources/js/example03',

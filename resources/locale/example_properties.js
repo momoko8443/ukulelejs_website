@@ -95,8 +95,9 @@ var locale = {
         "GUIDE_LABEL_CMD_CONFIG":"在seajs.config中配置Ukujs",
 
         "GUIDE_LABEL_BIND_TEXT":"绑定文本",
-        "GUIDE_TEXT_BIND_TEXT":"一种是使用“{{ }}”双层花括号将需要显示的模型属性括起来，比如{{myCtrl.user.username}}",
+        "GUIDE_TEXT_BIND_TEXT":"一种是使用“{{ }}”双层花括号将需要显示的模型属性括起来，比如{{myCtrl.user.username}}, {{myCtrl.a + myCtrl.b + yourCtrl.c}}, {{!myCtrl.isHide}}",
         "GUIDE_TEXT_BIND_TEXT2":"注意，目前Ukujs不支持 hello, {{myCtrl.username}}这种动静混排的写法，同时也不支持{{myCtrl.firstName + myCtrl.lastName}}的表达式写法<br/>理由有2点:<br/>1,容易把业务相关的逻辑散落到view的各个角落，不利于日后的维护和排错，不利于单元测试<br/>2,作者很懒<br/>因此建议把页面上要显示的文本都使用模型来维护，即使里面会有一些静态的值。不要为了贪图一时爽快，最终有些债以后还是要还的。切记切记（市面上其它主流mvvm框架即使提供了类似偷懒功能我也不推荐你去使用它）",
+        "GUIDE_TEXT_BIND_TEXT3":"Ukujs自1.3.0版开始支持复杂的逻辑，运算表达式 (打脸)",
         "GUIDE_LABEL_BIND_ATTR2":"绑定属性",
         "GUIDE_TEXT_BIND_ATTR":"绑定属性可以说是ukujs最重要的功能之一，你只要记住一条规则 “uku-”这个前缀加上任意的html标签上的属性即可生成属性的绑定。例如 uku-src='myCtrl.imageUrl' 即可将img标签的src属性与模型上的 imageUrl变量进行绑定",
         "GUIDE_TEXT_BIND_ATTR2":"你还可以尝试uku-value , uku-style, uku-class... <span style='color:red'>uku-+任何原生的属性，uku-+任何原生的属性，uku-+任何原生的属性</span>（重说三）。在接下去的几个关于双向绑定的小节其实都是围绕这条规则展开的。",
@@ -265,8 +266,9 @@ var locale = {
         "GUIDE_LABEL_CMD_CONFIG":"Configurate Ukujs in seajs.config",
 
         "GUIDE_LABEL_BIND_TEXT":"Bind Text",
-        "GUIDE_TEXT_BIND_TEXT":"One way is using {{ }} to wrap the view-model's properties , e.g. {{myCtrl.user.username}}",
+        "GUIDE_TEXT_BIND_TEXT":"One way is using {{ }} to wrap the view-model's properties , e.g. {{myCtrl.user.username}}, {{myCtrl.a + myCtrl.b + yourCtrl.c}}, {{!myCtrl.isHide}}",
         "GUIDE_TEXT_BIND_TEXT2":"Attention, Ukujs doesn't support like hello, {{myCtrl.username}} which is mixed type, and not support like {{myCtrl.firstName + myCtrl.lastName}} which is expression type <br/>reasons:<br/>1, bussiness logices will be sperate into view-model, it's not friendly to debugger, troubleshooting and unit testing<br/>2,Author is lazy<br/>So I suggest to use view-model to describe a full text expression",
+        "GUIDE_TEXT_BIND_TEXT3":"Ukujs starts to support complex expressions from version 1.3.0",
         "GUIDE_LABEL_BIND_ATTR2":"Bind Attribute",
         "GUIDE_TEXT_BIND_ATTR":"Binding attribute is one of the most important function of Ukujs, You just remember one policy 'the prefix uku- append any html native attribues' then the binding made. e.g. uku-src='myCtrl.imageUrl' makes view-model's property myCtrl.imageUrl bind with img's src attribute",
         "GUIDE_TEXT_BIND_ATTR2":"You could try uku-value , uku-style, uku-class... <span style='color:red'>uku- + any native attribues uku- + any native attribues，uku- + any native attribues</span>. then at the next sections, we will work follow this policy",

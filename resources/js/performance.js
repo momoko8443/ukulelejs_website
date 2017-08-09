@@ -1,49 +1,118 @@
 define("PerformanceCtrl", ["Chart", "jquery"], function (Chart, $) {
     var options = {
-        legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
-
-    };
-    
-    var myBarChart;
-    function drawBarChart(type) {
-        var dataUlr = "resources/data/performance_2k.json";
-        if(type === 20000){
-            dataUlr = "resources/data/performance_2w.json";
+        legend: {
+            position: "bottom",
+            display: true,
+            labels: {
+                fontColor: '#cccccc'
+            }
         }
-        
-        var dataProvider = {};
-        $.get(dataUlr, function (result) {
-            for (var key in result) {
-                var obj = result[key];
+    };
+
+    var myBarChart;
+    var data = {
+        labels: ["ukulele", "ukujs web component", "angular", "avalon", "react", "vue", "polymer"],
+        datasets: [
+            {
+                label: "2000",
+                backgroundColor: [
+                    '#ff6384',
+                    '#ff6384',
+                    '#ff6384',
+                    '#ff6384',
+                    '#ff6384',
+                    '#ff6384',
+                    '#ff6384'
+                ],
+                data: []
+            },
+            {
+                label: "20000",
+                backgroundColor: [
+                    '#ffce56',
+                    '#ffce56',
+                    '#ffce56',
+                    '#ffce56',
+                    '#ffce56',
+                    '#ffce56',
+                    '#ffce56'
+                    
+                ],
+                data: []
+            }
+        ]
+    };
+    function drawBarChart() {
+
+        var metadata = {
+            "2000": {
+                "ukulele": [],
+                "ukujs web component": [],
+                "angular": [],
+                "avalon": [],
+                "react": [],
+                "vue": [],
+                "polymer": []
+            },
+            "20000": {
+                "ukulele": [],
+                "ukujs web component": [],
+                "angular": [],
+                "avalon": [],
+                "react": [],
+                "vue": [],
+                "polymer": []
+            }
+
+        }
+        renderChart(metadata);
+        window.addEventListener('message', function (event) {
+            //console.log(event.data);
+            var record = JSON.parse(event.data);
+            var framework = record.name;
+            var runTime = record.runTime;
+            var type = record.type;
+            if (metadata[type] && metadata[type][framework]) {
+                metadata[type][framework].push(runTime);
+                renderChart(metadata);
+            }
+        });
+
+        function renderChart(result) {
+            var copyData = JSON.parse(JSON.stringify(data));
+            var dataProvider = {};
+            for (var type in result) {
+                var obj = result[type];
                 for (var framework in obj) {
                     var timeArray = obj[framework];
                     var avg = getTimeAvg(timeArray);
                     if (!dataProvider[framework]) {
                         dataProvider[framework] = {};
                     }
-                    dataProvider[framework][key] = avg;
+                    dataProvider[framework][type] = avg;
                 }
             }
-            for (var i = 0; i < data.labels.length; i++) {
-                var name = data.labels[i];
+            for (var i = 0; i < copyData.labels.length; i++) {
+                var name = copyData.labels[i];
 
-                for (var browser in dataProvider[name]) {
-                    var dataset = getDatasetByLabel(browser);
-                    dataset.data.push(dataProvider[name][browser]);
+                for (var type in dataProvider[name]) {
+                    var dataset = getDatasetByLabel(copyData, type);
+                    dataset.data.push(dataProvider[name][type]);
                 }
             }
-            if(myBarChart){
-                myBarChart.destroy();
-            }
-            var ctx = document.getElementById("myChart").getContext("2d");
-            myBarChart = new Chart(ctx).Bar(data, options);
-            
-            var legend = myBarChart.generateLegend();
-            $("#myLegend").empty();
-            $("#myLegend").append(legend);
-        });
+            if (!myBarChart) {
+                var ctx = document.getElementById("myChart").getContext("2d");
+                myBarChart = new Chart(ctx, { data: copyData, options: options, type: 'horizontalBar' });
 
-        function getDatasetByLabel(lable) {
+                var legend = myBarChart.generateLegend();
+            } else {
+                myBarChart.data.datasets = copyData.datasets;
+                myBarChart.update();
+            }
+
+        };
+
+        function getDatasetByLabel(data, lable) {
             for (var i = 0; i < data.datasets.length; i++) {
                 var dataset = data.datasets[i];
                 if (dataset.label === lable) {
@@ -54,58 +123,21 @@ define("PerformanceCtrl", ["Chart", "jquery"], function (Chart, $) {
         }
 
         function getTimeAvg(arr) {
-            arr.sort(function (a, b) {
-                return a < b ? 1 : -1
-            });
-            arr.pop();
-            arr.shift();
-            var sum = eval(arr.join("+"));
-            var avg = Math.floor(sum / arr.length);
+            var avg = 0;
+            if (arr && arr.length > 0) {
+                var sum = 0;
+                for (var i = 0; i < arr.length; i++) {
+                    sum += arr[i];
+                }
+                avg = Math.floor(sum / arr.length);
+            }
             return avg;
         }
-        var data = {
-            labels: ["ukulele", "angular", "avalon", "react", "vue", "polymer"],
-            datasets: [
-                {
-                    label: "chrome",
-                    fillColor: "rgba(220,220,220,0.5)",
-                    strokeColor: "rgba(220,220,220,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
-                    data: []
-        },
-                {
-                    label: "firefox",
-                    fillColor: "rgba(151,187,205,0.5)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: []
-        },
-                {
-                    label: "ie",
-                    fillColor: "rgba(151,250,205,0.5)",
-                    strokeColor: "rgba(151,250,205,0.8)",
-                    highlightFill: "rgba(151,250,205,0.75)",
-                    highlightStroke: "rgba(151,250,205,1)",
-                    data: []
-        }
-    ]
-        };
-
-
     }
 
     return function () {
-        this.init = function(){
-            drawBarChart(2000);
+        this.init = function () {
+            drawBarChart();
         }
-        this.options = [{"name":2000,"value":2000},{"name":20000,"value":20000}];
-        this.selectedOption = this.options[0];
-        
-        this.onSelectChanged = function(){
-            var type = this.selectedOption.value;
-            drawBarChart(type);
-        };
     };
 });

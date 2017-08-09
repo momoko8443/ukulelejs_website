@@ -3,7 +3,9 @@
     <div>
       <h2>Ukujs Web Component</h2>
       <lable>Repeat Count:</lable>
-      <input type="text" uku-value="cc.rowNum">
+      <select uku-selected="cc.selectedOption|value">
+          <option uku-repeat="option in cc.options" uku-data-item="option" uku-value="option.value">{{option.name}}</option>
+      </select>
       <button uku-onclick="cc.generateTesingData()">Render</button>
       <button uku-onclick="cc.reset()">Reset</button>
       <br/>
@@ -20,9 +22,14 @@
         this.rowNum = 0;
         this.total = 0;
         this.items = [];
+        this.options = [
+            {name:"render 100 times",value:100},
+            {name:"render 1000 times",value:1000}
+        ]
+        this.selectedOption = this.options[0];
         this.generateTesingData = function() {
           this.items = [];
-          var rowLen = this.rowNum;
+          var rowLen = this.selectedOption.value;
           var columnLen = 10;
           for (var i = 0; i < rowLen; i++) {
             var item = {};
@@ -33,7 +40,8 @@
           }
           this.total = rowLen * columnLen * 2;
           this.fire('settingchanged', {
-            items: this.items
+            items: this.items,
+            total: this.total
           });
         };
 
@@ -42,7 +50,8 @@
           this.rowNum = 0;
           this.total = 0;
           this.fire('settingchanged', {
-            items: this.items
+            items: this.items,
+            total: this.total
           });
         };
       }

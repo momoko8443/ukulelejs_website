@@ -10,7 +10,9 @@
     <div>
         <h2>Ukulelejs</h2>
         <lable>Repeat Count:</lable>
-        <input type="text" uku-value="perCtrl.rowNum">
+        <select uku-selected="perCtrl.selectedOption|value">
+            <option uku-repeat="option in perCtrl.options" uku-data-item="option" uku-value="option.value">{{option.name}}</option>
+        </select>
         <button uku-onclick="perCtrl.generateTesingData()">Render</button>
         <button uku-onclick="perCtrl.reset()">Reset</button>
         <br/>
@@ -57,17 +59,22 @@
 
     function PerformanceController() {
         this.items = [];
-        this.rowNum = 0;
+        
         this.total = 0;
+        
+        this.options = [
+            {name:"render 100 times",value:100},
+            {name:"render 1000 times",value:1000}
+        ]
+        this.selectedOption = this.options[0];
         this.reset = function() {
             this.items = [];
-            this.rowNum = 0;
             this.total = 0;
             timer_em.innerHTML = 0;
         };
         this.generateTesingData = function () {
             this.items = [];
-            var rowLen = this.rowNum;
+            var rowLen = this.selectedOption.value;
             var columnLen = 10;
             for (var i = 0; i < rowLen; i++) {
                 var item = {};
@@ -94,6 +101,7 @@
                 var runTime = endTime - startTime;
                 timer_em.innerHTML = runTime;
                 clearInterval(timer);
+                parent.postMessage(JSON.stringify({name:"ukulele",runTime:runTime,type:ctrl.total}),"*");
             }
         },interval);
     }

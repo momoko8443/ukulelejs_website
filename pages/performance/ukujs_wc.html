@@ -26,12 +26,14 @@
         function MyController(uku){
             var self = this;
             this.items = [];
+            this.total = 0;
             this.init = function(){
                 var setting = document.getElementById("performanceSetting");
                 list_comp = document.getElementById("performanceList");
                 setting.addEventListener("settingchanged", function (e) {
                     timer_em = document.getElementById("timer");
                     var items = e.data.items;
+                    self.total = e.data.total;
                     if (items.length > 0) {
                         calulateTime(items.length);
                     } else {
@@ -59,6 +61,7 @@
                     var runTime = endTime - startTime;
                     timer_em.innerHTML = runTime;
                     clearInterval(timer);
+                    parent.postMessage(JSON.stringify({name:"ukujs web component",runTime:runTime,type:myCtrl.total}),"*");
                 }
             }, interval);
         }
