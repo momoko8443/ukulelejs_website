@@ -23,7 +23,7 @@ var MainForm = React.createClass({
         this.setState({
             data: []
         });
-        React.findDOMNode(this.refs.rowNum).value = 0;
+        React.findDOMNode(this.refs.rowNum).value = 100;
         React.findDOMNode(this.refs.total).innerHTML = "0";
         React.findDOMNode(this.refs.timer).innerHTML = "0";
     },
@@ -60,6 +60,7 @@ var MainForm = React.createClass({
                     var runTime = endTime - startTime;
                     timer_em.innerHTML = runTime;
                     clearInterval(timer);
+                    parent.postMessage(JSON.stringify({name:"react",runTime:runTime,type:total}),"*");
                 }
             },interval);
         }
@@ -76,7 +77,10 @@ var MainForm = React.createClass({
             <div className="mainForm">
                 <h2>React</h2>
                 <lable>Repeat Count:</lable>
-                <input type="text" ref="rowNum"/>
+                <select ref="rowNum">
+                    <option value="100">render 100 times</option>
+                    <option value="1000">render 1000 times</option>
+                </select>
                 <button onClick={this.generateTesingData}>Render</button>
                 <button onClick={this.reset}>Reset</button>
                 <br/>

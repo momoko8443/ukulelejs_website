@@ -10,6 +10,9 @@
         <h2>Vue</h2>
         <lable>Repeat Count:</lable>
         <input type="text" v-model="rowNum">
+        <select v-model="rowNum">
+            <option v-repeat="option in options" value="{{option.value}}">{{option.name}}</option>
+        </select>
         <button v-on="click: generateTesingData">Render</button>
         <button v-on="click: reset">Reset</button>
         <br/>
@@ -52,13 +55,17 @@
     var mainOL = document.getElementById("mainOL");
     var interval = 50;
     var timer;
-
+    var total;
     var performance = new Vue({
         el: '#vueApp',
         data: {
             items: [],
-            rowNum: 0,
-            total: 0
+            rowNum: 100,
+            total: 0,
+            options: [
+                {name:"render 100 times",value:100},
+                {name:"render 1000 times",value:1000}
+            ]
         },
         methods: {
             generateTesingData: function (e) {
@@ -74,12 +81,13 @@
                     vm.items.push(item);
                 }
                 vm.total = rowLen * columnLen * 2;
+                total = vm.total;
                 calulateTime(rowLen);
             },
             reset: function (e) {
                 var vm = e.targetVM;
                 vm.items = [];
-                vm.rowNum = 0;
+                vm.rowNum = 100;
                 vm.total = 0;
                 timer_em.innerHTML = 0;
             }
@@ -95,6 +103,7 @@
                 var runTime = endTime - startTime;
                 timer_em.innerHTML = runTime;
                 clearInterval(timer);
+                parent.postMessage(JSON.stringify({name:"vue",runTime:runTime,type:total}),"*");
             }
         }, interval);
     }

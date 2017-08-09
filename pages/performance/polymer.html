@@ -15,8 +15,10 @@
     HTMLImports.whenReady(function () {
         var setting = document.getElementById("performanceSetting");
         var list = document.getElementById("performanceList");
+        var total;
         setting.addEventListener("settingChanged", function (e) {
             var items = e.detail.items;
+            total = e.detail.total;
             if (items.length > 0) {
                 calulateTime(items.length);
             } else {
@@ -39,6 +41,7 @@
                     var runTime = endTime - startTime;
                     timer_em.innerHTML = runTime;
                     clearInterval(timer);
+                    parent.postMessage(JSON.stringify({name:"polymer",runTime:runTime,type:total}),"*");
                 }
             }, interval);
         }

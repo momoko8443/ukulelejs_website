@@ -10,7 +10,8 @@
     <div ng-controller="testCtrl">
         <h2>Angularjs</h2>
         <label>Repeat Count:</label>
-        <input type="text" ng-model="rowNum">
+        <select ng-init="rowNum=options[0].value" ng-model="rowNum" ng-options="item.value as item.name for item in options">
+        </select>
         <button ng-click="render()" id="renderBtn">Render</button>
         <button ng-click="reset()">Reset</button>
         <br/>
@@ -50,13 +51,18 @@
 </body>
 <script>
     var app = angular.module('testApp', []);
+    var total;
     app.controller('testCtrl', ['$scope', function ($scope) {
         $scope.rowNum = 0;
         $scope.items = [];
         $scope.total = 0;
+        $scope.options = [
+            {name:"render 100 times",value:100},
+            {name:"render 1000 times",value:1000}
+        ];
         $scope.reset = function () {
             $scope.items = 0;
-            $scope.rowNum = 0;
+            $scope.rowNum = 100;
             $scope.total = 0;
             timer_em.innerHTML = 0;
         };
@@ -72,6 +78,7 @@
                 $scope.items.push(item);
             }
             $scope.total = rowLen * columnLen * 2;
+            total = $scope.total;
             calulateTime(rowLen);
         };
     }]);
@@ -91,6 +98,7 @@
                 var runTime = endTime - startTime;
                 timer_em.innerHTML = runTime;
                 clearInterval(timer);
+                parent.postMessage(JSON.stringify({name:"angular",runTime:runTime,type:total}),"*");
             }
         }, interval);
     }

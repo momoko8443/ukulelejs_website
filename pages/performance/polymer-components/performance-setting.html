@@ -3,7 +3,10 @@
     <template>
         <h2>Polymer</h2>
         <lable>Repeat Count:</lable>
-        <input type="text" value="{{rowNum::input}}">
+        <select value="{{rowNum::change}}">
+            <option value="100">render 100 times</option>
+            <option value="1000">render 1000 times</option>
+        </select>
         <button on-click="generateTesingData">Render</button>
         <button on-click="reset">Reset</button>
         <br/>
@@ -17,7 +20,7 @@
             is: "performance-setting",
             properties: {
                 rowNum: {
-                    value: 0,
+                    value: 100,
                     type: "number"
                 },
                 total: {
@@ -45,7 +48,7 @@
             },
             reset: function () {
                 this.items = [];
-                this.rowNum = 0;
+                this.rowNum = 100;
                 this.total = 0;
                 this.fire('settingChanged', {items: this.items,total:this.total});
                 //timer_em.innerHTML = 0;
