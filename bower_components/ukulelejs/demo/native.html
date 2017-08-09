@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <style>
+            button{
+                color:blue;
+            }
+            p{
+                color:green;
+            }
+        </style>
+        <script src="../dist/uku.js"></script>
+    </head>
+
+<body uku-application>
+    <!--<my-comp id="myComp"></my-comp>
+    <button uku-onclick="myCtrl.clickHandler('test',1)">test me</button>
+    <my-item uku-render="myCtrl.show"></my-item>-->
+    <!--<my-comp2 show-input="myCtrl.show"></my-comp2>-->
+    <!--<select uku-selected="myCtrl.selectedItem|value">
+        <option uku-repeat="item in myCtrl.items" uku-data-item="item" uku-value="item.value">{{item.name}}</option>
+    </select>-->
+    <my-comp3 uku-options="myCtrl.options" uku-login-user="myCtrl.loginUser"></my-comp3>
+    <button uku-onclick="myCtrl.done()">done</button>
+</body>
+<script>
+    var uku = new Ukulele();
+    uku.registerController('myCtrl',new MyCtrl(uku));
+    //uku.registerComponent('my-comp2',"components/comp2.html");
+    //uku.registerComponent('my-comp',"components/comp1.html");
+    //uku.registerComponent('my-item',"components/my_item.html");
+    uku.registerComponent('my-comp3','components/comp3.html');
+    //uku.registerComponent('my-comp4','components/comp4.html');
+    uku.init();
+
+    function MyCtrl(uku){
+        this.show = false;
+        this.loginUser = {};
+        this.options = [];
+        this.done = function(){
+            this.loginUser = {username:"momoko"};
+            //this.options = [{'name':'AAA',value:'aaa'},{'name':'BBB',value:'bbb'}];
+            uku.refresh('myCtrl');
+
+        }
+        //this.items = [{'name':'AAA',value:'aaa'},{'name':'BBB',value:'bbb'}];
+        //this.selectedItem = this.items[1];
+        
+        /*this.clickHandler = function(msg,num,event){
+            var controller = uku.getComponentController('myComp');
+            controller.show();
+        }*/
+    }
+</script>
+</html>

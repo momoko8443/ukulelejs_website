@@ -1,0 +1,38 @@
+<uku-component>
+    <template>
+        <div>
+            <h3 uku-text="cc.user.username"></h3>
+            <ul>
+                <li uku-repeat="option in cc.options">{{option.name}}</li>
+            </ul>
+            <h3 uku-text="cc.getFuncLabel(cc.name)"></h3>
+        </div>
+    </template>
+    <script>
+        (function(){
+            return function(uku){
+                this._initialized = function(cc){
+                    console.log(cc);
+                };
+                this.getFuncLabel = function(_name){
+                    return _name + "aaa";
+                }
+                this.name = "xiao hong";
+                Object.defineProperty(this, "opts", {
+                    set: function (value) {
+                        if(value){
+                            this.options = value;
+                        }
+                    }
+                });
+                Object.defineProperty(this, "loginUser", {
+                    set: function( value){
+                        if(value){
+                            this.user = value;
+                        }
+                    }
+                });
+            };
+        })();
+    </script>
+</uku-component>·
