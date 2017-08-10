@@ -33,13 +33,15 @@
         Object.defineProperty(this, "usersFromOutside", {
           set: function(value) {
             usersFromOutside = value;
-            for (var i = 0; i < usersFromOutside.length; i++) {
-              var user = {
-                'name': usersFromOutside[i],
-                'selected': false
-              };
-              this.users.push(user);
-            }
+            if(value){
+              for (var i = 0; i < usersFromOutside.length; i++) {
+                var user = {
+                  'name': usersFromOutside[i],
+                  'selected': false
+                };
+                this.users.push(user);
+              }
+            }        
           }
         });
       }

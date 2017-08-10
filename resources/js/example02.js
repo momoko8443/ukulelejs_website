@@ -1,5 +1,3 @@
-define("Example02Ctrl", function () {
-    return function (uku) {
-        this.yourName = "";
-    };
-});
+export default function (uku) {
+    this.yourName = "";
+};

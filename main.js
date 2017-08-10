@@ -1,56 +1,36 @@
-require.config({
-    waitSeconds : 30,
-    paths: {
-        "jquery": 'bower_components/jquery/dist/jquery.min',
-        "jquery.bootstrap": 'bower_components/bootstrap/dist/js/bootstrap.min',
-        "uku": 'bower_components/ukulelejs/dist/uku',
-        "highlight": 'bower_components/highlightjs/highlight.pack',
-        "locale": 'resources/locale/example_properties',
-        "routejs": 'bower_components/uku-routejs/build/js/uku-route',
-        "domReady": 'bower_components/domReady/domReady',
-        "Chart": 'bower_components/Chart.js/dist/Chart.min',
-        "Example01Ctrl": 'resources/js/example01',
-        "Example02Ctrl": 'resources/js/example02',
-        "Example03Ctrl": 'resources/js/example03',
-        "Example04Ctrl": 'resources/js/example04',
-        "Example05Ctrl": 'resources/js/example05',
-        "Example06Ctrl": 'resources/js/example06',
-        "Example09Ctrl": 'resources/js/example09',
-        "Example10Ctrl": 'resources/js/example10',
-        "Example11Ctrl": 'resources/js/example11',
-        "Example12Ctrl": 'resources/js/example12',
-        "Example13Ctrl": 'resources/js/example13',
-        "Example15Ctrl": 'resources/js/example15',
-        "PerformanceCtrl": 'resources/js/performance'
-    },
-    shim: {
-        "routejs": {
-            exports: "Route"
-        },
-        "jquery.bootstrap": {
-            deps: ["jquery"]
-        },
-        "Chart": {
-            exports: "Chart"
-        }
-    }
-});
-
-require(["domReady", "routejs", "uku", "RootCtrl", "GuideCtrl","OtherCtrl",
-"Example01Ctrl", "Example02Ctrl", "Example03Ctrl", "Example04Ctrl", "Example05Ctrl", "Example06Ctrl",
-"Example09Ctrl", "Example10Ctrl", "Example11Ctrl", "Example12Ctrl", "Example13Ctrl", "Example15Ctrl",
-"PerformanceCtrl", "Chart", "jquery", "jquery.bootstrap", "highlight", "locale"],
-function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
-            Example01Ctrl, Example02Ctrl, Example03Ctrl, Example04Ctrl, Example05Ctrl, Example06Ctrl,
-            Example09Ctrl, Example10Ctrl, Example11Ctrl, Example12Ctrl, Example13Ctrl, Example15Ctrl, PerformanceCtrl) {
+//import jquery from './bower_components/jquery/dist/jquery.min';
+//import jquery_bootstrap from './bower_components/bootstrap/dist/js/bootstrap.min';
+import * as Ukulele from './bower_components/ukulelejs/dist/uku';
+import hljs from 'highlight.js';
+import locale from './resources/locale/example_properties';
+//import Chart from './bower_components/Chart.js/dist/Chart.min';
+import Example01Ctrl from './resources/js/example01';
+import Example02Ctrl from './resources/js/example02';
+import Example03Ctrl from './resources/js/example03';
+import Example04Ctrl from './resources/js/example04';
+import Example05Ctrl from './resources/js/example05';
+import Example06Ctrl from './resources/js/example06';
+import Example09Ctrl from './resources/js/example09';
+import Example10Ctrl from './resources/js/example10';
+import Example11Ctrl from './resources/js/example11';
+import Example12Ctrl from './resources/js/example12';
+import Example13Ctrl from './resources/js/example13';
+import Example15Ctrl from './resources/js/example15';
+import PerformanceCtrl from './resources/js/performance';
+import RootCtrl from './resources/js/rootCtrl';
+import GuideCtrl from './resources/js/guideCtrl';
+import OtherCtrl from './resources/js/otherCtrl';
+import './bower_components/bootstrap/dist/js/bootstrap.min';
+function main() {
 
     var uku;
     var route;
     var initRoutePool = {};
     var perforCtrl;
-    domReady(function () {
-        var Ukulele = uku.Ukulele;
-        uku = new Ukulele();
+    function init() {
+        var Ukulelejs = Ukulele.Ukulele;
+        uku = new Ukulelejs();
+        console.log(new Example05Ctrl().child.say());
         uku.registerController("root", new RootCtrl(uku));
         uku.registerController("guideCtrl", new GuideCtrl(uku));
         uku.registerController("otherCtrl", new OtherCtrl());
@@ -137,7 +117,7 @@ function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
 				.when("#about", "pages/about.html")
 				.otherwise("pages/home.html")
 				.addAnchor("repeat");
-        uku.addListener(Ukulele.INITIALIZED,function(e){
+        uku.addListener(Ukulelejs.INITIALIZED,function(e){
             var element = e.element;
             route.work();
             var elementId = element.getAttribute("id");
@@ -154,7 +134,7 @@ function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
 				if (page && page.page && !page.cache) {
 					document.getElementById("mainView").classList.add('blur');
 					document.getElementById("loadingBar").style.display = "block";
-                    uku.addListener(Ukulele.HANDLE_ELEMENT_COMPLETED,function(e){
+                    uku.addListener(Ukulelejs.HANDLE_ELEMENT_COMPLETED,function(e){
                         if(e.element){
                             var codeDoms = e.element.querySelectorAll('pre code');
                             for (var i = 0; i < codeDoms.length; i++) {
@@ -162,7 +142,7 @@ function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
                             }
                         }
                     });
-                    uku.addListener(Ukulele.HANDLE_ELEMENT_COMPLETED,function(e){
+                    uku.addListener(Ukulelejs.HANDLE_ELEMENT_COMPLETED,function(e){
                         document.getElementById("mainView").classList.remove('blur');
                         document.getElementById("loadingBar").style.display = "none";
                     });
@@ -174,7 +154,9 @@ function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
 			};
         });
         uku.init();
-    });
+    };
+
+    init();
 
     function ResourceManager() {
         this.changeLocale = function (language) {
@@ -199,46 +181,6 @@ function (domReady, Route, uku, RootCtrl, GuideCtrl,OtherCtrl,
             return str;
         };
     }
-});
+}
 
-define("RootCtrl", function () {
-    return function (uku) {
-        this.loadSuccessHandler = function () {
-            document.getElementById("mainView").classList.remove('blur');
-            document.getElementById("loadingBar").style.display = "none";
-        }
-    };
-
-});
-
-define("GuideCtrl", function(){
-    return function(uku){
-        var currentMenuItem;
-        this.guideMenuItemClickHandler = function(e){
-            if(e.target.nodeName === "BUTTON"){
-                var menuItem = e.target.dataset.menuItem;
-                if(currentMenuItem !== menuItem){
-                    var componentTag = "guide-"+menuItem;
-                    var comp = uku.getComponent(componentTag);
-                    var guideItem;
-                    if(comp){
-                        guideItem = document.createElement(componentTag);
-                    }else{
-                        guideItem = document.createElement("guide-building");
-                    }
-                    var guideContentPanel = document.getElementById("guideContentPanel");
-                    guideContentPanel.removeChild(guideContentPanel.children[0]);
-                    guideContentPanel.appendChild(guideItem);
-                    uku.handleElement(guideItem);
-                    currentMenuItem = menuItem;
-                }
-            }
-        };
-    };
-});
-
-define("OtherCtrl", function () {
-    return function (uku) {
-        this.myName = "name from OtherCtrl";
-    };
-});
+main();
