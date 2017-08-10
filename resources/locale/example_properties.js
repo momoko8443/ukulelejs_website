@@ -342,3 +342,5 @@ var locale = {
                                 +"<br/>call handleElement() will trigger Ukulele.HANDLE_ELEMENT_COMPLETED event",
     }
 };
+
+export default locale;

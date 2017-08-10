@@ -1,12 +1,10 @@
-define("Example05Ctrl", function () {
-    return function () {
-        this.child = new Child();
+export default function () {
+    function Child() {
+        this.name = "child";
+        this.say = function () {
+            return "Hi, " + this.name;
+        };
+    }
 
-        function Child() {
-            this.name = "child";
-            this.say = function () {
-                return "Hi, " + this.name;
-            };
-        }
-    };
-});
+    this.child = new Child();
+};

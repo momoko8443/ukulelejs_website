@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "this is a light mvvc framework likes angularjs",
   "scripts": {
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "watch": "webpack  --progress --watch",
+    "start": "webpack-dev-server --open",
+    "build": "webpack"
   },
   "repository": {
     "type": "git"
@@ -18,8 +21,14 @@
   "license": "ISC",
   "devDependencies": {
     "bower": "^1.4.1",
+    "css-loader": "^0.28.4",
     "gulp": "^3.9.0",
     "gulp-connect": "^2.2.0",
-    "webpack": "^3.5.2"
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.2",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
   }
 }

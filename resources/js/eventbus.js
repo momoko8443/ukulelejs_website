@@ -43,3 +43,5 @@ EventBus.prototype.dispatchEvent = function(event){
         }
     }
 };
+
+export {EventBus};

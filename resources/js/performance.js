@@ -1,4 +1,6 @@
-define("PerformanceCtrl", ["Chart", "jquery"], function (Chart, $) {
+import Chart from '../../bower_components/Chart.js/dist/Chart.min';
+
+export default function () {
     var options = {
         legend: {
             position: "bottom",
@@ -36,7 +38,7 @@ define("PerformanceCtrl", ["Chart", "jquery"], function (Chart, $) {
                     '#ffce56',
                     '#ffce56',
                     '#ffce56'
-                    
+
                 ],
                 data: []
             }
@@ -134,10 +136,7 @@ define("PerformanceCtrl", ["Chart", "jquery"], function (Chart, $) {
             return avg;
         }
     }
-
-    return function () {
-        this.init = function () {
-            drawBarChart();
-        }
+    this.init = function () {
+        drawBarChart();
     };
-});
+};
