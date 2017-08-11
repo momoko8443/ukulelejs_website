@@ -1,9 +1,9 @@
 //import jquery from './bower_components/jquery/dist/jquery.min';
 //import jquery_bootstrap from './bower_components/bootstrap/dist/js/bootstrap.min';
 import * as Ukulele from './bower_components/ukulelejs/dist/uku';
-import hljs from 'highlight.js';
+import hljs from 'highlight.js/lib/highlight';
+import javascript from 'highlight.js/lib/languages/javascript';
 import locale from './resources/locale/example_properties';
-//import Chart from './bower_components/Chart.js/dist/Chart.min';
 import Example01Ctrl from './resources/js/example01';
 import Example02Ctrl from './resources/js/example02';
 import Example03Ctrl from './resources/js/example03';
@@ -27,6 +27,7 @@ function main() {
     var route;
     var initRoutePool = {};
     var perforCtrl;
+    hljs.registerLanguage('javascript', javascript);
     function init() {
         var Ukulelejs = Ukulele.Ukulele;
         uku = new Ukulelejs();

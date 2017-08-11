@@ -112,7 +112,7 @@ var locale = {
         "GUIDE_LABEL_BIND_EVENT":"绑定事件",
         "GUIDE_TEXT_BIND_EVENT":"绑定事件其实也是对上个小节，绑定属性的一种实现，我们使用 uku-onEventType来实现这个功能，例如原生事件使用onclick来设置点击事件的回调函数，那么在Ukujs中，你使用uku-onclick 即可，无需额外的记忆",
         "GUIDE_LABEL_BIND_EVENT2":"关于Handler的参数",
-        "GUIDE_TEXT_BIND_EVENT2":"buttonClickHandler函数中的最后一个参数默认为事件的event,event不需要你显示地去传递(Ukujs会自动添加在最后),你只需要专注于自己想传递的参数，例如",
+        "GUIDE_TEXT_BIND_EVENT2":"buttonClickHandler函数中的第一一个参数默认为事件的event,event不需要你显示地去传递(Ukujs会自动添加在最后),你只需要专注于自己想传递的参数，例如",
 
         "GUIDE_LABLE_BIND_STYLE":"绑定样式",
         "GUIDE_TEXT_BIND_STYLE":"绑定样式其实也是对绑定属性的一种实现，我们使用 uku-style和 uku-class来实现这个功能",
@@ -283,7 +283,7 @@ var locale = {
         "GUIDE_LABEL_BIND_EVENT":"Binding with event",
         "GUIDE_TEXT_BIND_EVENT":"Binding with event is alse an implement of binding attribute, we use uku-onEventType to implement this function, e.g. as we all know, native html using onclick to link handler function, then in Ukujs, you just use uku-onclick to work it, no more extra cost",
         "GUIDE_LABEL_BIND_EVENT2":"About Handler's arguments",
-        "GUIDE_TEXT_BIND_EVENT2":"In buttonClickHandler function, the latest arguments is event'object, you needn't to transfer event by yourself (Ukujs will append it automatically), you just focus on the arguments which you transfered, e.g.",
+        "GUIDE_TEXT_BIND_EVENT2":"In buttonClickHandler function, the first argument is event'object, you needn't to transfer event by yourself (Ukujs will append it automatically), you just focus on the arguments which you transfered, e.g.",
 
         "GUIDE_LABLE_BIND_STYLE":"Binding with style",
         "GUIDE_TEXT_BIND_STYLE":"Binding with style is alse an implement of binding attribute, we could use uku-style and uku-class to implement it",

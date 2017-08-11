@@ -67,7 +67,7 @@ function MyCtrl(uku) {
                     <pre>
                         <code class="javascript">
 function MyCtrl(uku) {
-    this.buttonClickHandler2 = function(arg,e){
+    this.buttonClickHandler2 = function(e,arg){
         alert(e.target.nodeName + " has been clicked with " + arg);
     };
 }
@@ -83,7 +83,7 @@ function MyCtrl(uku) {
                 this.buttonClickHandler = function(e){
                     alert(e.target.nodeName + " has been clicked");
                 };
-                this.buttonClickHandler2 = function(arg,e){
+                this.buttonClickHandler2 = function(e,arg){
                     alert(e.target.nodeName + " has been clicked with " + arg);
                 };
             };

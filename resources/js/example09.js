@@ -1,4 +1,4 @@
-import  * as $ from '../../bower_components/jquery/dist/jquery.min';
+import * as $ from "jquery";
 export default function (uku) {
     this.asyncData = "will show json from async request";
     var self = this;
