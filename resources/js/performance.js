@@ -70,14 +70,19 @@ export default function () {
         renderChart(metadata);
         window.addEventListener('message', function (event) {
             //console.log(event.data);
+            if(event.data.search('setImmediate') !== -1){
+                return;
+            }
             var record = JSON.parse(event.data);
             var framework = record.name;
             var runTime = record.runTime;
             var type = record.type;
             if (metadata[type] && metadata[type][framework]) {
+                metadata[type][framework] = [];
                 metadata[type][framework].push(runTime);
                 renderChart(metadata);
             }
+
         });
 
         function renderChart(result) {

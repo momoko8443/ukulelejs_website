@@ -11,23 +11,23 @@
 </body>
 <script>
     var uku;
-    window.onload = function(){
+    window.onload = function () {
         uku = new Ukulele();
-        uku.registerComponent('my-setting','ukujs-components/setting.html');
-        uku.registerComponent('my-list','ukujs-components/list.html');
-        uku.registerComponent('my-item','ukujs-components/item.html');
+        uku.registerComponent('my-setting', 'ukujs-components/setting.html');
+        uku.registerComponent('my-list', 'ukujs-components/list.html');
+        uku.registerComponent('my-item', 'ukujs-components/item.html');
         var myCtrl = new MyController(uku);
-        uku.registerController('myCtrl',myCtrl);
-        uku.addListener(Ukulele.INITIALIZED,function(e){
+        uku.registerController('myCtrl', myCtrl);
+        uku.addListener(Ukulele.INITIALIZED, function (e) {
             myCtrl.init();
         });
         uku.init();
 
-        function MyController(uku){
+        function MyController(uku) {
             var self = this;
             this.items = [];
             this.total = 0;
-            this.init = function(){
+            this.init = function () {
                 var setting = document.getElementById("performanceSetting");
                 list_comp = document.getElementById("performanceList");
                 setting.addEventListener("settingchanged", function (e) {
@@ -44,6 +44,13 @@
                     uku.refresh();
                 });
             }
+
+            this.reset = function () {
+                this.items = [];
+                this.total = 0;
+                this.selectedOption = this.options[0];
+                timer_em.innerHTML = 0;
+            };
         }
 
 
@@ -53,6 +60,7 @@
         var timer;
         var timer_em;
         var list_comp;
+
         function calulateTime(rowLen) {
             var startTime = new Date().getTime();
             timer = setInterval(function () {
@@ -61,7 +69,11 @@
                     var runTime = endTime - startTime;
                     timer_em.innerHTML = runTime;
                     clearInterval(timer);
-                    parent.postMessage(JSON.stringify({name:"ukujs web component",runTime:runTime,type:myCtrl.total}),"*");
+                    parent.postMessage(JSON.stringify({
+                        name: "ukujs web component",
+                        runTime: runTime,
+                        type: myCtrl.total
+                    }), "*");
                 }
             }, interval);
         }

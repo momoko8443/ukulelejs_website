@@ -21,7 +21,7 @@ module.exports = {
       new RegExp(`^./(${['javascript'].join('|')})$`)
     ),
     new BundleAnalyzerPlugin(),
-    new webpack.optimize.DedupePlugin(),
+    //new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true
     })
