@@ -20,7 +20,7 @@ module.exports = {
       /highlight\.js\/lib\/languages$/,
       new RegExp(`^./(${['javascript'].join('|')})$`)
     ),
-    new BundleAnalyzerPlugin(),
+    //new BundleAnalyzerPlugin(),
     //new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true

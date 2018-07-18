@@ -13,20 +13,20 @@
     <script>
         (function(EB){
             return function(uku){
-                this.talk2father = function(msg){
+                this.talk2father = function(e, msg){
                     this.fire("messagefromchild",{'message':msg});
                 };
-                this.talk2grandFather = function(msg){
+                this.talk2grandFather = function(e, msg){
                     this.fire("transfermessage2parents",{'message':msg,'toGrandFather':true},true);
                 };
-                this.talk2grandFather2 = function(msg){
+                this.talk2grandFather2 = function(e, msg){
                     this.fire("messagefromchild",{'message':msg,'toGrandFather':true},false);
                 };
 
-                this.talk2brother = function(msg){
+                this.talk2brother = function(e, msg){
                     this.fire("messagefromchild",{'message':msg,'toBrother':true});
                 };
-                this.talk2brotherInLaw = function(msg){
+                this.talk2brotherInLaw = function(e, msg){
                     var eb = EB.getInstance();
                     eb.dispatchEvent({'eventType':'global_event','data':msg});
                 };
