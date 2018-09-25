@@ -1,6 +1,6 @@
 <uku-component>
 <template>
-<h3 uku-text="res.getResource('LABEL_EXAMPLE_15')"></h3>
+<h3 uku-text="$res.getResource('LABEL_EXAMPLE_15')"></h3>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
         <a href="#demo15" aria-controls="demo15" role="tab" data-toggle="tab">Demo</a>
@@ -17,13 +17,13 @@
 </ul>
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="demo15" style="margin: 20px">
-        <user-list uku-users-from-outside="ex15Ctrl.users"></user-list>
+        <user-list uku-users-from-outside="$ex15Ctrl.users"></user-list>
     </div>
     <div role="tabpanel" class="tab-pane" id="html15" style="margin: 20px">
         <pre>
 			<code class="html">
 &lt;div&gt;
-	&lt;user-list uku-users-from-outside="ex15Ctrl.users"&gt;&lt;/user-list&gt;
+	&lt;user-list uku-users-from-outside="$ex15Ctrl.users"&gt;&lt;/user-list&gt;
 &lt;/div&gt;
 			</code>
 		</pre>

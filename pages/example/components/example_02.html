@@ -1,6 +1,6 @@
 <uku-component>
 <template>
-<h3 uku-text="res.getResource('LABEL_EXAMPLE_02')"></h3>
+<h3 uku-text="$res.getResource('LABEL_EXAMPLE_02')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
 		<a href="#demo2" aria-controls="demo2" role="tab" data-toggle="tab">Demo</a>
@@ -14,22 +14,22 @@
 </ul>
 <div class="tab-content">
 	<div role="tabpanel" class="tab-pane active" id="demo2" style="margin: 20px">
-		<input type="text" placeholder="please input your name" uku-value="ex02Ctrl.yourName" class="form-control" style="width:30%">
+		<input type="text" placeholder="please input your name" uku-value="$ex02Ctrl.yourName" class="form-control" style="width:30%">
         <br/>
 		<p>
-			{{ex02Ctrl.yourName}}
+			{{$ex02Ctrl.yourName}}
 		</p>
-        <p uku-text="ex02Ctrl.yourName"></p>
+        <p uku-text="$ex02Ctrl.yourName"></p>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html2" style="margin: 20px">
-        <div class="alert alert-info" role="alert" uku-text="res.getResource('TOOL_TIPS_UKU_TEXT')"></div>
+        <div class="alert alert-info" role="alert" uku-text="$res.getResource('TOOL_TIPS_UKU_TEXT')"></div>
 		<pre>
 			<code class="html">
-&lt;input type="text" placeholder="please input your name" uku-value="ex02Ctrl.yourName"&gt;
+&lt;input type="text" placeholder="please input your name" uku-value="$ex02Ctrl.yourName"&gt;
 &lt;p&gt;
-	{{ex02Ctrl.yourName}}
+	{{$ex02Ctrl.yourName}}
 &lt;/p&gt;
-&lt;p uku-text="ex02Ctrl.yourName"&gt;&lt;/p&gt;
+&lt;p uku-text="$ex02Ctrl.yourName"&gt;&lt;/p&gt;
 			</code>
 		</pre>
 	</div>

@@ -1,6 +1,6 @@
 <uku-component>
 <template>
-<h3 uku-text="res.getResource('LABEL_EXAMPLE_04')"></h3>
+<h3 uku-text="$res.getResource('LABEL_EXAMPLE_04')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
 		<a href="#demo4" aria-controls="demo4" role="tab" data-toggle="tab">Demo</a>
@@ -15,11 +15,11 @@
 <div class="tab-content">
 	<div role="tabpanel" class="tab-pane active" id="demo4" style="margin: 20px">
 		<ul>
-			<li uku-repeat="item in ex04Ctrl.items">
-				<a style="cursor:pointer" uku-onclick="ex04Ctrl.sayHelloWith2Argument(ex04Ctrl.myName,item.name)">
+			<li uku-repeat="item in $ex04Ctrl.items">
+				<a style="cursor:pointer" uku-onclick="$ex04Ctrl.sayHelloWith2Argument($ex04Ctrl.myName,item.name)">
 					{{item.name}}
 				</a>
-				<img uku-src="item.imgUrl" style="cursor:pointer" uku-onclick="ex04Ctrl.sayHelloWithInstanceArgument(item)"/>
+				<img uku-src="item.imgUrl" style="cursor:pointer" uku-onclick="$ex04Ctrl.sayHelloWithInstanceArgument(item)"/>
 				<ul>
 					<li uku-repeat="sub in item.subModels">{{sub.name}}</li>
 				</ul>
@@ -27,15 +27,15 @@
 		</ul>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html4" style="margin: 20px">
-        <div class="alert alert-info" role="alert" uku-text="res.getResource('TOOL_TIPS_UKU_REPEAT')"></div>
+        <div class="alert alert-info" role="alert" uku-text="$res.getResource('TOOL_TIPS_UKU_REPEAT')"></div>
 		<pre>
 			<code class="html">
 &lt;ul&gt;
-    &lt;li uku-repeat="item in ex04Ctrl.items"&gt;
-        &lt;a style="cursor:pointer" uku-onclick="ex04Ctrl.sayHelloWith2Argument(ex04Ctrl.myName,item.name)"&gt;
+    &lt;li uku-repeat="item in $ex04Ctrl.items"&gt;
+        &lt;a style="cursor:pointer" uku-onclick="$ex04Ctrl.sayHelloWith2Argument($ex04Ctrl.myName,item.name)"&gt;
             {{item.name}}
         &lt;/a&gt;
-        &lt;img uku-src="item.imgUrl" style="cursor:pointer"uku-onclick="ex04Ctrl.sayHelloWithInstanceArgument(item)"/&gt;
+        &lt;img uku-src="item.imgUrl" style="cursor:pointer"uku-onclick="$ex04Ctrl.sayHelloWithInstanceArgument(item)"/&gt;
         &lt;ul&gt;
             &lt;li uku-repeat="sub in item.subModels">{{sub.name}}&lt;/li&gt;
         &lt;/ul&gt;

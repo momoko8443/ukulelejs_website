@@ -1,21 +1,21 @@
 <uku-component>
     <template>
         <div>
-            <h3 uku-text="res.getResource('GUIDE_LABEL_BIND_INPUT')"></h3>
-            <p uku-text="res.getResource('GUIDE_TEXT_BIND_INPUT')">
+            <h3 uku-text="$res.getResource('GUIDE_LABEL_BIND_INPUT')"></h3>
+            <p uku-text="$res.getResource('GUIDE_TEXT_BIND_INPUT')">
                 <ol>
                     <li>
-                        {{res.getResource('GUIDE_LI_BIND_INPUT1')}}
+                        {{$res.getResource('GUIDE_LI_BIND_INPUT1')}}
                     </li>
                     <li>
-                        {{res.getResource('GUIDE_LI_BIND_INPUT2')}}
+                        {{$res.getResource('GUIDE_LI_BIND_INPUT2')}}
                     </li>
                     <li>
-                        {{res.getResource('GUIDE_LI_BIND_INPUT3')}}
+                        {{$res.getResource('GUIDE_LI_BIND_INPUT3')}}
                     </li>
                 </ol>
             </p>
-            <p uku-text="res.getResource('GUIDE_TEXT_BIND_INPUT2')">        
+            <p uku-text="$res.getResource('GUIDE_TEXT_BIND_INPUT2')">        
             </p>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -51,7 +51,7 @@ function MyCtrl() {
                     </pre>
                 </div>
             </div>
-            <p uku-text="res.getResource('GUIDE_TEXT_BIND_INPUT3')">
+            <p uku-text="$res.getResource('GUIDE_TEXT_BIND_INPUT3')">
             </p>
         </div>
     </template>

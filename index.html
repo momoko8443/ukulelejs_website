@@ -17,8 +17,8 @@
     <div id="mainView" class="blur">
         <tab-bar></tab-bar>
         <div class="languageSelect">
-            <select class="form-control" uku-selected="res.selectedLanguage|name">
-                <option uku-repeat="language in res.languages" uku-data-item="language" uku-text="language.name"></option>
+            <select class="form-control" uku-selected="$res.selectedLanguage|name">
+                <option uku-repeat="language in $res.languages" uku-data-item="language" uku-text="language.name"></option>
             </select>
         </div>
         <div class="clear"></div>

@@ -1,10 +1,10 @@
 <uku-component>
     <template>
         <div>
-            <h3 uku-text="res.getResource('GUIDE_LABEL_API_FUNCTION')"></h3>
+            <h3 uku-text="$res.getResource('GUIDE_LABEL_API_FUNCTION')"></h3>
             <b>init()</b>
-            <h3 uku-text="res.getResource('GUIDE_LABEL_API_ARGUMENT')"></h3>
-            <p uku-text="res.getResource('GUIDE_TEXT_API_INIT')">
+            <h3 uku-text="$res.getResource('GUIDE_LABEL_API_ARGUMENT')"></h3>
+            <p uku-text="$res.getResource('GUIDE_TEXT_API_INIT')">
             </p>
             <pre>
                 <code class="js">
@@ -18,7 +18,7 @@ uku.registerComponent("myComp2","component2.html");
 uku.init();
                 </code>
             </pre>
-            <p uku-text="res.getResource('GUIDE_TEXT_API_INIT2')">
+            <p uku-text="$res.getResource('GUIDE_TEXT_API_INIT2')">
             </p>
         </div>
     </template>

@@ -4,7 +4,7 @@
       <h2>Ukujs Web Component</h2>
       <lable>Repeat Count:</lable>
       <select uku-selected="cc.selectedOption|value">
-          <option uku-repeat="option in cc.options" uku-data-item="option" uku-value="option.value">{{option.name}}</option>
+          <option uku-repeat="opt in cc.options" uku-data-item="opt" uku-value="opt.value">{{opt.name}}</option>
       </select>
       <button uku-onclick="cc.generateTesingData()">Render</button>
       <button uku-onclick="cc.reset()">Reset</button>

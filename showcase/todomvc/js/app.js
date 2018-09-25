@@ -161,7 +161,7 @@
 	}
 	var uku = new Ukulele();
 	var mainCtrl = new MainController(uku);
-	uku.registerController('mainCtrl', mainCtrl);
+	uku.registerController('$mainCtrl', mainCtrl);
 	uku.registerComponent('info', 'components/info.html');
 	uku.registerComponent('footer', 'components/footer.html');
 	uku.registerComponent('header', 'components/header.html');

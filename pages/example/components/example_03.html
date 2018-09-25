@@ -1,6 +1,6 @@
 <uku-component>
 <template>
-<h3 uku-text="res.getResource('LABEL_EXAMPLE_03')"></h3>
+<h3 uku-text="$res.getResource('LABEL_EXAMPLE_03')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
 		<a href="#demo3" aria-controls="demo3" role="tab" data-toggle="tab">Demo</a>
@@ -14,30 +14,30 @@
 </ul>
 <div class="tab-content">
 	<div role="tabpanel" class="tab-pane active" id="demo3" style="margin: 20px">
-		<button class="btn btn-default" uku-onclick="ex03Ctrl.sayHello()">
+		<button class="btn btn-default" uku-onclick="$ex03Ctrl.sayHello()">
 			Click Me
 		</button>
-		<button class="btn btn-primary" uku-onclick="ex03Ctrl.sayHelloWithString('hello')">
+		<button class="btn btn-primary" uku-onclick="$ex03Ctrl.sayHelloWithString('hello')">
 			Click Me with String
 		</button>
-		<button class="btn btn-success" uku-onclick="ex03Ctrl.sayHelloWithArgument(ex03Ctrl.myName)">
+		<button class="btn btn-success" uku-onclick="$ex03Ctrl.sayHelloWithArgument($ex03Ctrl.myName)">
 			Click Me with argument
 		</button>
-        <button uku-disabled="ex03Ctrl.disabled">disabled</button>
+        <button uku-disabled="$ex03Ctrl.disabled">disabled</button>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html3" style="margin: 20px">
 		<pre>
 			<code class="html">
-&lt;button uku-onclick="ex03Ctrl.sayHello()"&gt;
+&lt;button uku-onclick="$ex03Ctrl.sayHello()"&gt;
 	Click Me
 &lt;/button&gt;
-&lt;button uku-onclick="ex03Ctrl.sayHelloWithString('hello')"&gt;
+&lt;button uku-onclick="$ex03Ctrl.sayHelloWithString('hello')"&gt;
 	Click Me with String
 &lt;/button&gt;
-&lt;button uku-onclick="ex03Ctrl.sayHelloWithArgument(ex03Ctrl.myName)"&gt;
+&lt;button uku-onclick="$ex03Ctrl.sayHelloWithArgument($ex03Ctrl.myName)"&gt;
 	Click Me with argument
 &lt;/button&gt;
-&lt;button uku-disabled="ex03Ctrl.disabled"&gt;disabled&lt;/button&gt;
+&lt;button uku-disabled="$ex03Ctrl.disabled"&gt;disabled&lt;/button&gt;
 			</code>
 		</pre>
 	</div>

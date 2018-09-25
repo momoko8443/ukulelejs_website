@@ -1,8 +1,8 @@
 <uku-component>
     <template>
         <div>
-            <h3 uku-text="res.getResource('GUIDE_LABEL_BIND_TEXT')"></h3>
-            <p uku-text="res.getResource('GUIDE_TEXT_BIND_TEXT')">
+            <h3 uku-text="$res.getResource('GUIDE_LABEL_BIND_TEXT')"></h3>
+            <p uku-text="$res.getResource('GUIDE_TEXT_BIND_TEXT')">
             </p>
             <ul class="nav nav-tabs" role="tablist">
             	<li role="presentation" class="active">
@@ -36,9 +36,9 @@ function MyCtrl() {
                     </pre>
             	</div>
             </div>
-            <p uku-text="res.getResource('GUIDE_TEXT_BIND_TEXT2')" style="text-decoration:line-through">
+            <p uku-text="$res.getResource('GUIDE_TEXT_BIND_TEXT2')" style="text-decoration:line-through">
 			</p>
-			<p uku-text="res.getResource('GUIDE_TEXT_BIND_TEXT3')" style="color:red">
+			<p uku-text="$res.getResource('GUIDE_TEXT_BIND_TEXT3')" style="color:red">
             </p>
         </div>
     </template>

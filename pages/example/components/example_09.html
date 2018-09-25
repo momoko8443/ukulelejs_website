@@ -1,6 +1,6 @@
 <uku-component>
 <template>
-<h3 uku-text="res.getResource('LABEL_EXAMPLE_09')"></h3>
+<h3 uku-text="$res.getResource('LABEL_EXAMPLE_09')"></h3>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
         <a href="#demo9" aria-controls="demo9" role="tab" data-toggle="tab">Demo</a>
@@ -14,24 +14,24 @@
 </ul>
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="demo9" style="margin: 20px">
-        <button class="btn btn-success" uku-onclick="ex09Ctrl.callAsync()">Call Async</button>
+        <button class="btn btn-success" uku-onclick="$ex09Ctrl.callAsync()">Call Async</button>
         <p>
-            {{ex09Ctrl.asyncData}}
+            {{$ex09Ctrl.asyncData}}
         </p>
     </div>
     <div role="tabpanel" class="tab-pane" id="html9" style="margin: 20px">
         <pre>
 			<code class="html">
-&lt;button uku-onclick="ex09Ctrl.callAsync()">Call Async&lt;/button&gt;
+&lt;button uku-onclick="$ex09Ctrl.callAsync()">Call Async&lt;/button&gt;
 &lt;p&gt;
-	{{ex09Ctrl.callAsync}}
+	{{$ex09Ctrl.callAsync}}
 &lt;/p&gt;
 			</code>
 		</pre>
     </div>
 
     <div role="tabpanel" class="tab-pane" id="js9" style="margin: 20px">
-        <div class="alert alert-info" role="alert" uku-text="res.getResource('TOOL_TIPS_UKU_REFRESH')"></div>
+        <div class="alert alert-info" role="alert" uku-text="$res.getResource('TOOL_TIPS_UKU_REFRESH')"></div>
         <pre>
 			<code class="javascript">
 function Example09Ctrl() {

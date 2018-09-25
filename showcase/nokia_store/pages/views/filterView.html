@@ -11,7 +11,7 @@
             <label>Filter</label>
             <h6>Series</h6>
             <select class="form-control" style="width:250px" uku-selected="cc.selectedSeries|value" uku-onchange="cc.doFilter()">
-                <option uku-repeat="option in cc.series" uku-value="option.value" uku-data-item="option">{{option.name}}</option>
+                <option uku-repeat="opt in cc.series" uku-value="opt.value" uku-data-item="opt">{{opt.name}}</option>
             </select>
             <h6>Price</h6>
             <input id="priceRange" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1100" data-slider-step="10"

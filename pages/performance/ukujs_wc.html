@@ -7,7 +7,7 @@
 
 <body uku-application>
     <my-setting id="performanceSetting"></my-setting>
-    <my-list id="performanceList" uku-items="myCtrl.items"></my-list>
+    <my-list id="performanceList" uku-items="$myCtrl.items"></my-list>
 </body>
 <script>
     var uku;
@@ -17,7 +17,7 @@
         uku.registerComponent('my-list', 'ukujs-components/list.html');
         uku.registerComponent('my-item', 'ukujs-components/item.html');
         var myCtrl = new MyController(uku);
-        uku.registerController('myCtrl', myCtrl);
+        uku.registerController('$myCtrl', myCtrl);
         uku.addListener(Ukulele.INITIALIZED, function (e) {
             myCtrl.init();
         });

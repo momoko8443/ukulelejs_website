@@ -1,6 +1,6 @@
 <uku-component>
 <template>
-<h3 uku-text="res.getResource('LABEL_EXAMPLE_06')"></h3>
+<h3 uku-text="$res.getResource('LABEL_EXAMPLE_06')"></h3>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
         <a href="#demo6" aria-controls="demo6" role="tab" data-toggle="tab">Demo</a>
@@ -15,13 +15,13 @@
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="demo6" style="margin: 20px">
         <p>
-            {{ex06Ctrl.add(ex06Ctrl.numA,ex06Ctrl.numB)}}
+            {{$ex06Ctrl.add($ex06Ctrl.numA,$ex06Ctrl.numB)}}
         </p>
         <p>
-            {{ex06Ctrl.showInfo(ex06Ctrl)}}
+            {{$ex06Ctrl.showInfo(ex06Ctrl)}}
         </p>
         <p>
-            {{ex06Ctrl.showString('hello, ukulelejs')}}
+            {{$ex06Ctrl.showString('hello, ukulelejs')}}
         </p>
 
     </div>
@@ -29,13 +29,13 @@
         <pre>
 			<code class="html">
 &lt;p&gt;
-	{{ex06Ctrl.add(ex06Ctrl.numA,ex06Ctrl.numB)}}
+	{{$ex06Ctrl.add($ex06Ctrl.numA,$ex06Ctrl.numB)}}
 &lt;/p&gt;
 &lt;p&gt;
-	{{ex06Ctrl.showInfo(ex06Ctrl)}}
+	{{$ex06Ctrl.showInfo(ex06Ctrl)}}
 &lt;/p&gt;
 &lt;p&gt;
-	{{ex06Ctrl.showString("aaa")}}
+	{{$ex06Ctrl.showString("aaa")}}
 &lt;/p&gt;
 			</code>
 		</pre>

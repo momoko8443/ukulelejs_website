@@ -1,6 +1,6 @@
 <uku-component>
 <template>
-<h3 uku-text="res.getResource('LABEL_EXAMPLE_12')"></h3>
+<h3 uku-text="$res.getResource('LABEL_EXAMPLE_12')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
 		<a href="#demo12" aria-controls="demo12" role="tab" data-toggle="tab">Demo</a>
@@ -25,25 +25,25 @@
         }
     </style>
 	<div role="tabpanel" class="tab-pane active" id="demo12" style="margin: 20px">
-		<input type="checkbox" uku-value="ex12Ctrl.isShown" uku-onchange="ex12Ctrl.showHideFunction()">
-        <label>Is Shown:<em>{{ex12Ctrl.isShown}}</em></label>
-        <p uku-style="ex12Ctrl.hideStyle" uku-class="ex12Ctrl.classList">
+		<input type="checkbox" uku-value="$ex12Ctrl.isShown" uku-onchange="$ex12Ctrl.showHideFunction()">
+        <label>Is Shown:<em>{{$ex12Ctrl.isShown}}</em></label>
+        <p uku-style="$ex12Ctrl.hideStyle" uku-class="$ex12Ctrl.classList">
             balabalabalbalabala...
         </p>
         <br/>
-        <button class="btn btn-default" uku-onclick="ex12Ctrl.addClass()">add class</button>
-        <button class="btn btn-default" uku-onclick="ex12Ctrl.removeClass()">remove class</button>
+        <button class="btn btn-default" uku-onclick="$ex12Ctrl.addClass()">add class</button>
+        <button class="btn btn-default" uku-onclick="$ex12Ctrl.removeClass()">remove class</button>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html12" style="margin: 20px">
 		<pre>
 			<code class="html">
-&lt;input type="checkbox" uku-value="ex12Ctrl.isShown" uku-onchange="ex12Ctrl.showHideFunction()"&gt;
-&lt;label&gt;Is Shown:&lt;em>{{ex12Ctrl.isShown}}&lt;/em>&lt;/label&gt;
-&lt;p uku-style="ex12Ctrl.hideStyle" uku-class="ex12Ctrl.classList"&gt;
+&lt;input type="checkbox" uku-value="$ex12Ctrl.isShown" uku-onchange="$ex12Ctrl.showHideFunction()"&gt;
+&lt;label&gt;Is Shown:&lt;em>{{$ex12Ctrl.isShown}}&lt;/em>&lt;/label&gt;
+&lt;p uku-style="$ex12Ctrl.hideStyle" uku-class="$ex12Ctrl.classList"&gt;
     balabalabalbalabala...
 &lt;/p&gt;
-&lt;button uku-onclick="ex12Ctrl.addClass()">add class&lt;/button&gt;
-&lt;button uku-onclick="ex12Ctrl.removeClass()">remove class&lt;/button&gt;
+&lt;button uku-onclick="$ex12Ctrl.addClass()">add class&lt;/button&gt;
+&lt;button uku-onclick="$ex12Ctrl.removeClass()">remove class&lt;/button&gt;
 			</code>
 		</pre>
 	</div>

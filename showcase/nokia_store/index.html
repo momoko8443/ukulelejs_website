@@ -18,7 +18,7 @@
 <body uku-application>
     <div id="mainDiv">
         <filter-view></filter-view>
-        <dashboard-view uku-compare-items="appCtrl.compareItems"></dashboard-view>
+        <dashboard-view uku-compare-items="$appCtrl.compareItems"></dashboard-view>
         <cart-view></cart-view>
 </body>
 <script>
@@ -32,7 +32,7 @@
     uku.registerComponent("compare-item-detail","pages/components/compareItemDetail.html");
     uku.registerComponent("dash-item","pages/components/dashItem.html");
     uku.registerComponent("item-detail","pages/components/itemDetail.html");
-    uku.registerController("appCtrl", new ApplicationController(uku));
+    uku.registerController("$appCtrl", new ApplicationController(uku));
 
     uku.addListener(Ukulele.INITIALIZED,function(e){
         var body = document.getElementsByTagName("body")[0];

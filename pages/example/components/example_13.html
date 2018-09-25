@@ -1,6 +1,6 @@
 <uku-component>
 <template>
-<h3 uku-text="res.getResource('LABEL_EXAMPLE_13')"></h3>
+<h3 uku-text="$res.getResource('LABEL_EXAMPLE_13')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
 		<a href="#demo13" aria-controls="demo13" role="tab" data-toggle="tab">Demo</a>
@@ -29,9 +29,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr uku-repeat="city in ex13Ctrl.cities">
-                    <td uku-rowspan="ex13Ctrl.setRowSpan(city,'area')" uku-style="ex13Ctrl.setRowStyle(city,'area')">{{city.area}}</td>
-                    <td uku-rowspan="ex13Ctrl.setRowSpan(city,'country')" uku-style="ex13Ctrl.setRowStyle(city,'country')">{{city.country}}</td>
+                <tr uku-repeat="city in $ex13Ctrl.cities">
+                    <td uku-rowspan="$ex13Ctrl.setRowSpan(city,'area')" uku-style="$ex13Ctrl.setRowStyle(city,'area')">{{city.area}}</td>
+                    <td uku-rowspan="$ex13Ctrl.setRowSpan(city,'country')" uku-style="$ex13Ctrl.setRowStyle(city,'country')">{{city.country}}</td>
                     <td>{{city.name}}</td>
                     <td>{{city.total}}</td>
                 </tr>
@@ -51,9 +51,9 @@
         &lt;/tr>
     &lt;/thead>
     &lt;tbody>
-        &lt;tr uku-repeat="city in ex13Ctrl.cities"&gt;
-            &lt;td uku-rowspan="ex13Ctrl.setRowSpan(city,'area')" uku-style="ex13Ctrl.setRowStyle(city,'area')"&gt;{{city.area}}&lt;/td&gt;
-            &lt;td uku-rowspan="ex13Ctrl.setRowSpan(city,'country')" uku-style="ex13Ctrl.setRowStyle(city,'country')"&gt;{{city.country}}&lt;/td>
+        &lt;tr uku-repeat="city in $ex13Ctrl.cities"&gt;
+            &lt;td uku-rowspan="$ex13Ctrl.setRowSpan(city,'area')" uku-style="$ex13Ctrl.setRowStyle(city,'area')"&gt;{{city.area}}&lt;/td&gt;
+            &lt;td uku-rowspan="$ex13Ctrl.setRowSpan(city,'country')" uku-style="$ex13Ctrl.setRowStyle(city,'country')"&gt;{{city.country}}&lt;/td>
             &lt;td&gt;{{city.city}}&lt;/td&gt;
             &lt;td&gt;{{city.total}}&lt;/td&gt;
         &lt;/tr&gt;

@@ -1,39 +1,39 @@
 <div class="left_column">
     <div style="overflow:auto;position:absolute;top:60px;left:0;bottom:0;width:300px">
-        <div class="list-group" style="margin:10px" uku-onclick="guideCtrl.guideMenuItemClickHandler()">
-            <li class="list-group-item active" uku-text="res.getResource('GUIDE_MENU_ITEM_PREPARE')"></li>
-            <button type="button" class="list-group-item" data-menu-item="install" uku-text="res.getResource('GUIDE_MENU_ITEM_INSTALL')"></button>
-            <button type="button" class="list-group-item" data-menu-item="config" uku-text="res.getResource('GUIDE_MENU_ITEM_CONFIGURATION')"></button>
-            <button type="button" class="list-group-item" data-menu-item="native" uku-text="res.getResource('GUIDE_MENU_ITEM_NATIVE_WAY')"></button>
-            <button type="button" class="list-group-item" data-menu-item="amd" uku-text="res.getResource('GUIDE_MENU_ITEM_AMD_WAY')"></button>
-            <button type="button" class="list-group-item" data-menu-item="cmd" uku-text="res.getResource('GUIDE_MENU_ITEM_CMD_WAY')"></button>
-            <!-- <button type="button" class="list-group-item" data-menu-item="webpack" uku-text="res.getResource('GUIDE_MENU_ITEM_WEBPACK_WAY')"></button> -->
-            <li class="list-group-item active" uku-text="res.getResource('GUIDE_MENU_ITEM_TWO_WAY_BINDING')"></li>
-            <button type="button" class="list-group-item" data-menu-item="bind-text" uku-text="res.getResource('GUIDE_MENU_ITEM_BIND_TEXT')"></button>
-            <button type="button" class="list-group-item" data-menu-item="bind-attr" uku-text="res.getResource('GUIDE_MENU_ITEM_BIND_ATTRIBUTE')"></button>
-            <button type="button" class="list-group-item" data-menu-item="bind-input" uku-text="res.getResource('GUIDE_MENU_ITEM_TWO_BIND_INPUT')"></button>
-            <button type="button" class="list-group-item" data-menu-item="bind-event" uku-text="res.getResource('GUIDE_MENU_ITEM_TWO_BIND_EVENT')"></button>
-            <button type="button" class="list-group-item" data-menu-item="bind-style" uku-text="res.getResource('GUIDE_MENU_ITEM_TWO_BIND_STYLE')"></button>
-            <button type="button" class="list-group-item" data-menu-item="bind-function" uku-text="res.getResource('GUIDE_MENU_ITEM_TWO_BIND_FUNCTION')"></button>
-            <li class="list-group-item active" uku-text="res.getResource('GUIDE_MENU_ITEM_DIRECTIVE')"></li>
-            <button type="button" class="list-group-item" data-menu-item="uku-text" uku-text="res.getResource('GUIDE_MENU_ITEM_UKU_TEXT')"></button>
-            <button type="button" class="list-group-item" data-menu-item="uku-repeat" uku-text="res.getResource('GUIDE_MENU_ITEM_UKU_REPEAT')"></button>
-            <!-- <button type="button" class="list-group-item" data-menu-item="uku-include" uku-text="res.getResource('GUIDE_MENU_ITEM_UKU_INCLUDE')"></button> -->
-            <button type="button" class="list-group-item" data-menu-item="uku-selected" uku-text="res.getResource('GUIDE_MENU_ITEM_UKU_SELECTED')"></button>
-            <button type="button" class="list-group-item" data-menu-item="uku-selected2" uku-text="res.getResource('GUIDE_MENU_ITEM_UKU_SELECTED2')"></button>
-            <li class="list-group-item active" uku-text="res.getResource('GUIDE_MENU_ITEM_API')"></li>
-            <button type="button" class="list-group-item" data-menu-item="register-controller" uku-text="res.getResource('GUIDE_MENU_ITEM_API_REG_CTRL')"></button>
-            <button type="button" class="list-group-item" data-menu-item="register-component" uku-text="res.getResource('GUIDE_MENU_ITEM_API_REG_COMP')"></button>
-            <button type="button" class="list-group-item" data-menu-item="init" uku-text="res.getResource('GUIDE_MENU_ITEM_API_INIT')"></button>
-            <button type="button" class="list-group-item" data-menu-item="refresh" uku-text="res.getResource('GUIDE_MENU_ITEM_API_REFRSH')"></button>
-<button type="button" class="list-group-item" data-menu-item="add-listener" uku-text="res.getResource('GUIDE_MENU_ITEM_API_ADD_LISTENER')"></button>
-            <button type="button" class="list-group-item" data-menu-item="handle-element" uku-text="res.getResource('GUIDE_MENU_ITEM_API_DEAL_ELEMENT')"></button>
-            <li class="list-group-item active" uku-text="res.getResource('GUIDE_MENU_ITEM_COMP')"></li>
-            <button type="button" class="list-group-item" data-menu-item="custom-comp" uku-text="res.getResource('GUIDE_MENU_ITEM_CUSTOM_COMP')"></button>
-            <button type="button" class="list-group-item" data-menu-item="nest-comp" uku-text="res.getResource('GUIDE_MENU_ITEM_NEST_COMP')"></button>
-            <button type="button" class="list-group-item" data-menu-item="communicate-comp" uku-text="res.getResource('GUIDE_MENU_ITEM__COMMUNICAT_COMP')"></button>
-            <button type="button" class="list-group-item" data-menu-item="3rd-part-comp" uku-text="res.getResource('GUIDE_MENU_ITEM__THIRD_PART_COMP')"></button>
-            <button type="button" class="list-group-item" data-menu-item="dynamic-comp" uku-text="res.getResource('GUIDE_MENU_ITEM_DYNAMIC_LOAD_COMP')"></button>
+        <div class="list-group" style="margin:10px" uku-onclick="$guideCtrl.guideMenuItemClickHandler()">
+            <li class="list-group-item active" uku-text="$res.getResource('GUIDE_MENU_ITEM_PREPARE')"></li>
+            <button type="button" class="list-group-item" data-menu-item="install" uku-text="$res.getResource('GUIDE_MENU_ITEM_INSTALL')"></button>
+            <button type="button" class="list-group-item" data-menu-item="config" uku-text="$res.getResource('GUIDE_MENU_ITEM_CONFIGURATION')"></button>
+            <button type="button" class="list-group-item" data-menu-item="native" uku-text="$res.getResource('GUIDE_MENU_ITEM_NATIVE_WAY')"></button>
+            <button type="button" class="list-group-item" data-menu-item="amd" uku-text="$res.getResource('GUIDE_MENU_ITEM_AMD_WAY')"></button>
+            <button type="button" class="list-group-item" data-menu-item="cmd" uku-text="$res.getResource('GUIDE_MENU_ITEM_CMD_WAY')"></button>
+            <!-- <button type="button" class="list-group-item" data-menu-item="webpack" uku-text="$res.getResource('GUIDE_MENU_ITEM_WEBPACK_WAY')"></button> -->
+            <li class="list-group-item active" uku-text="$res.getResource('GUIDE_MENU_ITEM_TWO_WAY_BINDING')"></li>
+            <button type="button" class="list-group-item" data-menu-item="bind-text" uku-text="$res.getResource('GUIDE_MENU_ITEM_BIND_TEXT')"></button>
+            <button type="button" class="list-group-item" data-menu-item="bind-attr" uku-text="$res.getResource('GUIDE_MENU_ITEM_BIND_ATTRIBUTE')"></button>
+            <button type="button" class="list-group-item" data-menu-item="bind-input" uku-text="$res.getResource('GUIDE_MENU_ITEM_TWO_BIND_INPUT')"></button>
+            <button type="button" class="list-group-item" data-menu-item="bind-event" uku-text="$res.getResource('GUIDE_MENU_ITEM_TWO_BIND_EVENT')"></button>
+            <button type="button" class="list-group-item" data-menu-item="bind-style" uku-text="$res.getResource('GUIDE_MENU_ITEM_TWO_BIND_STYLE')"></button>
+            <button type="button" class="list-group-item" data-menu-item="bind-function" uku-text="$res.getResource('GUIDE_MENU_ITEM_TWO_BIND_FUNCTION')"></button>
+            <li class="list-group-item active" uku-text="$res.getResource('GUIDE_MENU_ITEM_DIRECTIVE')"></li>
+            <button type="button" class="list-group-item" data-menu-item="uku-text" uku-text="$res.getResource('GUIDE_MENU_ITEM_UKU_TEXT')"></button>
+            <button type="button" class="list-group-item" data-menu-item="uku-repeat" uku-text="$res.getResource('GUIDE_MENU_ITEM_UKU_REPEAT')"></button>
+            <!-- <button type="button" class="list-group-item" data-menu-item="uku-include" uku-text="$res.getResource('GUIDE_MENU_ITEM_UKU_INCLUDE')"></button> -->
+            <button type="button" class="list-group-item" data-menu-item="uku-selected" uku-text="$res.getResource('GUIDE_MENU_ITEM_UKU_SELECTED')"></button>
+            <button type="button" class="list-group-item" data-menu-item="uku-selected2" uku-text="$res.getResource('GUIDE_MENU_ITEM_UKU_SELECTED2')"></button>
+            <li class="list-group-item active" uku-text="$res.getResource('GUIDE_MENU_ITEM_API')"></li>
+            <button type="button" class="list-group-item" data-menu-item="register-controller" uku-text="$res.getResource('GUIDE_MENU_ITEM_API_REG_CTRL')"></button>
+            <button type="button" class="list-group-item" data-menu-item="register-component" uku-text="$res.getResource('GUIDE_MENU_ITEM_API_REG_COMP')"></button>
+            <button type="button" class="list-group-item" data-menu-item="init" uku-text="$res.getResource('GUIDE_MENU_ITEM_API_INIT')"></button>
+            <button type="button" class="list-group-item" data-menu-item="refresh" uku-text="$res.getResource('GUIDE_MENU_ITEM_API_REFRSH')"></button>
+<button type="button" class="list-group-item" data-menu-item="add-listener" uku-text="$res.getResource('GUIDE_MENU_ITEM_API_ADD_LISTENER')"></button>
+            <button type="button" class="list-group-item" data-menu-item="handle-element" uku-text="$res.getResource('GUIDE_MENU_ITEM_API_DEAL_ELEMENT')"></button>
+            <li class="list-group-item active" uku-text="$res.getResource('GUIDE_MENU_ITEM_COMP')"></li>
+            <button type="button" class="list-group-item" data-menu-item="custom-comp" uku-text="$res.getResource('GUIDE_MENU_ITEM_CUSTOM_COMP')"></button>
+            <button type="button" class="list-group-item" data-menu-item="nest-comp" uku-text="$res.getResource('GUIDE_MENU_ITEM_NEST_COMP')"></button>
+            <button type="button" class="list-group-item" data-menu-item="communicate-comp" uku-text="$res.getResource('GUIDE_MENU_ITEM__COMMUNICAT_COMP')"></button>
+            <button type="button" class="list-group-item" data-menu-item="3rd-part-comp" uku-text="$res.getResource('GUIDE_MENU_ITEM__THIRD_PART_COMP')"></button>
+            <button type="button" class="list-group-item" data-menu-item="dynamic-comp" uku-text="$res.getResource('GUIDE_MENU_ITEM_DYNAMIC_LOAD_COMP')"></button>
         </div>
     </div>
 </div>

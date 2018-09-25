@@ -1,6 +1,6 @@
 <uku-component>
 <template>
-<h3 uku-text="res.getResource('LABEL_EXAMPLE_11')"></h3>
+<h3 uku-text="$res.getResource('LABEL_EXAMPLE_11')"></h3>
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active">
 		<a href="#demo11" aria-controls="demo11" role="tab" data-toggle="tab">Demo</a>
@@ -14,30 +14,30 @@
 </ul>
 <div class="tab-content">
 	<div role="tabpanel" class="tab-pane active" id="demo11" style="margin: 20px">
-		<input type="checkbox" uku-value="ex11Ctrl.isCheckboxSelected">
-        <em>{{ex11Ctrl.isCheckboxSelected}}</em>
+		<input type="checkbox" uku-value="$ex11Ctrl.isCheckboxSelected">
+        <em>{{$ex11Ctrl.isCheckboxSelected}}</em>
         <br />
         Male:
-        <input type="radio" name="Sex" value="male" uku-selected="ex11Ctrl.sex">
+        <input type="radio" name="Sex" value="male" uku-selected="$ex11Ctrl.sex">
         <br />
         Female:
-        <input type="radio" name="Sex" value="female" uku-selected="ex11Ctrl.sex">
+        <input type="radio" name="Sex" value="female" uku-selected="$ex11Ctrl.sex">
         <br/>
         You selected:
-        <em>{{ex11Ctrl.sex}}</em>
+        <em>{{$ex11Ctrl.sex}}</em>
 	</div>
 	<div role="tabpanel" class="tab-pane" id="html11" style="margin: 20px">
-        <div class="alert alert-info" role="alert" uku-text="res.getResource('TOOL_TIPS_UKU_SELECTED_2')"></div>
+        <div class="alert alert-info" role="alert" uku-text="$res.getResource('TOOL_TIPS_UKU_SELECTED_2')"></div>
 		<pre>
 			<code class="html">
-&lt;input type="checkbox" uku-value="ex11Ctrl.isCheckboxSelected"&gt;
-&lt;em>{{ex11Ctrl.isCheckboxSelected}}&lt;/em&gt;
+&lt;input type="checkbox" uku-value="$ex11Ctrl.isCheckboxSelected"&gt;
+&lt;em>{{$ex11Ctrl.isCheckboxSelected}}&lt;/em&gt;
 Male:
-&lt;input type="radio" name="Sex" value="male" uku-selected="ex11Ctrl.sex"&gt;
+&lt;input type="radio" name="Sex" value="male" uku-selected="$ex11Ctrl.sex"&gt;
 Female:
-&lt;input type="radio" name="Sex" value="female" uku-selected="ex11Ctrl.sex"&gt;
+&lt;input type="radio" name="Sex" value="female" uku-selected="$ex11Ctrl.sex"&gt;
 You selected:
-&lt;em>{{ex11Ctrl.sex}}&lt;/em&gt;
+&lt;em>{{$ex11Ctrl.sex}}&lt;/em&gt;
 			</code>
 		</pre>
 	</div>

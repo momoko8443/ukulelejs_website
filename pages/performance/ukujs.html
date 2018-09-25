@@ -10,19 +10,19 @@
     <div>
         <h2>Ukulelejs</h2>
         <lable>Repeat Count:</lable>
-        <select uku-selected="perCtrl.selectedOption|value">
-            <option uku-repeat="option in perCtrl.options" uku-data-item="option" uku-value="option.value">{{option.name}}</option>
+        <select uku-selected="$perCtrl.selectedOption|value">
+            <option uku-repeat="opt in $perCtrl.options" uku-data-item="opt" uku-value="opt.value">{{opt.name}}</option>
         </select>
-        <button uku-onclick="perCtrl.generateTesingData()">Render</button>
-        <button uku-onclick="perCtrl.reset()">Reset</button>
+        <button uku-onclick="$perCtrl.generateTesingData()">Render</button>
+        <button uku-onclick="$perCtrl.reset()">Reset</button>
         <br/>
         <lable>Total Binding Objects:</lable>
-        <em>{{perCtrl.total}}</em>
+        <em>{{$perCtrl.total}}</em>
         <br/>
         <label>Time:</label><em id="timer">0</em> ms
         <ol id="mainOL">
             <h3>previous dom</h3>
-            <li uku-repeat="item in perCtrl.items">
+            <li uku-repeat="item in $perCtrl.items">
                 <div>
                     <label>{{item.field0}}</label>
                     <input type="text" uku-value="item.field0" style="width:80px">
@@ -54,7 +54,7 @@
     var uku;
     var ctrl = new PerformanceController();
     uku = new Ukulele();
-    uku.registerController("perCtrl", ctrl);
+    uku.registerController("$perCtrl", ctrl);
     uku.init();
 
     function PerformanceController() {

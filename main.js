@@ -1,8 +1,8 @@
 //import jquery from './bower_components/jquery/dist/jquery.min';
 //import jquery_bootstrap from './bower_components/bootstrap/dist/js/bootstrap.min';
 import * as Ukulele from './bower_components/ukulelejs/dist/uku';
-import hljs from 'highlight.js/lib/highlight';
-import javascript from 'highlight.js/lib/languages/javascript';
+import hljs from './bower_components/highlightjs/highlight.pack';
+//import javascript from 'highlight.js/lib/languages/javascript';
 import locale from './resources/locale/example_properties';
 import Example01Ctrl from './resources/js/example01';
 import Example02Ctrl from './resources/js/example02';
@@ -27,27 +27,27 @@ function main() {
     var route;
     var initRoutePool = {};
     var perforCtrl;
-    hljs.registerLanguage('javascript', javascript);
+    //hljs.registerLanguage('javascript', javascript);
     function init() {
         var Ukulelejs = Ukulele.Ukulele;
         uku = new Ukulelejs();
         console.log(new Example05Ctrl().child.say());
-        uku.registerController("root", new RootCtrl(uku));
-        uku.registerController("guideCtrl", new GuideCtrl(uku));
-        uku.registerController("otherCtrl", new OtherCtrl());
-        uku.registerController("ex01Ctrl", new Example01Ctrl());
-        uku.registerController("ex02Ctrl", new Example02Ctrl());
-        uku.registerController("ex03Ctrl", new Example03Ctrl());
-        uku.registerController("ex04Ctrl", new Example04Ctrl());
-        uku.registerController("ex05Ctrl", new Example05Ctrl());
-        uku.registerController("ex06Ctrl", new Example06Ctrl());
+        uku.registerController("$root", new RootCtrl(uku));
+        uku.registerController("$guideCtrl", new GuideCtrl(uku));
+        uku.registerController("$otherCtrl", new OtherCtrl());
+        uku.registerController("$ex01Ctrl", new Example01Ctrl());
+        uku.registerController("$ex02Ctrl", new Example02Ctrl());
+        uku.registerController("$ex03Ctrl", new Example03Ctrl());
+        uku.registerController("$ex04Ctrl", new Example04Ctrl());
+        uku.registerController("$ex05Ctrl", new Example05Ctrl());
+        uku.registerController("$ex06Ctrl", new Example06Ctrl());
 
-        uku.registerController("ex09Ctrl", new Example09Ctrl(uku));
-        uku.registerController("ex10Ctrl", new Example10Ctrl(uku));
-        uku.registerController("ex11Ctrl", new Example11Ctrl());
-        uku.registerController("ex12Ctrl", new Example12Ctrl());
-        uku.registerController("ex13Ctrl", new Example13Ctrl());
-        uku.registerController("ex15Ctrl", new Example15Ctrl(uku));
+        uku.registerController("$ex09Ctrl", new Example09Ctrl(uku));
+        uku.registerController("$ex10Ctrl", new Example10Ctrl(uku));
+        uku.registerController("$ex11Ctrl", new Example11Ctrl());
+        uku.registerController("$ex12Ctrl", new Example12Ctrl());
+        uku.registerController("$ex13Ctrl", new Example13Ctrl());
+        uku.registerController("$ex15Ctrl", new Example15Ctrl(uku));
 
         uku.registerComponent("tab-bar","pages/components/tabbar.html");
         uku.registerComponent("example-00","pages/example/components/example_00.html");
@@ -106,8 +106,8 @@ function main() {
         uku.registerComponent("uncle","pages/guide/comp/communication/uncle.html");
         uku.registerComponent("brother-in-law","pages/guide/comp/communication/brother_in_law.html");
         perforCtrl = new PerformanceCtrl();
-        uku.registerController("perforCtrl", perforCtrl);
-        uku.registerController("res", new ResourceManager());
+        uku.registerController("$perforCtrl", perforCtrl);
+        uku.registerController("$res", new ResourceManager());
 		route = new RouteController("viewContainer");
 		route.default("#home", "pages/home.html")
         .when("#guide", "pages/guide.html")

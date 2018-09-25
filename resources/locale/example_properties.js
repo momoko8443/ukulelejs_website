@@ -13,7 +13,7 @@ var locale = {
         "PROS_3":"性能还算不错",
         "PROS_4":"学习成本非常低",
         "TOOL_TIPS_UKU_TEXT":"uku-text是ukujs中特有的属性，它用来代替{{xxx}}的写法，引入uku-text功能是为了方式初始化时花括号的闪现带来的不佳用户体验体验",
-        "TOOL_TIPS_UKU_REPEAT":"uku-repeat是ukujs中特有的属性，它用来遍历渲染一组集合数据，如果在子dom中想调用外围controller的资源，请使用parent.ctrlAlias.xxx的方式",
+        "TOOL_TIPS_UKU_REPEAT":"uku-repeat是ukujs中特有的属性，它用来遍历渲染一组集合数据，如果在子dom中想调用外围controller的资源，请直接使用parentCtrlAlias.xxx的方式",
         "TOOL_TIPS_UKU_REFRESH":"你可以使用 uku.refresh()，方法来强制同步视图和与之绑定的模型，refresh('ctrlAlias')同步指定的controller， refresh(['ctrlAliasA','ctrlAliasB'])同步多个controller，refresh()同步所有controller",
         "TOOL_TIPS_UKU_SELECTED":"uku-selected='ex10Ctrl.selectedOption|value' 设置SELECT控件的默认选中项目|右边为使用对象中那个字段作为value来定位具体OPTION，uku-data-item 用来设置与OPTION绑定的对象",
         "TOOL_TIPS_UKU_SELECTED_2":"radio button中可以设置uku-selected='some value'来决定某个button的选中",

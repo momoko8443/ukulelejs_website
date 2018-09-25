@@ -1,8 +1,8 @@
 <uku-component>
     <template>
         <div>
-            <h3 uku-text="res.getResource('GUIDE_LABEL_DIRECTIVE_UKU_TEXT')"></h3>
-            <p uku-text="res.getResource('GUIDE_TEXT_DIRECTIVE_UKU_TEXT')">
+            <h3 uku-text="$res.getResource('GUIDE_LABEL_DIRECTIVE_UKU_TEXT')"></h3>
+            <p uku-text="$res.getResource('GUIDE_TEXT_DIRECTIVE_UKU_TEXT')">
             </p>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
@@ -38,7 +38,7 @@ function MyCtrl(uku) {
                     </pre>
                 </div>
             </div>
-            <p uku-text="res.getResource('GUIDE_TEXT_DIRECTIVE_UKU_TEXT2')">
+            <p uku-text="$res.getResource('GUIDE_TEXT_DIRECTIVE_UKU_TEXT2')">
             </p>
         </div>
     </template>

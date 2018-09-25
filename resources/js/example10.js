@@ -58,6 +58,6 @@ export default function (uku) {
 
     this.selectedOptionChanged = function () {
         this.selectedChildOption = this.selectedOption.children[0];
-        uku.refresh();
+        uku.refresh("ex10Ctrl");
     };
 };
