@@ -37,7 +37,7 @@ function MyController(uku){
     this.getUsersFromServer = function(){
         ajax.get("/users",function(result){
             self.users = result;
-            uku.refresh("myCtrl");
+            uku.refresh("$myCtrl");
         });
     }
 }
