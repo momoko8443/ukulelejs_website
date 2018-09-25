@@ -32,7 +32,7 @@
                 <code class="js">
 function MyController(uku){
     this.appendNewDOM = function(){
-        var domHtml = "&lt;h3 uku-text='myCtrl.message'&gt;&lt;/h3&gt;";
+        var domHtml = "&lt;h3 uku-text='$myCtrl.message'&gt;&lt;/h3&gt;";
         var newDOM = document.createElement(domHtml);
         uku.addListener(Ukulele.HANDLE_ELEMENT_COMPLETED,function(e){
             alert(e);

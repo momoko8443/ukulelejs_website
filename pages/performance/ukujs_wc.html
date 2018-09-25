@@ -19,7 +19,7 @@
         var myCtrl = new MyController(uku);
         uku.registerController('$myCtrl', myCtrl);
         uku.addListener(Ukulele.INITIALIZED, function (e) {
-            myCtrl.init();
+            $myCtrl.init();
         });
         uku.init();
 
@@ -72,7 +72,7 @@
                     parent.postMessage(JSON.stringify({
                         name: "ukujs web component",
                         runTime: runTime,
-                        type: myCtrl.total
+                        type: $myCtrl.total
                     }), "*");
                 }
             }, interval);

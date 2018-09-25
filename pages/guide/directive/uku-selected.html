@@ -28,13 +28,13 @@
                 <div role="tabpanel" class="tab-pane" id="html" style="margin: 20px">
                     <pre>
                         <code class="html">
-&lt;select uku-selected="myCtrl.selectedItem|value"&gt;
-    &lt;option uku-repeat="item in myCtrl.items" uku-value="item.value" uku-data-item="item"&gt;
+&lt;select uku-selected="$myCtrl.selectedItem|value"&gt;
+    &lt;option uku-repeat="item in $myCtrl.items" uku-value="item.value" uku-data-item="item"&gt;
         {{item.name}}
     &lt;/option&gt;
 &lt;/select&gt;
-&lt;h4>{{myCtrl.selectedItem.name}}&lt;/h4&gt;
-&lt;h4>{{myCtrl.selectedItem.value}}&lt;/h4&gt;
+&lt;h4>{{$myCtrl.selectedItem.name}}&lt;/h4&gt;
+&lt;h4>{{$myCtrl.selectedItem.value}}&lt;/h4&gt;
                         </code>
                     </pre>
                 </div>
