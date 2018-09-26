@@ -1,9 +1,10 @@
 <uku-component>
     <template>
         <footer class="footer">
-				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong uku-text="cc.left"></strong>{{cc.activeTodoWord}}</span>
-				<!-- Remove this if you don't implement routing -->
+				<span class="todo-count">
+					<strong uku-text="cc.left"></strong>
+					<span>{{cc.activeTodoWord}}</span>
+				</span>
 				<ul class="filters">
 					<li>
 						<a uku-class="cc.getFilterButtonClass('all')" href="#/all" uku-onclick="cc.dofilter('all')">All</a>

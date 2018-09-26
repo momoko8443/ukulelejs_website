@@ -27,13 +27,13 @@
                     <dash-item class="phoneItemDiv" uku-phone="phone" uku-repeat="phone in cc.phones" draggable="true" uku-ondragstart="cc.doDrag(phone)"
                         uku-onaddItemToCart="cc.addItemToCart()" uku-onaddItemToCompart="cc.addItemToCompart()"
                         uku-onshowItemDetail="cc.showItemDetail()">
-                        </dash-item>
+                    </dash-item>
                 </div>
             </div>
             <div id="compareView">
                 <compare-item-detail class="compareItemDiv" uku-repeat="phone in cc.itemsInCompare" uku-item="phone" uku-onaddItemToCart="cc.addItemToCart()"
                     uku-onshowItemDetail="cc.showItemDetail()" uku-onexitDetailView="cc.exitDetailView()">
-                    </compare-item-detail>
+                </compare-item-detail>
             </div>
         </div>
     </template>
@@ -52,7 +52,7 @@
                                 backupPhones.push(self.phones[i]);
                             }
                         }
-                        uku.refresh(this._alias);
+                        uku.refresh(self._alias);
                     });
                 })();
 
@@ -170,12 +170,12 @@
                     EventBusSingleton.getInstance().dispatchEvent(event);
                 };
 
-                this.doDrag = function (e,item) {
+                this.doDrag = function (event, item) {
                     var jsonStr = JSON.stringify(item);
-                    if(!e.dataTrander){
-                        e = e.originalEvent;
+                    if(!event.dataTransfer){
+                        event = event.originalEvent;
                     }
-                    e.dataTransfer.setData("Text", jsonStr);
+                    event.dataTransfer.setData("Text", jsonStr);
                 };
             };
         })(EventBusSingleton);

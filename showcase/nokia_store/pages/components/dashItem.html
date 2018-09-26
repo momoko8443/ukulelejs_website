@@ -48,13 +48,13 @@
                         display: show
                     };
                 };
-                this.addItemToCart = function(e,item) {
+                this.addItemToCart = function(event,item) {
                     this.fire('addItemToCart', item);
                 };
-                this.addItemToCompart = function(e,item) {
+                this.addItemToCompart = function(event,item) {
                     this.fire('addItemToCompart', item);
                 };
-                this.showItemDetail = function(e,item) {
+                this.showItemDetail = function(event,item) {
                     this.fire('showItemDetail', item);
                 }
             };

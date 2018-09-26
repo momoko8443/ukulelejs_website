@@ -138,11 +138,11 @@
                     e.preventDefault();
                 };
 
-                this.itemDrop = function (e) {
-                    if(!e.dataTrander){
-                        e = e.originalEvent;
+                this.itemDrop = function (event) {
+                    if(!event.dataTransfer){
+                        event = event.originalEvent;
                     }
-                    var jsonStr = e.dataTransfer.getData("Text");
+                    var jsonStr = event.dataTransfer.getData("Text");
                     var item = JSON.parse(jsonStr);
                     addItem2Compare(item);
                 };
