@@ -1,12 +1,12 @@
 {
   "name": "todomvc-app-css",
   "homepage": "https://github.com/tastejs/todomvc-app-css",
-  "version": "2.1.0",
-  "_release": "2.1.0",
+  "version": "2.1.2",
+  "_release": "2.1.2",
   "_resolution": {
     "type": "version",
-    "tag": "v2.1.0",
-    "commit": "0c5df20b3a1b98e0ab448573679595cefe7b6619"
+    "tag": "v2.1.2",
+    "commit": "9bdbf03df0561a73da800d86b5d2aaa219c791df"
   },
   "_source": "https://github.com/tastejs/todomvc-app-css.git",
   "_target": "^2.0.6",

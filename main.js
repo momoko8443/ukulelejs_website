@@ -108,7 +108,7 @@ function main() {
         perforCtrl = new PerformanceCtrl();
         uku.registerController("$perforCtrl", perforCtrl);
         uku.registerController("$res", new ResourceManager());
-		route = new RouteController("viewContainer");
+		route = new UkuRouter("viewContainer");
 		route.default("#home", "pages/home.html")
         .when("#guide", "pages/guide.html")
 				.when("#example", "pages/example.html")

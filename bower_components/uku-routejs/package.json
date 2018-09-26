@@ -1,10 +1,11 @@
 {
-  "name": "routejs",
-  "version": "1.0.0",
+  "name": "uku-routejs",
+  "version": "1.1.1",
   "description": "routejs is a simple route tool for spa",
-  "main": "index.js",
+  "main": "dist/uku-router.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,12 @@
   "author": "momoko8443",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-jshint": "^1.11.2",
-    "gulp-uglify": "^1.2.0"
+    "css-loader": "^1.0.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "path-to-regexp": "^2.4.0"
   }
 }

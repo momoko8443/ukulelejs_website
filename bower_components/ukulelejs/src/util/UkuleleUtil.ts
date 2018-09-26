@@ -1,5 +1,4 @@
 import { Selector } from "../extend/Selector";
-import { ArgumentUtil } from "./ArgumentUtil";
 import { ComponentConfiguration } from "../model/ComponentConfiguration";
 import { IUkulele } from "../core/IUkulele";
 import { ControllerModel } from "../model/ControllerModel";
@@ -12,14 +11,6 @@ class ValueAndParent {
     }
 }
 export class UkuleleUtil {
-    /* static getFinalAttribute(expression:string):string {
-        let temp:Array<string> = expression.split(".");
-        let isParent:string = temp.shift();
-        if (isParent === "parent") {
-            return UkuleleUtil.getFinalAttribute(temp.join("."));
-        }
-        return temp.join(".");
-    } */
 
     static searchHtmlTag(htmlString: string, tagName: string): number {
         let reTemp: string = "^<" + tagName + "[\\s\\S]*>" + "[\\s\\S]*</" + tagName + ">$";
@@ -141,6 +132,7 @@ export class UkuleleUtil {
         let arr = [];
         controller_alias_list.forEach(alias => {
             let pattern = new RegExp("\\b" + alias, "gm");
+            console.count('getBoundModelInstantNames执行的次数');
             if (expression.search(pattern) > -1) {
                 arr.push(alias);
             }
@@ -161,8 +153,12 @@ export class UkuleleUtil {
                 attrName = attrName.replace(pattern2, "." + alias);
 
             });
-
-            var result = eval(attrName);
+            var result;
+            try {
+                result = eval(attrName);
+            } catch (err) {
+                result = '';
+            }
             tempScope = null;
             return result;
         })();
@@ -172,18 +168,48 @@ export class UkuleleUtil {
         return (function () {
             var tempScope = {};
             tempScope[object['_alias']] = object;
-            
+
             let valueString;
-            if(typeof value === "string"){
+            if (typeof value === "string") {
                 valueString = '"' + value + '"';
-            }else if(typeof value === "object"){
+            } else if (typeof value === "object") {
                 valueString = "JSON.parse('" + JSON.stringify(value) + "')";
-            }else{
+            } else {
                 valueString = value;
             }
 
             let evalString = "tempScope." + attrName + "=" + valueString;
             eval(evalString);
         })();
+    }
+
+    static wrapScriptInComponent(originalScript): string {
+        let trimScript = originalScript.replace(new RegExp('\\s', 'gm'), '');
+        if (trimScript.search(new RegExp('\\(function\\(')) === 0) {
+            return originalScript;
+        } else {
+            let selfExcutingFrame =
+                `	(function(){
+                        return function(uku){                
+                            Object.defineProperty(this, 'currentState', {
+                                set: function(value){
+                                    if(value){
+                                        this._currentState = value;
+                                        uku.refresh(this._alias);
+                                    }
+                                }
+                            });
+
+                            this.setState = function(state){
+                                this._currentState = state;
+                                uku.refresh(this._alias);
+                            };
+
+                            ${originalScript}
+                        };
+                    })();
+                `;
+            return selfExcutingFrame;
+        }
     }
 }

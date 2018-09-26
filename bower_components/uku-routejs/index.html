@@ -2,15 +2,17 @@
     <head>
         <title>Route Demo</title>
         <link rel="stylesheet" href="resources/css/example.css">
-        <link rel="stylesheet" href="resources/css/effect.css">
+        <!-- <link rel="stylesheet" href="resources/css/effect.css"> -->
         <!--<script src="build/js/uku-route.js"></script>-->
-        <script src="src/js/uku-route.js"></script>
+        <script src="dist/uku-router.js"></script>
     </head>
     
     <body>
         <div class="borderBox">
             <a href="#page1">go to page1</a>
             <a href="#page2">go to page2</a>
+            <a href="#article">go to view article</a>
+            <a href="#article/123">go to edit article</a>
             <button onclick="test_goto('#page1')">goto page1</button>
             <button onclick="test_goto('#page2')">goto page2</button>
             <a href="#anchor">anchor</a>
@@ -24,13 +26,23 @@
     </body>
     <script>
         //------------------ Usage -----------------
-        var route = new RouteController("viewContainer");
-        route.onRouteChange = function(page){
+        var route = new UkuRouter("viewContainer");
+        route.onRouteChange = function(page,params){
             page;
         };
-        route.default("#page1","pages/page1.html")
-        .when("#page2","pages/page2.html")
-        .otherwise("pages/404.html")
+        route.default("#page1","pages/page1.html",function(params){
+            console.log('default',params);
+        })
+        .when("#page2","pages/page2.html",function(params){
+            console.log('when',params);
+        })
+        .when("#article","pages/page1.html")
+        .when("#article/:id","pages/page2.html",function(params){
+            console.log('when',params);
+        })
+        .otherwise("pages/404.html",function(params){
+            console.log('otherwise',params);
+        })
         .work(); 
         
         function test_goto(key){

@@ -24,7 +24,7 @@ export class Analyzer extends EventEmitter {
         this.searchComponent(ele).then((element) => {
             this.searchExpression(element);
             this.searchUkuAttribute(element);
-            this.defMgr.copyAllController();
+            //this.defMgr.copyAllController();
             if (this.hasListener(Analyzer.ANALYIZE_COMPLETED)) {
                 this.dispatchEvent(new UkuEvent(Analyzer.ANALYIZE_COMPLETED, element));
             }
@@ -33,14 +33,17 @@ export class Analyzer extends EventEmitter {
 
     private sortAttributes(subElement): Array<any> {
         let orderAttrs = [];
+        let listenerAttrs = [];
         for (let i = 0; i < subElement.attributes.length; i++) {
             let attribute = subElement.attributes[i];
             if (attribute.nodeName.search("uku-on") !== -1) {
-                orderAttrs.push(attribute);
+                //orderAttrs.push(attribute);
+                listenerAttrs.push(attribute);
             } else {
-                orderAttrs.unshift(attribute);
+                orderAttrs.push(attribute);
             }
         }
+        orderAttrs = orderAttrs.concat(listenerAttrs);
         return orderAttrs;
     }
 
@@ -130,8 +133,8 @@ export class Analyzer extends EventEmitter {
     }
 
     private async dealWithComponent(tag, template, Clazz, attrs): Promise<any> {
-        let randomAlias = 'cc_' + Math.floor(10000 * Math.random()).toString();
-
+        let time = new Date().getTime();
+        let randomAlias = 'cc_' + Math.floor(time * Math.random()).toString();
         //should consider white space between characters
         template = template.replace(new RegExp("\'cc\\.", 'gm'), "'" + randomAlias + '.');
         template = template.replace(new RegExp('"cc\\.', 'gm'), '"' + randomAlias + '.');
@@ -140,6 +143,7 @@ export class Analyzer extends EventEmitter {
         template = template.replace(new RegExp('\\(cc\\.', 'gm'), '(' + randomAlias + '.');
         template = template.replace(new RegExp('\\,cc\\.', 'gm'), ',' + randomAlias + '.');
         template = template.replace(new RegExp('\\.cc\\.', 'gm'), '.' + randomAlias + '.');
+        template = template.replace(new RegExp('\\!cc\\.', 'gm'), '!' + randomAlias + '.');
         let tempFragment = document.createElement('div');
         tempFragment.insertAdjacentHTML('afterBegin' as InsertPosition, template);
         if (tempFragment.children.length > 1) {
@@ -178,6 +182,10 @@ export class Analyzer extends EventEmitter {
                         });
                         
                         boundItem.render(controllers);
+                    }else{
+                        //native value, not expression
+                        let boundItem = new BoundItemComponentAttribute(attr.nodeValue, tagName, cc, this.uku);
+                        boundItem.render([]);
                     }
                 }
             }
@@ -292,7 +300,7 @@ export class Analyzer extends EventEmitter {
         EventListener.addEventListener(element, eventNameInListener, (event) => {
             let alias_list = [];
             controllerModels.forEach(controllerModel => {
-                this.defMgr.copyControllerInstance(controllerModel.controllerInstance, controllerModels.alias);
+                //this.defMgr.copyControllerInstance(controllerModel.controllerInstance, controllerModels.alias);
                 alias_list.push(controllerModel.alias);
             });
             

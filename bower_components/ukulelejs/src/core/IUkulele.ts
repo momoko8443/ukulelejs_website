@@ -2,12 +2,10 @@
 import {IEventEmitter} from "./IEventEmitter";
 import {DefinitionManager} from "./DefinitionManager";
 export interface IUkulele extends IEventEmitter{
-
-	parentUku:IUkulele;
-
+	
 	init();
 
-	handleElement(element);
+	handleElement(element, handleElementCompletedFunc);
 
 	registerController(instanceName, controllerInst);
 
@@ -16,6 +14,8 @@ export interface IUkulele extends IEventEmitter{
 	registerComponent(tag,templateUrl,preload);
 
 	getComponent(tagName);
+
+	getComponentController(componentId): Object;
 
 	refresh(alias,excludeElement?);
 	//internal function
